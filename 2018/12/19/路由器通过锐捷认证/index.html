@@ -1,0 +1,1041 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion" lang="zh-Hans">
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="theme-color" content="#222">
+
+
+
+  
+  
+    
+    
+  <script src="/lib/pace/pace.min.js?v=1.0.2"></script>
+  <link href="/lib/pace/pace-theme-minimal.min.css?v=1.0.2" rel="stylesheet">
+
+
+
+
+  
+  
+  <link rel="stylesheet" media="all" href="/lib/Han/dist/han.min.css?v=3.3">
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css">
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+    
+      
+    
+
+    
+  
+
+  
+    
+      
+    
+
+    
+  
+
+  
+    
+      
+    
+
+    
+  
+
+  
+    
+      
+    
+
+    
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic|Roboto Slab:300,300italic,400,400italic,700,700italic|Lato:300,300italic,400,400italic,700,700italic|Lobster Two:300,300italic,400,400italic,700,700italic|Roboto Mono:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="Caffreyfans">
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="为什么一般路由器不能用于校园联通网络认证？我们家里常用的路由器一般只支持 PPPoE协议 , 而我们校园的联通网用的是锐捷认证的方式，这种拨号方式比较特殊所以一般路由器并不支持。mentohust 是由华中科技大学首先是在Linux系统下开发出来，而后扩展到支持Windows、Linux、Mac OS下的锐捷认证的程序（附带支持赛尔认证），兼容Windows、Linux和MacOS所有主流版本，完">
+<meta property="og:type" content="article">
+<meta property="og:title" content="路由器通过锐捷认证">
+<meta property="og:url" content="https://www.caffreyfans.top/2018/12/19/路由器通过锐捷认证/index.html">
+<meta property="og:site_name" content="L J">
+<meta property="og:description" content="为什么一般路由器不能用于校园联通网络认证？我们家里常用的路由器一般只支持 PPPoE协议 , 而我们校园的联通网用的是锐捷认证的方式，这种拨号方式比较特殊所以一般路由器并不支持。mentohust 是由华中科技大学首先是在Linux系统下开发出来，而后扩展到支持Windows、Linux、Mac OS下的锐捷认证的程序（附带支持赛尔认证），兼容Windows、Linux和MacOS所有主流版本，完">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="https://raw.githubusercontent.com/Caffreyfans/Public-Source/master/pictures/router%20pictures/3.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/Caffreyfans/Public-Source/master/pictures/router%20pictures/1.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/Caffreyfans/Public-Source/master/pictures/router%20pictures/2.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/Caffreyfans/Public-Source/master/pictures/router%20pictures/5.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/Caffreyfans/Public-Source/master/pictures/router%20pictures/4.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/Caffreyfans/Public-Source/master/pictures/router%20pictures/7.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/Caffreyfans/Public-Source/master/pictures/router%20pictures/6.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/Caffreyfans/Public-Source/master/pictures/router%20pictures/9.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/Caffreyfans/Public-Source/master/pictures/router%20pictures/10.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/Caffreyfans/Public-Source/master/pictures/router%20pictures/11.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/Caffreyfans/Public-Source/master/pictures/router%20pictures/12.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/Caffreyfans/Public-Source/master/pictures/router%20pictures/13.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/Caffreyfans/Public-Source/master/pictures/router%20pictures/15.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/Caffreyfans/Public-Source/master/pictures/router%20pictures/21.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/Caffreyfans/Public-Source/master/pictures/router%20pictures/22.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/Caffreyfans/Public-Source/master/pictures/router%20pictures/23.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/Caffreyfans/Public-Source/master/pictures/router%20pictures/17.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/Caffreyfans/Public-Source/master/pictures/router%20pictures/18.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/Caffreyfans/Public-Source/master/pictures/router%20pictures/20.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/Caffreyfans/Public-Source/master/pictures/router%20pictures/19.png">
+<meta property="og:updated_time" content="2019-03-16T15:36:51.422Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="路由器通过锐捷认证">
+<meta name="twitter:description" content="为什么一般路由器不能用于校园联通网络认证？我们家里常用的路由器一般只支持 PPPoE协议 , 而我们校园的联通网用的是锐捷认证的方式，这种拨号方式比较特殊所以一般路由器并不支持。mentohust 是由华中科技大学首先是在Linux系统下开发出来，而后扩展到支持Windows、Linux、Mac OS下的锐捷认证的程序（附带支持赛尔认证），兼容Windows、Linux和MacOS所有主流版本，完">
+<meta name="twitter:image" content="https://raw.githubusercontent.com/Caffreyfans/Public-Source/master/pictures/router%20pictures/3.png">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"hide","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":true,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="https://www.caffreyfans.top/2018/12/19/路由器通过锐捷认证/">
+
+
+
+
+
+  <title>路由器通过锐捷认证 | L J</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope="" itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope="" itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">L J</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <h1 class="site-subtitle" itemprop="description">我行过许多地方的桥，看过许多次数的云，喝过许多种类的酒，却只爱过一个正当年龄的人。</h1>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br>
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br>
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br>
+            
+            归档
+          </a>
+        </li>
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br>
+            
+            搜索
+          </a>
+        </li>
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  
+  <div class="algolia-popup popup search-popup">
+    <div class="algolia-search">
+      <div class="algolia-search-input-icon">
+        <i class="fa fa-search"></i>
+      </div>
+      <div class="algolia-search-input" id="algolia-search-input"></div>
+    </div>
+
+    <div class="algolia-results">
+      <div id="algolia-stats"></div>
+      <div id="algolia-hits"></div>
+      <div id="algolia-pagination" class="algolia-pagination"></div>
+    </div>
+
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+  </div>
+
+
+
+
+    </div>
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://www.caffreyfans.top/2018/12/19/路由器通过锐捷认证/">
+
+    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Caffreyfans">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/head.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="L J">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h2 class="post-title" itemprop="name headline">路由器通过锐捷认证</h2>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-12-19T00:00:00+00:00">
+                2018-12-19
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing">
+                  <a href="/categories/路由器/" itemprop="url" rel="index">
+                    <span itemprop="name">路由器</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+            <span class="post-meta-divider">|</span>
+            <span class="page-pv"><i class="fa fa-file-o"></i>
+            <span class="busuanzi-value" id="busuanzi_value_page_pv"></span>
+            </span>
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body han-init-context" itemprop="articleBody">
+
+      
+      
+
+      
+        <h1 id="为什么一般路由器不能用于校园联通网络认证？"><a href="#为什么一般路由器不能用于校园联通网络认证？" class="headerlink" title="为什么一般路由器不能用于校园联通网络认证？"></a>为什么一般路由器不能用于校园联通网络认证？</h1><p>我们家里常用的路由器一般只支持 <a href="https://baike.baidu.com/item/PPPOE/139247?fr=aladdin" target="_blank" rel="noopener">PPPoE协议</a> , 而我们校园的联通网用的是锐捷认证的方式，这种拨号方式比较特殊所以一般路由器并不支持。<a href="https://baike.baidu.com/item/mentohust" target="_blank" rel="noopener">mentohust</a> 是由华中科技大学首先是在Linux系统下开发出来，而后扩展到支持Windows、Linux、Mac OS下的锐捷认证的程序（附带支持赛尔认证），兼容Windows、Linux和MacOS所有主流版本，完美代替锐捷认证。<br>现在市面上的智能路由器的官方固件里一般都集成了这种认证方式，一些路由三方固件也支持这种认证方式，比如 <code>openwrt</code> , <code>ddwrt</code> , <code>Pandora</code> , <code>梅林</code> 这些。路由器里面装的就是 <code>Linux</code> 系统，就利用 <code>mentohust</code> 来实现锐捷认证。所以校园联通网还是可以使用路由器的。这里我讲述一种我自己使用的方式，用 <strong><em>极路由1S</em></strong> 来上网。至于再刷三方固件的来运行 <code>mentohust</code> 的方式也是可以的，只不过这里不做描述。</p>
+<h1 id="具体操作"><a href="#具体操作" class="headerlink" title="具体操作"></a>具体操作</h1><h2 id="准备材料"><a href="#准备材料" class="headerlink" title="准备材料"></a>准备材料</h2><blockquote>
+<ul>
+<li>硬件部分<br>淘宝上或者咸鱼，转转上去买一个 <strong><em>极路由1S</em></strong> 买新的一般在100左右，二手的50左右。建议大家买二手，因为路由器不容易坏，一般不用担心无法正常使用这个问题。</li>
+<li>软件部分 </li>
+</ul>
+</blockquote>
+<table>
+<thead>
+<tr>
+<th>软件名</th>
+<th>功能说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Putty</td>
+<td>ssh连接</td>
+</tr>
+<tr>
+<td>Winscp</td>
+<td>文件传输</td>
+</tr>
+<tr>
+<td>Notepad++</td>
+<td>编辑器</td>
+</tr>
+<tr>
+<td>Mentohusttool</td>
+<td>抓包</td>
+</tr>
+</tbody>
+</table>
+<p><a href="https://github.com/Caffreyfans/Public-Source/releases/download/1.0/hiwifi-1S.zip" target="_blank" rel="noopener"><strong>软件包下载连接</strong></a><br>所需要的软件全部打包到压缩文件里，解压安装即可使用。软件只能在 <code>windows 64位</code> 系统上安装，如果你是其他类型的系统，请自行下载同名软件。软件下载好之后请安装到电脑上，以备使用，这些软件都是我从官方下载打包的，如果不放心请到官方下载同名软件。</p>
+<h2 id="申请极路由开发者权限"><a href="#申请极路由开发者权限" class="headerlink" title="申请极路由开发者权限"></a>申请极路由开发者权限</h2><p>当我们拿到路由器并且上电之后，我们首先需要做的就是申请开发者权限。因为这个操作需要官方那边给你授权，这个授权过程会需要几天。申请开发者权限的主要目的是让极路由打开 <code>ssh</code> 服务。当我们打开了路由器的 <code>ssh</code> 服务就可以通过 <code>Putty</code> 远程登陆到路由器操作了。</p>
+<ol>
+<li><p>首先让路由器联网，联网方式可以用无线中继的方式或者用别人连好网的路由器牵根线到自己的路由器<img src="https://raw.githubusercontent.com/Caffreyfans/Public-Source/master/pictures/router%20pictures/3.png" alt="已连接网络图"> </p>
+</li>
+<li><p>点开智能插件，选择插件市场<img src="https://raw.githubusercontent.com/Caffreyfans/Public-Source/master/pictures/router%20pictures/1.png" alt="已连接网络图"> </p>
+</li>
+<li><p>在全部插件里面选择开发者模式，点击安装<img src="https://raw.githubusercontent.com/Caffreyfans/Public-Source/master/pictures/router%20pictures/2.png" alt="已连接网络图"> </p>
+</li>
+</ol>
+<h2 id="抓包与修改包文件"><a href="#抓包与修改包文件" class="headerlink" title="抓包与修改包文件"></a>抓包与修改包文件</h2><p>我们需要用到 <code>Mentohusttool</code> 抓包，然后用 <code>Notepad++</code> 修改包文件,把自己联通的网线连接到自己的电脑上</p>
+<ol>
+<li><p>打开 <code>MentoHUSTTool-RP.exe</code> 后选择开始，弹出来的文件选择框里，从你的 <code>成都信息工程大学校园网认证客户端</code> 的安装包文件里选中 <code>8021.exe</code> 这个应用程序，然后进入抓包就绪态(客户端默认安装位置为 <code>C:\Program Files\Ruijie Networks\Ruijie Supplicant</code> ,自定义位置请自行找到)<br><img src="https://raw.githubusercontent.com/Caffreyfans/Public-Source/master/pictures/router%20pictures/5.png" alt="MentoHUSTool-RP.exe"></p>
+</li>
+<li><p>然后在 <code>成都信息工程大学校园网认证客户端</code> 里填好自己的账号密码，点击连接抓包程序会自己抓到包<br><img src="https://raw.githubusercontent.com/Caffreyfans/Public-Source/master/pictures/router%20pictures/4.png" alt="MentoHUSTool-RP.exe"></p>
+</li>
+<li><p>将抓到的包命名成 <code>1</code> 保存在桌面上<br>这里需要注意这个 <code>1.mpf</code> 文件名不能修改成其他的，因为后面的脚本里设置的就是这个名字，修改成其他的会出错。<br><img src="https://raw.githubusercontent.com/Caffreyfans/Public-Source/master/pictures/router%20pictures/7.png" alt="MentoHUSTool-RP.exe"></p>
+</li>
+<li><p>将得到的 <code>1.mpf</code> 文件用 <code>Notepad++</code> 打开，在 <code>Notepad++</code> 里选择插件管理<br><img src="https://raw.githubusercontent.com/Caffreyfans/Public-Source/master/pictures/router%20pictures/6.png" alt="Notepad"></p>
+</li>
+<li><p>在插件管理器里找到 <code>HEX-Editor</code> 点击 <code>Install</code> 安装，安装成功后重启 <code>Notepad++</code><br><img src="https://raw.githubusercontent.com/Caffreyfans/Public-Source/master/pictures/router%20pictures/9.png" alt="Notepad"></p>
+</li>
+<li><p>在插件里选择 <code>Hex-Editor</code> 找到 <code>View in HEX</code> 选项并点击，之后你会看到打开文件内容有所变化<br><img src="https://raw.githubusercontent.com/Caffreyfans/Public-Source/master/pictures/router%20pictures/10.png" alt="Notepad"></p>
+</li>
+<li><p>键盘上按下 <code>Ctrl + H</code> 准备进行查找替换，在 <code>Data type</code> 里选择 <code>ANSI String</code> ,在 <code>Find what</code> 里填上 <code>RPLK</code> , <code>Replace with</code> 里填上 <code>HUST</code>, 然后点击 <code>Replace ALL</code>。修改好之后保存文件,然后就可以关闭前面打开过的程序了<br><img src="https://raw.githubusercontent.com/Caffreyfans/Public-Source/master/pictures/router%20pictures/11.png" alt="Notepad++"></p>
+</li>
+</ol>
+<h2 id="上传文件并执行-Shell-命令"><a href="#上传文件并执行-Shell-命令" class="headerlink" title="上传文件并执行 Shell 命令"></a>上传文件并执行 <strong><em>Shell</em></strong> 命令</h2><p>用一根网线连接的你的电脑,或者连接路由器的 <code>WiFi</code> ,待你路由器打开了 <code>开发者模式</code> 后就可以执行这步操作了</p>
+<ol>
+<li>打开 <code>Winscp</code> ,在文件协议里选择 <code>SCP</code> ,主机名填上 <code>hiwifi.com</code> ,端口号填上 <code>1022</code> ,用户名填上 <code>root</code> ,密码填上你路由器登录密码(默认为 <code>admin</code> )</li>
+</ol>
+<p><img src="https://raw.githubusercontent.com/Caffreyfans/Public-Source/master/pictures/router%20pictures/12.png" alt="Winscp"></p>
+<ol start="2">
+<li><p>然后直接将你桌面上修改好的 <code>1.mpf</code> 文件直接拖到路由器的 <code>/root</code> 文件夹下，待文件传送好了就可以关闭 <code>Winscp</code> 了<br><img src="https://raw.githubusercontent.com/Caffreyfans/Public-Source/master/pictures/router%20pictures/13.png" alt="Winscp"></p>
+</li>
+<li><p>打开 <code>Putty</code> , <code>Host Name</code> 里面填上 <code>hiwifi.com</code> , <code>Port</code> 里面填上 <code>1022</code> ,然后点击 <code>Open</code> 选项，然后在弹出的新窗口的 <code>login as</code> 里填上 <code>root</code> 之后按下键盘的 <code>回车键</code>,然后输入你路由器的登录,密码跟 <code>Winscp</code> 里填的是一样的，填密码的时候回没有回显，填好密码之后按下 <code>回车键</code> ,成功登录到路由器后台</p>
+</li>
+<li><p>执行 <code>shell</code> 命令,将下列命令复制并粘贴到刚刚打开的路由器命令行里(在putty里点击鼠标右键粘贴),然后按下回车,等脚本执行完了就可以关闭 <code>Putty</code> 了</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">cd /tmp &amp;&amp;curl -k -o shadow.sh https://raw.githubusercontent.com/Caffreyfans/Public-Source/master/scripts/shadow.sh &amp;&amp; sh shadow.sh &amp;&amp; rm shadow.sh</span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+<p><img src="https://raw.githubusercontent.com/Caffreyfans/Public-Source/master/pictures/router%20pictures/15.png" alt="Putty"></p>
+<h2 id="复制MAC与开启锐捷认证"><a href="#复制MAC与开启锐捷认证" class="headerlink" title="复制MAC与开启锐捷认证"></a>复制MAC与开启锐捷认证</h2><p>执行完这步就能成功让路由器联网了</p>
+<ol>
+<li><p>在电脑上按下 <code>Win + r</code> ,然后在里面输入 <code>cmd</code><br><img src="https://raw.githubusercontent.com/Caffreyfans/Public-Source/master/pictures/router%20pictures/21.png" alt="CMD"></p>
+</li>
+<li><p>输入 <code>ipconfig -all</code> 查询电脑的 <code>MAC</code> 地址<br><img src="https://raw.githubusercontent.com/Caffreyfans/Public-Source/master/pictures/router%20pictures/22.png" alt="MAC"></p>
+</li>
+<li><p>在路由器管理界面的首页中点击 <code>MAC地址克隆</code>,在里面选择 <code>手动输入</code> ,填上刚才获得的 <code>MAC</code> 地址，其中 <code>-</code> 用 <code>:</code> 代替,然后点击保存<br><img src="https://raw.githubusercontent.com/Caffreyfans/Public-Source/master/pictures/router%20pictures/23.png" alt="MAC"></p>
+</li>
+<li><p>在路由器的 <code>互联网</code> 里打开 <code>锐捷认证</code> ,填上图示信息,点击 <code>8021x.exe</code> 后面的选择文件并在 <code>成都信息工程大学校园网认证客户端</code> 的安装文件中选取同名文件上传, <code>SuConfig.dat</code> 、<code>W32N55.dll</code> 执行相同操作,然后点击 <code>提交</code><br><img src="https://raw.githubusercontent.com/Caffreyfans/Public-Source/master/pictures/router%20pictures/17.png" alt="锐捷认证"></p>
+</li>
+<li><p>点击 <code>查看日志</code> 当出现如图信息表明认证成功！<br><img src="https://raw.githubusercontent.com/Caffreyfans/Public-Source/master/pictures/router%20pictures/18.png" alt="锐捷认证"></p>
+</li>
+</ol>
+<h2 id="彩蛋"><a href="#彩蛋" class="headerlink" title="彩蛋"></a>彩蛋</h2><ol>
+<li><p>路由器管理界面有个 <code>安全上网</code> 这其实是 <code>SS</code> 客户端只要你填上你的节点信息,并开启就可以让路由器下的所有设备实现科学上网<br><img src="https://raw.githubusercontent.com/Caffreyfans/Public-Source/master/pictures/router%20pictures/20.png" alt="安全上网"></p>
+</li>
+<li><p>成功开启 <code>SS</code> 之后<br><img src="https://raw.githubusercontent.com/Caffreyfans/Public-Source/master/pictures/router%20pictures/19.png" alt="安全上网"></p>
+</li>
+</ol>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+      <div>
+        <ul class="post-copyright">
+  <li class="post-copyright-author">
+    <strong>本文作者：</strong>
+    Caffreyfans
+  </li>
+  <li class="post-copyright-link">
+    <strong>本文链接：</strong>
+    <a href="https://www.caffreyfans.top/2018/12/19/路由器通过锐捷认证/" title="路由器通过锐捷认证">https://www.caffreyfans.top/2018/12/19/路由器通过锐捷认证/</a>
+  </li>
+  <li class="post-copyright-license">
+    <strong>版权声明： </strong>
+    本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/3.0/" rel="external nofollow" target="_blank">CC BY-NC-SA 3.0</a> 许可协议。转载请注明出处！
+  </li>
+</ul>
+
+      </div>
+    
+
+    <footer class="post-footer">
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2018/12/19/玩HASS一年的故事 (一)/" rel="prev" title="讲一个玩 Homeassistant 一年的故事(一)">
+                讲一个玩 Homeassistant 一年的故事(一) <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image" src="/images/head.jpg" alt="Caffreyfans">
+            
+              <p class="site-author-name" itemprop="name">Caffreyfans</p>
+              <p class="site-description motion-element" itemprop="description"></p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">5</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">4</span>
+                  <span class="site-state-item-name">分类</span>
+                </a>
+              </div>
+            
+
+            
+
+          </nav>
+
+          
+
+          
+            <div class="links-of-author motion-element">
+                
+                  <span class="links-of-author-item">
+                    <a href="https://github.com/Caffreyfans" target="_blank" title="GitHub">
+                      
+                        <i class="fa fa-fw fa-github"></i>GitHub</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="mailto:Caffreyfans@163.com" target="_blank" title="E-Mail">
+                      
+                        <i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+                  </span>
+                
+            </div>
+          
+
+          
+          
+
+          
+          
+            <div class="links-of-blogroll motion-element links-of-blogroll-block">
+              <div class="links-of-blogroll-title">
+                <i class="fa  fa-fw fa-link"></i>
+                友链
+              </div>
+              <ul class="links-of-blogroll-list">
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://jerryding.site" title="jerryding" target="_blank">jerryding</a>
+                  </li>
+                
+              </ul>
+            </div>
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#为什么一般路由器不能用于校园联通网络认证？"><span class="nav-number">1.</span> <span class="nav-text">为什么一般路由器不能用于校园联通网络认证？</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#具体操作"><span class="nav-number">2.</span> <span class="nav-text">具体操作</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#准备材料"><span class="nav-number">2.1.</span> <span class="nav-text">准备材料</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#申请极路由开发者权限"><span class="nav-number">2.2.</span> <span class="nav-text">申请极路由开发者权限</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#抓包与修改包文件"><span class="nav-number">2.3.</span> <span class="nav-text">抓包与修改包文件</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#上传文件并执行-Shell-命令"><span class="nav-number">2.4.</span> <span class="nav-text">上传文件并执行 Shell 命令</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#复制MAC与开启锐捷认证"><span class="nav-number">2.5.</span> <span class="nav-text">复制MAC与开启锐捷认证</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#彩蛋"><span class="nav-number">2.6.</span> <span class="nav-text">彩蛋</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2019</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Caffreyfans</span>
+
+  
+</div>
+
+
+  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Pisces</a> v5.1.4</div>
+
+
+
+
+        
+<div class="busuanzi-count">
+  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+  
+    <span class="site-uv">
+      <i class="fa fa-user"></i>
+      <span class="busuanzi-value" id="busuanzi_value_site_uv"></span>
+      
+    </span>
+  
+
+  
+    <span class="site-pv">
+      <i class="fa fa-eye"></i>
+      <span class="busuanzi-value" id="busuanzi_value_site_pv"></span>
+      
+    </span>
+  
+</div>
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.4"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+  
+  
+  
+  <link rel="stylesheet" href="/lib/algolia-instant-search/instantsearch.min.css">
+
+  
+  
+  <script src="/lib/algolia-instant-search/instantsearch.min.js"></script>
+  
+
+  <script src="/js/src/algolia-search.js?v=5.1.4"></script>
+
+
+
+  
+
+  
+
+  
+<script>
+(function(){
+    var bp = document.createElement('script');
+    var curProtocol = window.location.protocol.split(':')[0];
+    if (curProtocol === 'https') {
+        bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';        
+    }
+    else {
+        bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+    }
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(bp, s);
+})();
+</script>
+
+
+  
+  
+
+  
+  
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({
+        tex2jax: {
+          inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+          processEscapes: true,
+          skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+        }
+      });
+    </script>
+
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for (i=0; i < all.length; i += 1) {
+          all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+      });
+    </script>
+    <script type="text/javascript" src="//cdn.bootcss.com/mathjax/2.7.1/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+  
+
+
+  
+
+  
+
+</body>
+</html>

@@ -1,0 +1,947 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion" lang="zh-Hans">
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="theme-color" content="#222">
+
+
+
+  
+  
+    
+    
+  <script src="/lib/pace/pace.min.js?v=1.0.2"></script>
+  <link href="/lib/pace/pace-theme-minimal.min.css?v=1.0.2" rel="stylesheet">
+
+
+
+
+  
+  
+  <link rel="stylesheet" media="all" href="/lib/Han/dist/han.min.css?v=3.3">
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css">
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+    
+      
+    
+
+    
+  
+
+  
+    
+      
+    
+
+    
+  
+
+  
+    
+      
+    
+
+    
+  
+
+  
+    
+      
+    
+
+    
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic|Roboto Slab:300,300italic,400,400italic,700,700italic|Lato:300,300italic,400,400italic,700,700italic|Lobster Two:300,300italic,400,400italic,700,700italic|Roboto Mono:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="Caffreyfans">
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="大家好，以下为我玩 HASS 一年的故事，我将以短小说的形式展现给大家，闲来无事故有此文。文中不谈技术只谈故事与经验。我是如何入坑？那么我就先从入坑开始讲起，大概是 2017 年的 5 月份我买了一块树莓派，型号是 3b ，买这个的初衷是为了玩，看着网上的教程资料发现这个小板子好玩的很呐，感觉无所不能，于是就在淘宝上购买了我的第一块板子，和一些面包板、杜邦线之类的东西。 买了这些东西其实不是为了玩">
+<meta property="og:type" content="article">
+<meta property="og:title" content="讲一个玩 Homeassistant 一年的故事(一)">
+<meta property="og:url" content="https://www.caffreyfans.top/2018/12/19/玩HASS一年的故事 (一)/index.html">
+<meta property="og:site_name" content="L J">
+<meta property="og:description" content="大家好，以下为我玩 HASS 一年的故事，我将以短小说的形式展现给大家，闲来无事故有此文。文中不谈技术只谈故事与经验。我是如何入坑？那么我就先从入坑开始讲起，大概是 2017 年的 5 月份我买了一块树莓派，型号是 3b ，买这个的初衷是为了玩，看着网上的教程资料发现这个小板子好玩的很呐，感觉无所不能，于是就在淘宝上购买了我的第一块板子，和一些面包板、杜邦线之类的东西。 买了这些东西其实不是为了玩">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="https://raw.githubusercontent.com/Caffreyfans/Public-Source/master/pictures/blog_1/1.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/Caffreyfans/Public-Source/master/pictures/blog_1/2.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/Caffreyfans/Public-Source/master/pictures/blog_1/3.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/Caffreyfans/Public-Source/master/pictures/blog_1/4.jpg">
+<meta property="og:updated_time" content="2019-03-16T15:36:51.422Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="讲一个玩 Homeassistant 一年的故事(一)">
+<meta name="twitter:description" content="大家好，以下为我玩 HASS 一年的故事，我将以短小说的形式展现给大家，闲来无事故有此文。文中不谈技术只谈故事与经验。我是如何入坑？那么我就先从入坑开始讲起，大概是 2017 年的 5 月份我买了一块树莓派，型号是 3b ，买这个的初衷是为了玩，看着网上的教程资料发现这个小板子好玩的很呐，感觉无所不能，于是就在淘宝上购买了我的第一块板子，和一些面包板、杜邦线之类的东西。 买了这些东西其实不是为了玩">
+<meta name="twitter:image" content="https://raw.githubusercontent.com/Caffreyfans/Public-Source/master/pictures/blog_1/1.png">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"hide","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":true,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="https://www.caffreyfans.top/2018/12/19/玩HASS一年的故事 (一)/">
+
+
+
+
+
+  <title>讲一个玩 Homeassistant 一年的故事(一) | L J</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope="" itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope="" itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">L J</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <h1 class="site-subtitle" itemprop="description">我行过许多地方的桥，看过许多次数的云，喝过许多种类的酒，却只爱过一个正当年龄的人。</h1>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br>
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br>
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br>
+            
+            归档
+          </a>
+        </li>
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br>
+            
+            搜索
+          </a>
+        </li>
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  
+  <div class="algolia-popup popup search-popup">
+    <div class="algolia-search">
+      <div class="algolia-search-input-icon">
+        <i class="fa fa-search"></i>
+      </div>
+      <div class="algolia-search-input" id="algolia-search-input"></div>
+    </div>
+
+    <div class="algolia-results">
+      <div id="algolia-stats"></div>
+      <div id="algolia-hits"></div>
+      <div id="algolia-pagination" class="algolia-pagination"></div>
+    </div>
+
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+  </div>
+
+
+
+
+    </div>
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://www.caffreyfans.top/2018/12/19/玩HASS一年的故事 (一)/">
+
+    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Caffreyfans">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/head.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="L J">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h2 class="post-title" itemprop="name headline">讲一个玩 Homeassistant 一年的故事(一)</h2>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-12-19T00:00:00+00:00">
+                2018-12-19
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing">
+                  <a href="/categories/故事/" itemprop="url" rel="index">
+                    <span itemprop="name">故事</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+            <span class="post-meta-divider">|</span>
+            <span class="page-pv"><i class="fa fa-file-o"></i>
+            <span class="busuanzi-value" id="busuanzi_value_page_pv"></span>
+            </span>
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body han-init-context" itemprop="articleBody">
+
+      
+      
+
+      
+        <h2 id="大家好，以下为我玩-HASS-一年的故事，我将以短小说的形式展现给大家，闲来无事故有此文。文中不谈技术只谈故事与经验。"><a href="#大家好，以下为我玩-HASS-一年的故事，我将以短小说的形式展现给大家，闲来无事故有此文。文中不谈技术只谈故事与经验。" class="headerlink" title="大家好，以下为我玩 HASS 一年的故事，我将以短小说的形式展现给大家，闲来无事故有此文。文中不谈技术只谈故事与经验。"></a>大家好，以下为我玩 <strong><em>HASS</em></strong> 一年的故事，我将以短小说的形式展现给大家，闲来无事故有此文。文中不谈技术只谈故事与经验。</h2><h3 id="我是如何入坑？"><a href="#我是如何入坑？" class="headerlink" title="我是如何入坑？"></a>我是如何入坑？</h3><p>那么我就先从入坑开始讲起，大概是 <code>2017</code> 年的 <code>5</code> 月份我买了一块树莓派，型号是 <code>3b</code> ，买这个的初衷是为了玩，看着网上的教程资料发现这个小板子好玩的很呐，感觉无所不能，于是就在淘宝上购买了我的第一块板子，和一些面包板、杜邦线之类的东西。</p>
+<p><img src="https://raw.githubusercontent.com/Caffreyfans/Public-Source/master/pictures/blog_1/1.png" width="50%" height="50%"><img src="https://raw.githubusercontent.com/Caffreyfans/Public-Source/master/pictures/blog_1/2.png" width="50%" height="50%"><br>买了这些东西其实不是为了玩 <strong><em>HASS</em></strong> ，当时想的是学习传感器以及单片机，自己一心想做个遥控小车出来。然后自己跟着一本印度人写的树莓派应用的书学习，初步了解到了点什么是 <strong>传感器</strong>，什么是 <strong>Linux</strong> 。自己傻乎乎的在那里玩 <strong>超声波</strong> 、<strong>DHT11</strong> 的驱动还以为自己发现了新大陆，觉得自己非常的牛逼。忍不住想在别人面前炫耀，于是自己加了个树莓派交流群，其实里面吹牛的多，干事的少。一天我例行公事在群友面前炫耀自己是怎么用树莓派让我的 <strong>HC-SR04</strong>、<strong>DHT11</strong> 如何工作的，结果有位老哥一声不吭的录了一段视频，视频里的内容我现在都记得，他用 <strong>Siri</strong> 控制了他一个自制的台灯。这种从来没发过话的人，突然发了一个比你还牛的视频，对于我来说无疑是对我巨大的打击，我顿时感觉自己的人格受到了严重的侮辱。我立马加了他好友，他也很很快的添加了我。于是我疯狂的赞美他，夸他是多么多么的牛，希望他也能教教我怎么做。最开始他没理我，于是我第二天又问他是怎么做的，可能是他不耐烦了，就回了我两个词 <strong>homeassistant + homebridge</strong> 就完了，再问他具体怎么做的也不说了，大神的口是真的难开，就回我两个词。再怎么问他都不鸟我了，于是我就在百度上找 <strong>homeassistant homebridge</strong> ，最开始这个资料是真的少，百度了许久才搞懂这个 <strong>Homeassistant</strong> 和 <strong>Homebridge</strong> 是两个东西，<strong>Homeassistant</strong> 可以理解为一个 <strong>Hub</strong> 而 <strong>Homebridge</strong> 应该理解为 <code>homeassistant to homekit</code> 的一个网关。百度上有用的资料就两篇，一个是 <strong>老高</strong> 的帖子，另一个是一个不知名的人写的，这两位人就是带我入门的人。老高的贴子最好，他讲的很详细，我的树莓派也因此发挥了它的光和热, 要知道我最初买树莓派并不是为了玩 <strong>Hass</strong> 的，所以这个也就告诉我们一个道理 “无心插柳柳成阴” ，他的教程从树莓派刷机到安装 <strong>Homeassistant</strong> ，到配置以及 <strong>Sonoff</strong> 刷固件每个细节都讲了，他还专门录制了视频害怕我们不会，没办法那时候是真的菜，他不讲那么细中间卡一步就够折腾的。</p>
+<p>就这样照着老高的帖子我跌跌撞撞的在一个星期内成功的用 <strong>Siri</strong> 了我的一个发光二级管的亮灭。于是我按耐不住激动的心情又录了一个 <strong>Siri</strong> 控制发光二级管的视频，这次的视频引起的反响就更大了。连前面我主动加的那位小哥都表示惊讶——“你这么快就弄好了？”，呵呵你也不看看我是谁。后面我与这个小哥互相交流了会，发现他也是个狠角色，比我大一级，参加过学校的比赛还获得过奖。顿时我就对他心存敬意，希望有朝一日也像他那样成功。过了几天我又把这个视频拿到群里炫耀，这时一个在 <strong>HomeAssistant智能家居</strong> 群里的人发现了我，并夸赞我东西做的不错，问我是不是也玩 <strong>Homeassistant</strong> 的。不一会他就把我拉到了全国最大的 <strong>Homeassistant</strong> 交流群，进入之后我又发现自己原来又是最菜的，别人都开始研究怎么让空调连接到 <strong>Homeassistant</strong> 了，<strong>Sonoff</strong> 这些别人早会了。</p>
+<h3 id="这一年我学到了些什么？"><a href="#这一年我学到了些什么？" class="headerlink" title="这一年我学到了些什么？"></a>这一年我学到了些什么？</h3><ol>
+<li><h4 id="我学会了学习新东西的能力"><a href="#我学会了学习新东西的能力" class="headerlink" title="我学会了学习新东西的能力"></a>我学会了学习新东西的能力</h4> 从这张图就看的出我段位不低了，入坑早资料少，所以后面入坑的朋友真心别心急慢慢来，前面已经出了很多教程了，选自己有用的学，学的很快的，毕竟资料很丰富了。我知道有的人跟我一样很依赖问别人，自己不愿意花大功夫去网上找资料。自己经验表明一般来说你的问题在网上都会找到，你要有总结出你的问题并提取关键词的能力，然后拿到网上去搜索一会就找到了，只有你的问题很前沿或者很奇葩的问题才找不到。<br><img src="https://raw.githubusercontent.com/Caffreyfans/Public-Source/master/pictures/blog_1/3.png" width="50%" height="50%"></li>
+<li><h4 id="国外网站要多逛"><a href="#国外网站要多逛" class="headerlink" title="国外网站要多逛"></a>国外网站要多逛</h4> 不得不承认老外是真的强，不是我舔他们。其实我们玩的这些东西都是老外玩了之后我们再玩的。除了 <strong>ESP8266</strong>、<strong>小米设备</strong> 是我们国产的，其余大多都是老外先玩的, <strong>Homeassistant、Homekit、Espeasy、Tasmota、Lovelace……</strong> 他们一般都比我们玩的溜，毕竟是他们写的东西。所以要找新的东西或者找些什么资料啊，去他们的网站找找，学习别人的东西也未尝不可。</li>
+<li><h4 id="要舍得花钱"><a href="#要舍得花钱" class="headerlink" title="要舍得花钱"></a>要舍得花钱</h4> 不得不说玩 <strong><em>HASS</em></strong> 是真的烧钱，我没玩 <strong><em>HASS</em></strong> 之前每个月都还会剩个两三百，每个月还会请别人在外面吃顿饭，自从玩了 <strong><em>HASS</em></strong> 后发现这玩意就是个无底洞。买完树莓买 <strong>Sonoff</strong>，刚把这个买了别人又在玩 <strong>Nodemcu</strong> 了又得买，双十一到了又跟风买天猫精灵，平时还买些传感器和配套的东西之类的，又什么 <strong>WS2812B</strong>、<strong>N1</strong>、<strong>K2P</strong>、<strong>摄像头</strong> 之类的反正我现在每个月都欠蚂蚁花呗钱，活动资金不够了就问朋友借。舍得花钱但到理性消费，买些自己需要的东西就行了，别看见什么就买，买来不用浪费。</li>
+</ol>
+<p><strong>看一张白神设备图</strong><br><img src="https://raw.githubusercontent.com/Caffreyfans/Public-Source/master/pictures/blog_1/4.jpg" width="50%" height="50%"></p>
+<ol start="4">
+<li><h4 id="学到了些新技术"><a href="#学到了些新技术" class="headerlink" title="学到了些新技术"></a>学到了些新技术</h4> 学校没学到的玩 <strong>HASS</strong> 学到了些，玩 <strong>HASS</strong> 你起码会学到点 <strong>Linux</strong> 的基础吧，设置开机启动，设置账户，权限，防火墙问题等等，再说 <strong>Linux</strong> 上的软件 <strong>Frp</strong>、<strong>Docker</strong>、<strong>Nginx</strong>、<strong>Shadowsocket</strong> ……也会接触到，反正东西需要自己琢磨。硬件也有从硬件连接到固件烧录，体验过之后就会收获很多，学习的时候要保持敬畏之心。为什么这么说？如果你弄些东西的过程中完全想当然的来做，很容易吃亏，有时候是耗时，有时候就是把东西弄坏。得不偿失，我一般喜欢弄东西的时候完全按教程来，等我把东西弄好了，自己再在再创造。这样一来是为了让我更快的体验到这东西弄好之后是什么样子，二来是为了总结经验方便再创造。</li>
+</ol>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+      <div>
+        <ul class="post-copyright">
+  <li class="post-copyright-author">
+    <strong>本文作者：</strong>
+    Caffreyfans
+  </li>
+  <li class="post-copyright-link">
+    <strong>本文链接：</strong>
+    <a href="https://www.caffreyfans.top/2018/12/19/玩HASS一年的故事 (一)/" title="讲一个玩 Homeassistant 一年的故事(一)">https://www.caffreyfans.top/2018/12/19/玩HASS一年的故事 (一)/</a>
+  </li>
+  <li class="post-copyright-license">
+    <strong>版权声明： </strong>
+    本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/3.0/" rel="external nofollow" target="_blank">CC BY-NC-SA 3.0</a> 许可协议。转载请注明出处！
+  </li>
+</ul>
+
+      </div>
+    
+
+    <footer class="post-footer">
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2018/12/19/路由器通过锐捷认证/" rel="next" title="路由器通过锐捷认证">
+                <i class="fa fa-chevron-left"></i> 路由器通过锐捷认证
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2018/12/19/Linux控制电脑风扇/" rel="prev" title="Linux 系统下手动控制电脑风扇">
+                Linux 系统下手动控制电脑风扇 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image" src="/images/head.jpg" alt="Caffreyfans">
+            
+              <p class="site-author-name" itemprop="name">Caffreyfans</p>
+              <p class="site-description motion-element" itemprop="description"></p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">5</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">4</span>
+                  <span class="site-state-item-name">分类</span>
+                </a>
+              </div>
+            
+
+            
+
+          </nav>
+
+          
+
+          
+            <div class="links-of-author motion-element">
+                
+                  <span class="links-of-author-item">
+                    <a href="https://github.com/Caffreyfans" target="_blank" title="GitHub">
+                      
+                        <i class="fa fa-fw fa-github"></i>GitHub</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="mailto:Caffreyfans@163.com" target="_blank" title="E-Mail">
+                      
+                        <i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+                  </span>
+                
+            </div>
+          
+
+          
+          
+
+          
+          
+            <div class="links-of-blogroll motion-element links-of-blogroll-block">
+              <div class="links-of-blogroll-title">
+                <i class="fa  fa-fw fa-link"></i>
+                友链
+              </div>
+              <ul class="links-of-blogroll-list">
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://jerryding.site" title="jerryding" target="_blank">jerryding</a>
+                  </li>
+                
+              </ul>
+            </div>
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#大家好，以下为我玩-HASS-一年的故事，我将以短小说的形式展现给大家，闲来无事故有此文。文中不谈技术只谈故事与经验。"><span class="nav-number">1.</span> <span class="nav-text">大家好，以下为我玩 HASS 一年的故事，我将以短小说的形式展现给大家，闲来无事故有此文。文中不谈技术只谈故事与经验。</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#我是如何入坑？"><span class="nav-number">1.1.</span> <span class="nav-text">我是如何入坑？</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#这一年我学到了些什么？"><span class="nav-number">1.2.</span> <span class="nav-text">这一年我学到了些什么？</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#我学会了学习新东西的能力"><span class="nav-number">1.2.1.</span> <span class="nav-text">我学会了学习新东西的能力</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#国外网站要多逛"><span class="nav-number">1.2.2.</span> <span class="nav-text">国外网站要多逛</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#要舍得花钱"><span class="nav-number">1.2.3.</span> <span class="nav-text">要舍得花钱</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#学到了些新技术"><span class="nav-number">1.2.4.</span> <span class="nav-text">学到了些新技术</span></a></li></ol></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2019</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Caffreyfans</span>
+
+  
+</div>
+
+
+  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Pisces</a> v5.1.4</div>
+
+
+
+
+        
+<div class="busuanzi-count">
+  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+  
+    <span class="site-uv">
+      <i class="fa fa-user"></i>
+      <span class="busuanzi-value" id="busuanzi_value_site_uv"></span>
+      
+    </span>
+  
+
+  
+    <span class="site-pv">
+      <i class="fa fa-eye"></i>
+      <span class="busuanzi-value" id="busuanzi_value_site_pv"></span>
+      
+    </span>
+  
+</div>
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.4"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+  
+  
+  
+  <link rel="stylesheet" href="/lib/algolia-instant-search/instantsearch.min.css">
+
+  
+  
+  <script src="/lib/algolia-instant-search/instantsearch.min.js"></script>
+  
+
+  <script src="/js/src/algolia-search.js?v=5.1.4"></script>
+
+
+
+  
+
+  
+
+  
+<script>
+(function(){
+    var bp = document.createElement('script');
+    var curProtocol = window.location.protocol.split(':')[0];
+    if (curProtocol === 'https') {
+        bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';        
+    }
+    else {
+        bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+    }
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(bp, s);
+})();
+</script>
+
+
+  
+  
+
+  
+  
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({
+        tex2jax: {
+          inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+          processEscapes: true,
+          skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+        }
+      });
+    </script>
+
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for (i=0; i < all.length; i += 1) {
+          all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+      });
+    </script>
+    <script type="text/javascript" src="//cdn.bootcss.com/mathjax/2.7.1/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+  
+
+
+  
+
+  
+
+</body>
+</html>
