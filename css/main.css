@@ -185,8 +185,8 @@ th {
 }
 body {
   position: relative;
-  font-family: 'Monda', "PingFang SC", "Microsoft YaHei", sans-serif;
-  font-size: 14px;
+  font-family: 'Lato', "PingFang SC", "Microsoft YaHei", sans-serif;
+  font-size: 16px;
   line-height: 2;
   color: #555;
   background: #f5f7f9;
@@ -203,7 +203,7 @@ body {
 }
 @media (min-width: 1600px) {
   body {
-    font-size: 16px;
+    font-size: 18px;
   }
 }
 h1,
@@ -216,7 +216,7 @@ h6 {
   padding: 0;
   font-weight: bold;
   line-height: 1.5;
-  font-family: 'Roboto Slab', 'Monda', "PingFang SC", "Microsoft YaHei", sans-serif;
+  font-family: 'Roboto Slab', 'Lato', "PingFang SC", "Microsoft YaHei", sans-serif;
 }
 h2,
 h3,
@@ -226,51 +226,51 @@ h6 {
   margin: 20px 0 15px;
 }
 h1 {
-  font-size: 22px;
-}
-@media (max-width: 767px) {
-  h1 {
-    font-size: 18px;
-  }
-}
-h2 {
-  font-size: 20px;
-}
-@media (max-width: 767px) {
-  h2 {
-    font-size: 16px;
-  }
-}
-h3 {
-  font-size: 18px;
-}
-@media (max-width: 767px) {
-  h3 {
-    font-size: 14px;
-  }
-}
-h4 {
   font-size: 16px;
 }
 @media (max-width: 767px) {
-  h4 {
+  h1 {
     font-size: 12px;
   }
 }
-h5 {
+h2 {
   font-size: 14px;
 }
 @media (max-width: 767px) {
-  h5 {
+  h2 {
     font-size: 10px;
   }
 }
-h6 {
+h3 {
   font-size: 12px;
 }
 @media (max-width: 767px) {
-  h6 {
+  h3 {
     font-size: 8px;
+  }
+}
+h4 {
+  font-size: 10px;
+}
+@media (max-width: 767px) {
+  h4 {
+    font-size: 6px;
+  }
+}
+h5 {
+  font-size: 8px;
+}
+@media (max-width: 767px) {
+  h5 {
+    font-size: 4px;
+  }
+}
+h6 {
+  font-size: 6px;
+}
+@media (max-width: 767px) {
+  h6 {
+    font-size: 2px;
   }
 }
 p {
@@ -434,6 +434,70 @@ th {
 td {
   border-bottom-width: 1px;
 }
+@media (max-width: 567px) {
+  .header-inner {
+    margin-bottom: initial !important;
+  }
+  .main-inner {
+    margin-top: initial !important;
+  }
+  .content-wrap {
+    padding: initial !important;
+  }
+  .posts-expand {
+    padding-top: 8px !important;
+    margin: initial !important;
+  }
+  .posts-expand .post-header {
+    padding: 0 18px;
+  }
+  .posts-expand .post-meta {
+    margin: 3px 0 10px 0 !important;
+  }
+  .post-block {
+    padding: 8px 0 !important;
+  }
+  .post-body h2,
+  .post-body h3,
+  .post-body h4,
+  .post-body h5,
+  .post-body h6 {
+    margin: 10px 18px 8px;
+  }
+  .post-body .note h2,
+  .post-body .tabs .tab-content .tab-pane h2,
+  .post-body .note h3,
+  .post-body .tabs .tab-content .tab-pane h3,
+  .post-body .note h4,
+  .post-body .tabs .tab-content .tab-pane h4,
+  .post-body .note h5,
+  .post-body .tabs .tab-content .tab-pane h5,
+  .post-body .note h6,
+  .post-body .tabs .tab-content .tab-pane h6 {
+    margin: 0 5px;
+  }
+  .post-body p {
+    margin: 0 0 10px 0;
+    padding: 0 18px;
+  }
+  .post-body .note > p,
+  .post-body .tabs .tab-content .tab-pane > p {
+    padding: 0 5px;
+  }
+  .post-body .video-container .fluid-vids {
+    margin-bottom: 10px !important;
+  }
+  .post-body .note {
+    padding: 10px !important;
+    margin-bottom: 10px !important;
+  }
+  .post-body .tabs .tab-content .tab-pane {
+    padding: 10px 10px 0 10px !important;
+  }
+  .post-nav {
+    padding-bottom: 2px;
+  }
+}
 html,
 body {
   height: 100%;
@@ -486,14 +550,14 @@ pre,
   overflow: auto;
   margin: 20px 0;
   padding: 0;
-  font-size: 13px;
-  color: #c5c8c6;
-  background: #1d1f21;
+  font-size: 16px;
+  color: #ccc;
+  background: #2d2d2d;
   line-height: 1.6;
 }
 pre,
 code {
-  font-family: 'PT Mono', consolas, Menlo, "PingFang SC", "Microsoft YaHei", monospace;
+  font-family: 'Roboto Mono', consolas, Menlo, "PingFang SC", "Microsoft YaHei", monospace;
 }
 code {
   padding: 2px 4px;
@@ -501,14 +565,14 @@ code {
   color: #555;
   background: #eee;
   border-radius: 3px;
-  font-size: 13px;
+  font-size: 16px;
 }
 pre {
   padding: 10px;
 }
 pre code {
   padding: 0;
-  color: #c5c8c6;
+  color: #ccc;
   background: none;
   text-shadow: none;
 }
@@ -531,7 +595,7 @@ pre code {
 }
 .highlight figcaption {
   font-size: 1em;
-  color: #c5c8c6;
+  color: #ccc;
   line-height: 1em;
   margin-bottom: 1em;
 }
@@ -545,23 +609,23 @@ pre code {
 }
 .highlight figcaption a {
   float: right;
-  color: #c5c8c6;
+  color: #ccc;
 }
 .highlight figcaption a:hover {
-  border-bottom-color: #c5c8c6;
+  border-bottom-color: #ccc;
 }
 .highlight .gutter pre {
   padding-left: 10px;
   padding-right: 10px;
-  color: #888f96;
+  color: #999;
   text-align: right;
-  background-color: #000;
+  background-color: #1b1b1b;
 }
 .highlight .code pre {
   width: 100%;
   padding-left: 10px;
   padding-right: 10px;
-  background-color: #1d1f21;
+  background-color: #2d2d2d;
 }
 .highlight .line {
   height: 20px;
@@ -585,10 +649,10 @@ pre .addition {
   background: #800000;
 }
 pre .meta {
-  color: #b294bb;
+  color: #c9c;
 }
 pre .comment {
-  color: #969896;
+  color: #999;
 }
 pre .variable,
 pre .attribute,
@@ -602,7 +666,7 @@ pre .html .doctype,
 pre .css .id,
 pre .css .class,
 pre .css .pseudo {
-  color: #c66;
+  color: #f2777a;
 }
 pre .number,
 pre .preprocessor,
@@ -611,7 +675,7 @@ pre .literal,
 pre .params,
 pre .constant,
 pre .command {
-  color: #de935f;
+  color: #f99157;
 }
 pre .ruby .class .title,
 pre .css .rules .attribute,
@@ -624,11 +688,11 @@ pre .xml .cdata,
 pre .special,
 pre .number,
 pre .formula {
-  color: #b5bd68;
+  color: #9c9;
 }
 pre .title,
 pre .css .hexcolor {
-  color: #8abeb7;
+  color: #6cc;
 }
 pre .function,
 pre .python .decorator,
@@ -638,11 +702,11 @@ pre .ruby .title .keyword,
 pre .perl .sub,
 pre .javascript .title,
 pre .coffeescript .title {
-  color: #81a2be;
+  color: #69c;
 }
 pre .keyword,
 pre .javascript .function {
-  color: #b294bb;
+  color: #c9c;
 }
 .full-image.full-image.full-image.full-image {
   border: none;
@@ -1129,9 +1193,9 @@ pre .javascript .function {
   display: inline-block;
   vertical-align: top;
   line-height: 36px;
-  font-size: 20px;
+  font-size: 24px;
   font-weight: normal;
-  font-family: 'Lobster Two', 'Monda', "PingFang SC", "Microsoft YaHei", sans-serif;
+  font-family: 'Lobster Two', 'Lato', "PingFang SC", "Microsoft YaHei", sans-serif;
 }
 .site-subtitle {
   margin-top: 10px;
@@ -1220,7 +1284,7 @@ pre .javascript .function {
   opacity: 0;
 }
 .post-body {
-  font-family: 'Monda', "PingFang SC", "Microsoft YaHei", sans-serif;
+  font-family: 'Lato', 'Lato', "PingFang SC", "Microsoft YaHei", sans-serif;
 }
 @media (max-width: 767px) {
   .post-body {
@@ -1238,7 +1302,7 @@ pre .javascript .function {
 .post-body .figure .caption {
   margin: -20px auto 15px;
   text-align: center;
-  font-size: 14px;
+  font-size: 16px;
   color: #999;
   font-weight: bold;
   line-height: 1;
@@ -1498,7 +1562,7 @@ pre .javascript .function {
 .posts-expand .post-meta {
   margin: 3px 0 60px 0;
   color: #999;
-  font-family: 'Monda', "PingFang SC", "Microsoft YaHei", sans-serif;
+  font-family: 'Lato', 'Lato', "PingFang SC", "Microsoft YaHei", sans-serif;
   font-size: 12px;
   text-align: center;
 }
@@ -1641,6 +1705,13 @@ pre .javascript .function {
 .fancybox-close,
 .fancybox-close:hover {
   border: none;
+}
+.post-copyright {
+  margin: 2em 0 0;
+  padding: 0.5em 1em;
+  border-left: 3px solid #ff1700;
+  background-color: #f9f9f9;
+  list-style: none;
 }
 .rtl.post-body p,
 .rtl.post-body a,
@@ -1823,7 +1894,7 @@ pre .javascript .function {
   width: 4px;
   height: 4px;
   border-radius: 50%;
-  background: #ff6ac7;
+  background: #6afcff;
 }
 .links-of-blogroll {
   font-size: 13px;
@@ -2747,6 +2818,49 @@ pre .javascript .function {
 .sidebar-position-right .footer-inner {
   padding-left: 0;
   padding-right: 260px;
+}
+d/ 以下为新增代码！！修改post宽度,
+header {
+  width: 80% !important;
+}
+header.post-header {
+  width: auto !important;
+}
+.container .main-inner {
+  width: 80%;
+}
+.content-wrap {
+  width: calc(100% - 260px);
+}
+@media (min-width: 768px) and (max-width: 991px) {
+  .header {
+    width: auto !important;
+  }
+}
+@media (max-width: 767px) {
+  .header {
+    width: auto !important;
+  }
+}
+@media (min-width: 768px) and (max-width: 991px) {
+  .container .main-inner {
+    width: auto !important;
+  }
+}
+@media (max-width: 767px) {
+  .container .main-inner {
+    width: auto !important;
+  }
+}
+@media (min-width: 768px) and (max-width: 991px) {
+  .content-wrap {
+    width: 100% !important;
+  }
+}
+@media (max-width: 767px) {
+  .content-wrap {
+    width: 100% !important;
+  }
 }
 .site-brand-wrapper {
   position: relative;
