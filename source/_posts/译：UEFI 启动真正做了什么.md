@@ -1,3 +1,9 @@
+title: 译：UEFI 启动真正做了什么
+date: 2020-09-04
+categories: 操作系统
+tags: UEFI - BOOT
+preview: 600
+
 该文译自 Adam Willianson 的 "UEFI boot:how does that actually work, then?"
 
 又是 AdamW 文章时间了！如果你是想找简短而生动的文章，请到别处。
