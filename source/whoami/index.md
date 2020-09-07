@@ -42,4 +42,4 @@ date: 2020-09-04
 + 虚拟机：[VirtualBox](https://www.virtualbox.org/)
 
 #### 感谢
-感谢 [Hexo](https://hexo.io/zh-cn/index.html) 这么棒的框架和 [obsidian](https://github.com/TriDiamond/hexo-theme-obsidian) 这么棒的主题。
+感谢 **[Hexo](https://hexo.io/zh-cn/index.html)** 这么棒的框架和 **[obsidian](https://github.com/TriDiamond/hexo-theme-obsidian)** 这么棒的主题。
