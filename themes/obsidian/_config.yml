@@ -43,7 +43,7 @@ version: '1.4.4'
 menu:
   ABOUT: /whoami
   CATEGORIES: /categories
-  TAGS: /tags
+  # TAGS: /tags
   ARCHIVES: /archives
 
 # Page custom titles
@@ -75,8 +75,8 @@ scrollbar: true
 keywords: Caffreyfans
 
 # Website slogans
-descriptionOne: 'Think like an artist, develop like an artisan'
-descriptionTwo: '艺术家思维去思考问题，工匠创造精神去开发'
+descriptionOne: '我行过许多地方的桥，看过许多次数的云，喝过许多种类的酒，却只爱过一个正当年龄的人。'
+# descriptionTwo: '艺术家思维去思考问题，工匠创造精神去开发'
 
 # If you use google analytics, please fill in the ID
 google_analytics: ''
@@ -119,7 +119,7 @@ gitalk:
 # Valine comment plugin (recommended!)
 # see https://valine.js.org/quickstart.html
 valine:
-  enable: false
+  enable: true
   app_id: 80wYAyLzzJamG4v8Wfyv90Ax-gzGzoHsz
   app_key: oQN5AvCT1HByt89w5ksqWAVI
   notify: false
@@ -157,7 +157,7 @@ html_truncate:
 # Enable Busuanzi statistic plugin
 # see http://ibruce.info/2015/04/04/busuanzi/
 busuanzi:
-  enable: true
+  enable: false
 
 #Enable social media sharing
 sharejs:
