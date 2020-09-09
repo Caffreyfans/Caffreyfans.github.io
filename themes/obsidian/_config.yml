@@ -105,7 +105,7 @@ mp3:
 # Gitalk comment plugin
 # see https://github.com/gitalk/gitalk
 gitalk:
-  enable: false
+  enable: true
   autoExpand: true
   clientID: '796ac80fa86709b60e41'
   clientSecret: '14fbb392b0e7c07a9bb1c48b7315e546335ac085'
@@ -119,7 +119,7 @@ gitalk:
 # Valine comment plugin (recommended!)
 # see https://valine.js.org/quickstart.html
 valine:
-  enable: true
+  enable: false
   app_id: 80wYAyLzzJamG4v8Wfyv90Ax-gzGzoHsz
   app_key: oQN5AvCT1HByt89w5ksqWAVI
   notify: false
