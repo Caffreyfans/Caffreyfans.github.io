@@ -14,15 +14,14 @@ date: 2020-09-04
 
 #### 关于我 Who am I
 
-<img src="https://s2.ax1x.com/2019/09/19/nLtSiD.png" style="height: 50px; width: 50px; border-radius: 50%; margin-bottom: 15px" />
+<img src="/img/nLtSiD.png" style="height: 50px; width: 50px; border-radius: 50%; margin-bottom: 15px" />
 
 欢迎来到我的博客, 我是<b style="color: #42d2ca"> **Caffreyfans** </b>, 
-一个从事 Linux 底层开发的工程师（干系统定制，安装占多。感觉自己更像运维）。代码写的越来越少了，目前干着不是一份特别喜欢的工作，期待自己慢慢升级打怪，成为一个 IOT 开发人员。
+一个从事 Linux 底层开发的工程师（干系统定制，安装占多,感觉自己更像运维）。代码写的越来越少了，目前干着不是一份特别喜欢的工作，期待自己慢慢升级打怪，成为一个 IOT 开发人员。
 
 追求新奇，追求热爱，愿为所爱而奋斗。喜欢一个高效、富有创新的团队，立志打造一款让自己骄傲的产品。
 
 热爱户外旅游和朋友交际，生活和工作平衡，有节奏感的人生。
-
 ——————
 
 #### 开源项目 Open Source Projects
@@ -38,6 +37,7 @@ date: 2020-09-04
 + Shell：[zsh](https://github.com/ohmyzsh/ohmyzsh)
 + 浏览器：[Chrome](https://www.google.com/chrome/browser/desktop/index.html)
 + 虚拟机：[VirtualBox](https://www.virtualbox.org/)
++ VPS: [BandwagongHOST](https://bandwagonhost.com/)
 
 #### 感谢
-感谢[Hexo](https://hexo.io/zh-cn/index.html)这么棒的框架和[obsidian](https://github.com/TriDiamond/hexo-theme-obsidian)这么棒的主题。
+感谢 [Hexo](https://hexo.io/zh-cn/index.html) 这么棒的框架和 [obsidian](https://github.com/TriDiamond/hexo-theme-obsidian) 这么棒的主题。

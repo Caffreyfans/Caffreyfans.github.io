@@ -26,6 +26,7 @@ categories: Linux
 ### 安装
 该一键安装脚本只适用于 Debian、Ubuntu、Centos 系统。
 直接在终端下执行以下命令就是了。该项目地址 [github](https://github.com/Caffreyfans/flypy-install)
-```bash
+
+```shell
 wget -O install.sh https://raw.githubusercontent.com/Caffreyfans/flypy-install/master/install.sh && sudo chmod +x install.sh && ./install.sh
 ```
