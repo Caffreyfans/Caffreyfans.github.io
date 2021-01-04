@@ -3,7 +3,10 @@ title: SPI Flash Modes 介绍
 date: 2021-01-01
 categories: ESP8266 嵌入式
 ---
-该文章翻译来源为 [https://github.com/espressif/esptool/wiki/SPI-Flash-Modes](https://github.com/espressif/esptool/wiki/SPI-Flash-Modes)，它主要介绍了我们烧录 ESP8266 和 ESP32 时对 SPI 接入方式该如何选择，每次我看到什么 DIO，DOUT，DIO 和 QOUT 都一脸懵B不知道该选什么，网上好像也没有什么专门讲这个的文章，至到我找网上翻到官方的文档，所以这里把它记录并翻译过来供大家参考，如果翻译错了请到[https://github.com/Caffreyfans/Caffreyfans.github.io.git](https://github.com/Caffreyfans/Caffreyfans.github.io.git)提交 issues 指出问题，我会即时修改。
+
+# 该文章翻译来源为 [https://github.com/espressif/esptool/wiki/SPI-Flash-Modes](https://github.com/espressif/esptool/wiki/SPI-Flash-Modes)
+
+它主要介绍了我们烧录 ESP8266 和 ESP32 时对 SPI 接入方式该如何选择，每次我看到什么 DIO，DOUT，DIO 和 QOUT 都一脸懵B不知道该选什么，网上好像也没有什么专门讲这个的文章，至到我找网上翻到官方的文档，所以这里把它记录并翻译过来供大家参考，如果翻译错了请到[https://github.com/Caffreyfans/Caffreyfans.github.io.git](https://github.com/Caffreyfans/Caffreyfans.github.io.git)提交 issues 指出问题，我会即时修改。
 
 ESP8266 和 ESP32 支持 4 种不同的 SPI flash 接入模式：DIO，DOUT，DIO 和 QOUT。他们可以在使用 `esptool.py write_flash` 使用 `--flash_mode` 选项。
 
@@ -14,11 +17,12 @@ ESP8266 和 ESP32 在从当从 SPI 闪存芯片读或执行代码和数据时用
 ## 总结
 按性能排序：
 |选项|模式名|引脚使用|速度(ESP8266 & ESP32)|
-|---|---|---|---|
-|qio|四路 I/O| 4 个引脚用于地址和数据|最快|\
+|-|-|-|-|
+|qio|四路 I/O| 4 个引脚用于地址和数据|最快|
 |qout|四路输出| 4 个引脚用于数据|比 `qio` 模式约慢 15%|
 |dio|两路 I/O| 2 个引脚用于地址和数据|比 `qio` 慢约 45%|
 |dout|两路输出| 2 个引脚用于数据|比 `qio` 约慢 50%|
+
 一般来说，应该为你的设备选择最快的 flash 模式。但是不是所有设备都支持所有工作模式。详情见下列 FAQ 部分。
 
 ##工作模式描述
