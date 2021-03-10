@@ -2,7 +2,6 @@
 title: Linux 系统下手动控制电脑风扇
 date: 2018-12-19
 categories: Linux
-comments: true
 ---
 
 ## 命令控制简单方便
@@ -12,7 +11,7 @@ comments: true
 ```bash
 sudo apt-get install lm-sensors fancontrol -y # 安装 lm-sensors fancontrol
 ```
-
+<!--more-->
 这里讲解一下 **lm-sensors** 与 **fancontrol** 这两个工具的作用。
 
 | 工具包名 | 使用命令 | 作用 |
