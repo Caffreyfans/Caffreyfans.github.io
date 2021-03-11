@@ -1,6 +1,8 @@
 ﻿---
 title: Linux 系统下手动控制电脑风扇
 date: 2018-12-19
+categories:
+- 分享
 tags:
 - Linux
 ---

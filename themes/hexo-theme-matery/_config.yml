@@ -190,9 +190,9 @@ mathjax:
 postInfo:
   date: true # 发布日期
   update: true # 更新日期
-  wordCount: true # 文章字数统计
-  totalCount: true # 站点总文章字数
-  min2read: true # 文章阅读时长
+  wordCount: false # 文章字数统计
+  totalCount: false # 站点总文章字数
+  min2read: false # 文章阅读时长
   readCount: true # 文章阅读次数
 
 # Whether to activate the 'love' effect of clicking on the page.
@@ -219,7 +219,7 @@ myProjects:
       url: http://github.com/Caffreyfans/IRbaby
       desc: 基于 ESP8266 的万能红外遥控解决方案.
     baidu_face:
-        icon: fas fa-database
+        icon: far fa-smile-wink
         iconBackground: 'linear-gradient(to bottom right, #F06292 0%, #EF5350 100%)'
         url: https://github.com/Caffreyfans/baidu_face
         desc: HomeAssistant 百度人脸识别插件。

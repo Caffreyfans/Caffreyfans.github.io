@@ -1,6 +1,8 @@
 ---
 title: SPI Flash Modes 介绍
 date: 2021-01-01
+categories:
+- 分享
 tags: 
 - ESP8266
 ---

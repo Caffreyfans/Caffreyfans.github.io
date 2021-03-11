@@ -1,6 +1,8 @@
 ---
 title: 指针与下标
 date: 2020-12-20
+categories:
+- 学习
 tags: 
 - C
 ---

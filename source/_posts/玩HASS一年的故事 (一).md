@@ -1,6 +1,8 @@
 ﻿---
 title: 讲一个玩 Homeassistant 一年的故事
 date: 2018-12-19
+categories:
+- 分享
 tags:
 - Linux
 - HomeAssistant

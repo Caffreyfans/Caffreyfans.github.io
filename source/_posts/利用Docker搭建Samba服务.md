@@ -1,6 +1,8 @@
 ﻿---
 title: 利用Docker搭建Samba服务
 date: 2019-03-17
+categories:
+- 分享
 tags: 
 - Linux
 ---

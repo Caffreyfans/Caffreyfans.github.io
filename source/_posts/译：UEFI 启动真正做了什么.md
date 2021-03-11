@@ -1,6 +1,8 @@
 ---
 title: 译：UEFI 启动真正做了什么
 date: 2020-09-04
+categories:
+- 分享
 tags: 
 - UEFI
 - BOOT

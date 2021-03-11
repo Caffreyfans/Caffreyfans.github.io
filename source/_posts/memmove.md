@@ -1,6 +1,8 @@
 ---
 title: memmove 实现
-date: 2020-12-21    
+date: 2020-12-21   
+categories:
+- 学习 
 tags: 
 - 面试题记录
 - C
