@@ -1,7 +1,9 @@
 ﻿---
 title: 一键部署小鹤音形方案
 date: 2019-01-01
-categories: Linux
+tags: 
+- Linux
+- flypy
 
 ---
 ### 部署原理

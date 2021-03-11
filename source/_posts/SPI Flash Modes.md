@@ -1,7 +1,8 @@
 ---
 title: SPI Flash Modes 介绍
 date: 2021-01-01
-categories: ESP8266 嵌入式
+tags: 
+- ESP8266
 ---
 
 该文章翻译来源为 [https://github.com/espressif/esptool/wiki/SPI-Flash-Modes](https://github.com/espressif/esptool/wiki/SPI-Flash-Modes)

@@ -1,8 +1,9 @@
 ﻿---
-title: 讲一个玩 Homeassistant 一年的故事(一)
+title: 讲一个玩 Homeassistant 一年的故事
 date: 2018-12-19
-categories: 故事
-comments: true
+tags:
+- Linux
+- HomeAssistant
 ---
 
 ## 大家好，以下为我玩 ***HASS*** 一年的故事，我将以短小说的形式展现给大家，闲来无事故有此文。文中不谈技术只谈故事与经验。

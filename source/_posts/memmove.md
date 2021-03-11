@@ -1,7 +1,9 @@
 ---
 title: memmove 实现
 date: 2020-12-21    
-categories: 面试题记录
+tags: 
+- 面试题记录
+- C
 ---
 
 # 一次关于 memmove 实现的记录

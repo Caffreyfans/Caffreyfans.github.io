@@ -1,6 +1,6 @@
 ---
 title: categories
-date: 2018-12-19 02:39:28
+date: 2018-09-30 17:25:30
 type: "categories"
-comments: true
+layout: "categories"
 ---

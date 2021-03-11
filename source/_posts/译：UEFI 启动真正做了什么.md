@@ -1,9 +1,9 @@
 ---
 title: 译：UEFI 启动真正做了什么
 date: 2020-09-04
-categories: 操作系统
-tags: UEFI - BOOT
-preview: 600
+tags: 
+- UEFI
+- BOOT
 ---
 该文译自 Adam Willianson 的 "UEFI boot:how does that actually work, then?"
 

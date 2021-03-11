@@ -1,7 +1,8 @@
 ﻿---
 title: Linux 系统下手动控制电脑风扇
 date: 2018-12-19
-categories: Linux
+tags:
+- Linux
 ---
 
 ## 命令控制简单方便
