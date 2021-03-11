@@ -3,7 +3,6 @@
     "version": "0.0.0",
     "private": true,
     "scripts": {
-        "setup": "npm install",
         "build": "hexo generate"
     },
     "hexo": {

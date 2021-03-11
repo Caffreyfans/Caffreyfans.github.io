@@ -34,6 +34,8 @@ jobs:
       uses: sma11black/hexo-action@v1.0.3
       with:
         deploy_key: ${{ secrets.DEPLOY_KEY }}
+        user_name: Caffreyfans
+        user_email: Caffreyfans@163.com
     # Use the output from the `deploy` step(use for test action)
     - name: Get the output
       run: |
