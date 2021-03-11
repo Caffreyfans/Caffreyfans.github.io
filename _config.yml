@@ -103,5 +103,5 @@ theme: hexo-theme-matery
 ## Docs: https://hexo.io/docs/one-command-deployment
 deploy:
   type: git
-  repo: https://github.com/Caffreyfans/Caffreyfans.github.io
+  repo: git@github.com:Caffreyfans/Caffreyfans.github.io.git
   branch: master
