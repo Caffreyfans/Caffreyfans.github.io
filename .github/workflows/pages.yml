@@ -6,28 +6,17 @@ on:
       - hexo  # default branch
 
 jobs:
-  pages:
+  build:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v2
-      - name: Use Node.js 12.x
-        uses: actions/setup-node@v1
-        with:
-          node-version: '12.x'
-      - name: Cache NPM dependencies
-        uses: actions/cache@v2
+      - uses: actions/checkout@v1
+      - name: Cache node modules
+        uses: actions/cache@v1
         with:
           path: node_modules
-          key: ${{ runner.OS }}-npm-cache
-          restore-keys: |
-            ${{ runner.OS }}-npm-cache
-      - name: Install Dependencies
-        run: npm install
-      - name: Build
-        run: npm run build
-      - name: Deploy
-        uses: peaceiris/actions-gh-pages@v3
+          key: ${{runner.OS}}-${{hashFiles('**/package-lock.json')}}
+      - uses: yrpang/github-actions-hexo@v1.3
         with:
-          github_token: ${{ secrets.GITHUB_TOKEN }}
-          publish_dir: ./public
-          publish_branch: master  # deploying branch
+          deploykey: ${{secrets.hexo}}
+          username: Caffreyfans
+          email: Caffreyfans@163.com
