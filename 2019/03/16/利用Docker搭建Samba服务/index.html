@@ -4,7 +4,7 @@
 
 <head>
     <meta charset="utf-8">
-    <meta name="keywords" content="About, Caffreyfans">
+    <meta name="keywords" content="利用Docker搭建Samba服务, Caffreyfans">
     <meta name="description" content="">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
@@ -16,7 +16,7 @@
     <!-- Global site tag (gtag.js) - Google Analytics -->
 
 
-    <title>About | Caffreyfans</title>
+    <title>利用Docker搭建Samba服务 | Caffreyfans</title>
     <link rel="icon" type="image/png" href="/favicon.png">
 
     <link rel="stylesheet" type="text/css" href="/libs/awesome/css/all.css">
@@ -244,12 +244,12 @@
 
 
 
-<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/5.jpg')">
+<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/10.jpg')">
     <div class="container" style="right: 0px;left: 0px;">
         <div class="row">
             <div class="col s12 m12 l12">
                 <div class="brand">
-                    <h1 class="description center-align post-title">about</h1>
+                    <h1 class="description center-align post-title">利用Docker搭建Samba服务</h1>
                 </div>
             </div>
         </div>
@@ -363,9 +363,13 @@
             <div class="row tag-cate">
                 <div class="col s7">
                     
-                          <div class="article-tag">
-                            <span class="chip bg-color">No tag</span>
-                          </div>
+                    <div class="article-tag">
+                        
+                            <a href="/tags/Linux/">
+                                <span class="chip bg-color">Linux</span>
+                            </a>
+                        
+                    </div>
                     
                 </div>
                 <div class="col s5 right-align">
@@ -377,7 +381,7 @@
                 
                 <div class="post-date info-break-policy">
                     <i class="far fa-calendar-minus fa-fw"></i>Publish Date:&nbsp;&nbsp;
-                    2021-03-11
+                    2019-03-17
                 </div>
                 
 
@@ -401,20 +405,29 @@
 
         <div class="card-content article-card-content">
             <div id="articleContent">
-                <p>这里是缅甸北部, 我生长的地方, 欢迎来到我的博客, 我娇贵的小公主。我是<b style="color: #42d2ca"> <strong>Caffreyfans</strong> </b>。追求新奇，追求热爱，愿为所爱而奋斗。喜欢一个高效、富有创新的团队，立志打造一款让自己骄傲的产品。热爱户外旅游和朋友交际，追求生活和工作平衡，有节奏感的人生。<br>——————</p>
-<h4 id="开源项目-Open-Source-Projects"><a href="#开源项目-Open-Source-Projects" class="headerlink" title="开源项目 Open Source Projects"></a>开源项目 Open Source Projects</h4><ul>
-<li><a target="_blank" rel="noopener" href="https://github.com/Caffreyfans/IRbaby">IRbaby</a> 一 基于 ESP8266 的万能红外遥控方案</li>
-<li><a target="_blank" rel="noopener" href="https://github.com/Caffreyfans/baidu_face">baidu_face</a> 一 HomeAssistant 百度人脸识别插件</li>
-</ul>
-<h4 id="开发装备-Development-Gears"><a href="#开发装备-Development-Gears" class="headerlink" title="开发装备 Development Gears"></a>开发装备 Development Gears</h4><ul>
-<li>硬件：自组台式 PC</li>
-<li>系统：Windows 10 专业版/Ubuntu 18.04 TLS</li>
-<li>编辑器：<a target="_blank" rel="noopener" href="https://code.visualstudio.com/">vscode</a></li>
-<li>Shell：<a target="_blank" rel="noopener" href="https://github.com/ohmyzsh/ohmyzsh">zsh</a></li>
-<li>浏览器：<a target="_blank" rel="noopener" href="https://www.google.com/chrome/browser/desktop/index.html">Chrome</a></li>
-<li>虚拟机：<a target="_blank" rel="noopener" href="https://www.virtualbox.org/">VirtualBox</a></li>
-<li>VPS: <a target="_blank" rel="noopener" href="https://bandwagonhost.com/">BandwagongHOST</a></li>
-</ul>
+                <h3 id="前述"><a href="#前述" class="headerlink" title="前述"></a>前述</h3><p>能看到搜索到这篇文章想必你已经了解了什么是 <strong>Docker</strong>，什么是 <strong>Samba</strong> 了。如果你不了解这两样东西，那么我建议你在网上搜索一下，仔细了解下这两样比较实用的工具。</p>
+<p>我就以我通俗的语言简述下这两样东西，<strong>Docker</strong> 是一种标准化的软件单元，说白了有了它，我们使用一个软件就像手机上使用 <strong>APP</strong> 一样，我们不用管这个软件怎么写的，以及运行这个软件需要什么环境啊。当我们手机需要某个软件的时候，我们都直接在应用商店里直接搜索下载某个软件，然后打开运行。<strong>Docker</strong> 跟这种道理差不多，如果我们需要某个软件，那么我们也直接从镜像仓库里直接拉取（手机上我们说下载应用，<strong>Docker</strong> 使用的是 <strong>pull</strong> 命令那么就该翻译成拉取，道理是一样的），手机上我们下载的称做安装包，<strong>Docker</strong> 中对应就是应该是镜像。手机上下载好软件包后安装的这个步骤对应 <strong>Docker</strong> 中就应该是创建容器的这个步骤了，创建容器的时候只需要你配置一些简单的参数。手机安装包在你的手机上能下载并安装，在别人的手机上也一样。<strong>Docker</strong> 也是如此，同一镜像都可以在同样的 <strong>CPU</strong> 架构下创建容器运行。只要你装了 <strong>Docker</strong> 就不在乎你用的什么系统了，就只有 <strong>CPU</strong> 架构的区分了。这样就大大为应用的部署提供了方便，而且通常来说一个容器是非常    轻量的，创建和删除它都非常的方便。这就是为什么要使用 <strong>Docker</strong> 来搭建 <strong>Samba</strong> 服务的原因了。</p>
+<span id="more"></span>
+<p>至于 <strong>Samba</strong> 就是适用与 <strong>Linux</strong> 和 <strong>Unix</strong> 的标准 <strong>Windows</strong> 互操作性程序套件。有了它我们就可以把任意文件在我们的 <strong>Windows</strong> 系统和 <strong>Linux</strong> 系统中任意的转移了。</p>
+<h3 id="启动容器"><a href="#启动容器" class="headerlink" title="启动容器"></a>启动容器</h3><pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token function">sudo</span> docker run -it --name samba --restart always <span class="token punctuation">\</span>
+	--net <span class="token function">host</span> -p <span class="token number">139</span>:139 -p <span class="token number">455</span>:455  -v /home:/shared <span class="token punctuation">\</span>
+	-d dperson/samba -s <span class="token string">"share;/shared;yes;no;yes"</span> -n<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
+<p>我们来说下每个参数的含义:</p>
+<p>sudo -&gt; 使用 root 权限执行后续命令</p>
+<p>docker -&gt; docker 命令</p>
+<p>run -&gt; docker 命令的参数，用于启动容器</p>
+<p>-i -&gt; 让容器的标准保持打开</p>
+<p>-t -&gt; 为容器分配一个伪终端</p>
+<p>–name -&gt; 容器名， samba 这里就给该容器命名为 samba</p>
+<p>–restart -&gt; 重启参数，always 我们这里选的就是一直重启，只要是启动失败了它就会不断的重启，这里的作用主要是为了开机启动</p>
+<p>–net -&gt; 加入网络，host 就是说该容器加入到主机网络中</p>
+<p>-p -&gt; 端口映射，139、455 是 <strong>Samba</strong> 协议的端口</p>
+<p>-v -&gt; 文件映射， /home:/shared 就是把主机中的 /home 目录映射到 容器中的 /shared 目录中</p>
+<p>-d -&gt; 后台运行</p>
+<p>dperson/samba 使用的镜像名，当我们的本地没有该镜像时，它会自动去网络仓库里搜索并拉取， 镜像可以是我们自己写的，也可以是别人写好的，我们这里所使用的就是别人已经写的了的</p>
+<p>这上面的都是 <strong>Docker</strong> 命令中的参数，而镜像名后面跟的参数就是该镜像自己设定的参数了，有的镜像可能有，有的镜像可能也没有。这主要就要看这个镜像是怎么写的了</p>
+<p>-s -&gt; 设置共享目录， “share;/shared;yes;no;yes” 给共享的文件夹取名为 share，共享的是容器中的 shared 文件夹（前面的参数就已经把主机中的文件映射到这里了），可见，非只读，启用访客</p>
+<p><em><strong>关于更多的 dperson/samba 详细设置请见 <a target="_blank" rel="noopener" href="https://hub.docker.com/r/dperson/samba/">dperson/samba</a></strong></em></p>
 
                 
             </div>
@@ -441,7 +454,7 @@
                     </i>
                 </span>
                 <span class="reprint-info">
-                    <a href="https://www.caffreyfans.top/about/index.html">https://www.caffreyfans.top/about/index.html</a>
+                    <a href="https://www.caffreyfans.top/2019/03/16/%E5%88%A9%E7%94%A8Docker%E6%90%AD%E5%BB%BASamba%E6%9C%8D%E5%8A%A1/">https://www.caffreyfans.top/2019/03/16/%E5%88%A9%E7%94%A8Docker%E6%90%AD%E5%BB%BASamba%E6%9C%8D%E5%8A%A1/</a>
                 </span>
             </div>
             <div class="reprint__notice">
@@ -478,7 +491,11 @@
                 <div class="post-meta__tag-list" style="display: inline-block;">
                     
                         <div class="article-tag">
-                            <span class="chip bg-color">No tag</span>
+                            
+                                <a href="/tags/Linux/">
+                                    <span class="chip bg-color">Linux</span>
+                                </a>
+                            
                         </div>
                     
                 </div>
@@ -522,30 +539,31 @@
 <article id="prenext-posts" class="prev-next articles">
     <div class="row article-row">
         
-        <div class="article col s12 m6" data-aos="fade-up" data-aos="fade-up">
+        <div class="article col s12 m6" data-aos="fade-up">
             <div class="article-badge left-badge text-color">
-                <i class="far fa-dot-circle"></i>&nbsp;Current
-            </div>
+                <i class="fas fa-chevron-left"></i>&nbsp;Previous</div>
             <div class="card">
-                <a href="/about/index.html">
+                <a href="/2020/09/03/%E8%AF%91%EF%BC%9AUEFI%20%E5%90%AF%E5%8A%A8%E7%9C%9F%E6%AD%A3%E5%81%9A%E4%BA%86%E4%BB%80%E4%B9%88/">
                     <div class="card-image">
                         
                         
-                        <img src="/medias/featureimages/5.jpg" class="responsive-img" alt="about">
+                        <img src="/medias/featureimages/13.jpg" class="responsive-img" alt="译：UEFI 启动真正做了什么">
                         
-                        <span class="card-title">about</span>
+                        <span class="card-title">译：UEFI 启动真正做了什么</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
                     <div class="summary block-with-text">
                         
-                            
+                            该文译自 Adam Willianson 的 “UEFI boot:how does that actually work, then?”
+又是 AdamW 文章时间了！如果你是想找简短而生动的文章，请到别处。
+Kamil Paral 友好
                         
                     </div>
                     <div class="publish-info">
-                            <span class="publish-date">
-                                <i class="far fa-clock fa-fw icon-date"></i>2021-03-11
-                            </span>
+                        <span class="publish-date">
+                            <i class="far fa-clock fa-fw icon-date"></i>2020-09-04
+                        </span>
                         <span class="publish-author">
                             
                             <i class="fas fa-user fa-fw"></i>
@@ -554,7 +572,18 @@
                         </span>
                     </div>
                 </div>
-
+                
+                <div class="card-action article-tags">
+                    
+                    <a href="/tags/UEFI/">
+                        <span class="chip bg-color">UEFI</span>
+                    </a>
+                    
+                    <a href="/tags/BOOT/">
+                        <span class="chip bg-color">BOOT</span>
+                    </a>
+                    
+                </div>
                 
             </div>
         </div>
@@ -562,27 +591,31 @@
         
         <div class="article col s12 m6" data-aos="fade-up">
             <div class="article-badge right-badge text-color">
-                Current&nbsp;<i class="far fa-dot-circle"></i>
+                Next&nbsp;<i class="fas fa-chevron-right"></i>
             </div>
             <div class="card">
-                <a href="/about/index.html">
+                <a href="/2019/01/04/%E8%BD%AF%E4%BB%B6%E6%B5%8B%E8%AF%95%E5%A4%8D%E4%B9%A0/">
                     <div class="card-image">
                         
                         
-                        <img src="/medias/featureimages/5.jpg" class="responsive-img" alt="about">
+                        <img src="/medias/featureimages/11.jpg" class="responsive-img" alt="软件测试复习概要">
                         
-                        <span class="card-title">about</span>
+                        <span class="card-title">软件测试复习概要</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
                     <div class="summary block-with-text">
                         
                             
+ 软件测试常用的概念，常用的分类，测试的目的，方法等
+ 软件测试静态测试的概念，技术，分类，执行过程，涉及的活动，测试的对象等
+ 软件测试的模型分类，个各模型的特点，适用场景，规划的阶段及其关系，表达的图形等
+ 面向对象的软件测试概念，与
                         
                     </div>
                     <div class="publish-info">
                             <span class="publish-date">
-                                <i class="far fa-clock fa-fw icon-date"></i>2021-03-11
+                                <i class="far fa-clock fa-fw icon-date"></i>2019-01-05
                             </span>
                         <span class="publish-author">
                             
@@ -592,7 +625,14 @@
                         </span>
                     </div>
                 </div>
-
+                
+                <div class="card-action article-tags">
+                    
+                    <a href="/tags/%E8%BD%AF%E4%BB%B6%E6%B5%8B%E8%AF%95/">
+                        <span class="chip bg-color">软件测试</span>
+                    </a>
+                    
+                </div>
                 
             </div>
         </div>

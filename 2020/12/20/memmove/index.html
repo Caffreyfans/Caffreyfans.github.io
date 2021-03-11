@@ -4,7 +4,7 @@
 
 <head>
     <meta charset="utf-8">
-    <meta name="keywords" content="About, Caffreyfans">
+    <meta name="keywords" content="memmove 实现, Caffreyfans">
     <meta name="description" content="">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
@@ -16,7 +16,7 @@
     <!-- Global site tag (gtag.js) - Google Analytics -->
 
 
-    <title>About | Caffreyfans</title>
+    <title>memmove 实现 | Caffreyfans</title>
     <link rel="icon" type="image/png" href="/favicon.png">
 
     <link rel="stylesheet" type="text/css" href="/libs/awesome/css/all.css">
@@ -244,12 +244,12 @@
 
 
 
-<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/5.jpg')">
+<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/12.jpg')">
     <div class="container" style="right: 0px;left: 0px;">
         <div class="row">
             <div class="col s12 m12 l12">
                 <div class="brand">
-                    <h1 class="description center-align post-title">about</h1>
+                    <h1 class="description center-align post-title">memmove 实现</h1>
                 </div>
             </div>
         </div>
@@ -363,9 +363,17 @@
             <div class="row tag-cate">
                 <div class="col s7">
                     
-                          <div class="article-tag">
-                            <span class="chip bg-color">No tag</span>
-                          </div>
+                    <div class="article-tag">
+                        
+                            <a href="/tags/C/">
+                                <span class="chip bg-color">C</span>
+                            </a>
+                        
+                            <a href="/tags/%E9%9D%A2%E8%AF%95%E9%A2%98%E8%AE%B0%E5%BD%95/">
+                                <span class="chip bg-color">面试题记录</span>
+                            </a>
+                        
+                    </div>
                     
                 </div>
                 <div class="col s5 right-align">
@@ -377,7 +385,7 @@
                 
                 <div class="post-date info-break-policy">
                     <i class="far fa-calendar-minus fa-fw"></i>Publish Date:&nbsp;&nbsp;
-                    2021-03-11
+                    2020-12-21
                 </div>
                 
 
@@ -401,20 +409,41 @@
 
         <div class="card-content article-card-content">
             <div id="articleContent">
-                <p>这里是缅甸北部, 我生长的地方, 欢迎来到我的博客, 我娇贵的小公主。我是<b style="color: #42d2ca"> <strong>Caffreyfans</strong> </b>。追求新奇，追求热爱，愿为所爱而奋斗。喜欢一个高效、富有创新的团队，立志打造一款让自己骄傲的产品。热爱户外旅游和朋友交际，追求生活和工作平衡，有节奏感的人生。<br>——————</p>
-<h4 id="开源项目-Open-Source-Projects"><a href="#开源项目-Open-Source-Projects" class="headerlink" title="开源项目 Open Source Projects"></a>开源项目 Open Source Projects</h4><ul>
-<li><a target="_blank" rel="noopener" href="https://github.com/Caffreyfans/IRbaby">IRbaby</a> 一 基于 ESP8266 的万能红外遥控方案</li>
-<li><a target="_blank" rel="noopener" href="https://github.com/Caffreyfans/baidu_face">baidu_face</a> 一 HomeAssistant 百度人脸识别插件</li>
-</ul>
-<h4 id="开发装备-Development-Gears"><a href="#开发装备-Development-Gears" class="headerlink" title="开发装备 Development Gears"></a>开发装备 Development Gears</h4><ul>
-<li>硬件：自组台式 PC</li>
-<li>系统：Windows 10 专业版/Ubuntu 18.04 TLS</li>
-<li>编辑器：<a target="_blank" rel="noopener" href="https://code.visualstudio.com/">vscode</a></li>
-<li>Shell：<a target="_blank" rel="noopener" href="https://github.com/ohmyzsh/ohmyzsh">zsh</a></li>
-<li>浏览器：<a target="_blank" rel="noopener" href="https://www.google.com/chrome/browser/desktop/index.html">Chrome</a></li>
-<li>虚拟机：<a target="_blank" rel="noopener" href="https://www.virtualbox.org/">VirtualBox</a></li>
-<li>VPS: <a target="_blank" rel="noopener" href="https://bandwagonhost.com/">BandwagongHOST</a></li>
-</ul>
+                <h1 id="一次关于-memmove-实现的记录"><a href="#一次关于-memmove-实现的记录" class="headerlink" title="一次关于 memmove 实现的记录"></a>一次关于 memmove 实现的记录</h1><p>有一次面试嵌入式工程师，题目中有一题为“请不使用任何函数实现 memmove 源码”，这题我没做出来。</p>
+<p>没做出来的原因1：我没使用过 <code>memmove</code> 函数不知道其作用，只知道字面意思。</p>
+<p>没做出来原因2：就算面试官告诉我这个函数的作用是把一段内存从一个地方移动到另一个地方，我也不知道如何不用函数来实现。</p>
+<p>关于这道题我脑子里第一反映就是使用 <code>memcpy</code> 直接拷过去，但是规定是不能使用函数的，我就傻了。后面我就想要不新开一段内存，做两次复制，第一次复制是源内存中数据到新内存空间，第二次复制是新内存空间到目标地址空间。这样做不是不行，但是浪费内存空间，而且操作步骤多，浪费处理器计算力。后面面试官又提醒我说，不要开辟新的内存空间该怎么办？我回答我实在没有办法了……</p>
+<p>直接我现在看了 gcc 里的 <code>memmove</code> 的源码现在才知道自己面试不过是应该的。先看下 gcc 中的源码吧。</p>
+<span id="more"></span>
+<pre class="line-numbers language-c" data-language="c"><code class="language-c"><span class="token keyword">void</span> <span class="token operator">*</span>
+<span class="token function">memmove</span> <span class="token punctuation">(</span><span class="token keyword">void</span> <span class="token operator">*</span>dest<span class="token punctuation">,</span> <span class="token keyword">const</span> <span class="token keyword">void</span> <span class="token operator">*</span>src<span class="token punctuation">,</span> <span class="token class-name">size_t</span> len<span class="token punctuation">)</span>
+<span class="token punctuation">&#123;</span>
+  <span class="token keyword">char</span> <span class="token operator">*</span>d <span class="token operator">=</span> dest<span class="token punctuation">;</span>   
+  <span class="token keyword">const</span> <span class="token keyword">char</span> <span class="token operator">*</span>s <span class="token operator">=</span> src<span class="token punctuation">;</span>
+  <span class="token keyword">if</span> <span class="token punctuation">(</span>d <span class="token operator">&lt;</span> s<span class="token punctuation">)</span>
+    <span class="token keyword">while</span> <span class="token punctuation">(</span>len<span class="token operator">--</span><span class="token punctuation">)</span>
+      <span class="token operator">*</span>d<span class="token operator">++</span> <span class="token operator">=</span> <span class="token operator">*</span>s<span class="token operator">++</span><span class="token punctuation">;</span>
+  <span class="token keyword">else</span>
+    <span class="token punctuation">&#123;</span>
+      <span class="token keyword">char</span> <span class="token operator">*</span>lasts <span class="token operator">=</span> s <span class="token operator">+</span> <span class="token punctuation">(</span>len<span class="token operator">-</span><span class="token number">1</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+      <span class="token keyword">char</span> <span class="token operator">*</span>lastd <span class="token operator">=</span> d <span class="token operator">+</span> <span class="token punctuation">(</span>len<span class="token operator">-</span><span class="token number">1</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+      <span class="token keyword">while</span> <span class="token punctuation">(</span>len<span class="token operator">--</span><span class="token punctuation">)</span>
+        <span class="token operator">*</span>lastd<span class="token operator">--</span> <span class="token operator">=</span> <span class="token operator">*</span>lasts<span class="token operator">--</span><span class="token punctuation">;</span>
+    <span class="token punctuation">&#125;</span>
+  <span class="token keyword">return</span> dest<span class="token punctuation">;</span>
+<span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p>现在才知道原来标准库里面的函数十分朴实，没有什么花里胡哨的操作，就是一个字节一个字节的拷贝。但是拷贝也是有前提的，如果目标地址低于源地址，就直接拷贝直接 len 为 0，这样拷贝的顺序就是正向的；如果目标地址是高于源地址的，那就需要做逆向拷贝，从最后一个字节拷贝到第一个字节来，这样做的原因就是为了避免正向拷贝的情况下，目标地址其实位置是源地址内存中的一部分，那么就会有内存覆盖情况，最终覆盖部分数据丢失，而逆向拷贝就不会。</p>
+<p>后来我也看了 <code>memcpy</code> 的源码，它其中就有内存覆盖的情况，所以当使用 <code>memcpy</code> 函数时，如果你的目标地址的起始位置是源地址空间的一部分，就会出现错误。</p>
+<pre class="line-numbers language-none"><code class="language-none"> src
+  ↓
++-------------------------------------------------+
+| 0 | 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 | 10 | 11 |
++-------------------------------------------------+       
+| a | b | c | d | e | f | g | h | i | j |  k |  l |
++-------------------------------------------------+
+                                  ↑
+                                 dest<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p>上面就是 memcpy 出现内存覆盖而导致数据丢失的情况，所以我们使用 memcpy 的时候应该知道有这么种情况，即使是数据丢失也是我们期望的一部分话就不用担心该问题了。</p>
 
                 
             </div>
@@ -441,7 +470,7 @@
                     </i>
                 </span>
                 <span class="reprint-info">
-                    <a href="https://www.caffreyfans.top/about/index.html">https://www.caffreyfans.top/about/index.html</a>
+                    <a href="https://www.caffreyfans.top/2020/12/20/memmove/">https://www.caffreyfans.top/2020/12/20/memmove/</a>
                 </span>
             </div>
             <div class="reprint__notice">
@@ -478,7 +507,15 @@
                 <div class="post-meta__tag-list" style="display: inline-block;">
                     
                         <div class="article-tag">
-                            <span class="chip bg-color">No tag</span>
+                            
+                                <a href="/tags/C/">
+                                    <span class="chip bg-color">C</span>
+                                </a>
+                            
+                                <a href="/tags/%E9%9D%A2%E8%AF%95%E9%A2%98%E8%AE%B0%E5%BD%95/">
+                                    <span class="chip bg-color">面试题记录</span>
+                                </a>
+                            
                         </div>
                     
                 </div>
@@ -522,30 +559,30 @@
 <article id="prenext-posts" class="prev-next articles">
     <div class="row article-row">
         
-        <div class="article col s12 m6" data-aos="fade-up" data-aos="fade-up">
+        <div class="article col s12 m6" data-aos="fade-up">
             <div class="article-badge left-badge text-color">
-                <i class="far fa-dot-circle"></i>&nbsp;Current
-            </div>
+                <i class="fas fa-chevron-left"></i>&nbsp;Previous</div>
             <div class="card">
-                <a href="/about/index.html">
+                <a href="/2020/12/31/SPI%20Flash%20Modes/">
                     <div class="card-image">
                         
                         
-                        <img src="/medias/featureimages/5.jpg" class="responsive-img" alt="about">
+                        <img src="/medias/featureimages/14.jpg" class="responsive-img" alt="SPI Flash Modes 介绍">
                         
-                        <span class="card-title">about</span>
+                        <span class="card-title">SPI Flash Modes 介绍</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
                     <div class="summary block-with-text">
                         
-                            
+                            该文章翻译来源为 https://github.com/espressif/esptool/wiki/SPI-Flash-Modes
+它主要介绍了我们烧录 ESP8266 和 ESP32 时对 SPI 接入方式该如何选择，每次我看到什么 D
                         
                     </div>
                     <div class="publish-info">
-                            <span class="publish-date">
-                                <i class="far fa-clock fa-fw icon-date"></i>2021-03-11
-                            </span>
+                        <span class="publish-date">
+                            <i class="far fa-clock fa-fw icon-date"></i>2021-01-01
+                        </span>
                         <span class="publish-author">
                             
                             <i class="fas fa-user fa-fw"></i>
@@ -554,7 +591,14 @@
                         </span>
                     </div>
                 </div>
-
+                
+                <div class="card-action article-tags">
+                    
+                    <a href="/tags/ESP8266/">
+                        <span class="chip bg-color">ESP8266</span>
+                    </a>
+                    
+                </div>
                 
             </div>
         </div>
@@ -562,27 +606,33 @@
         
         <div class="article col s12 m6" data-aos="fade-up">
             <div class="article-badge right-badge text-color">
-                Current&nbsp;<i class="far fa-dot-circle"></i>
+                Next&nbsp;<i class="fas fa-chevron-right"></i>
             </div>
             <div class="card">
-                <a href="/about/index.html">
+                <a href="/2020/12/19/C-1/">
                     <div class="card-image">
                         
                         
-                        <img src="/medias/featureimages/5.jpg" class="responsive-img" alt="about">
+                        <img src="/medias/featureimages/2.jpg" class="responsive-img" alt="如何将变量中的值以二进制形式打印出来">
                         
-                        <span class="card-title">about</span>
+                        <span class="card-title">如何将变量中的值以二进制形式打印出来</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
                     <div class="summary block-with-text">
                         
-                            
+                            如何将变量中的值以二进制形式打印出来先看源码：
+#include &lt;stdio.h>
+#include &lt;string.h>
+
+const char *uint64_to_binary(int n)
+&#123;
+    sta
                         
                     </div>
                     <div class="publish-info">
                             <span class="publish-date">
-                                <i class="far fa-clock fa-fw icon-date"></i>2021-03-11
+                                <i class="far fa-clock fa-fw icon-date"></i>2020-12-20
                             </span>
                         <span class="publish-author">
                             
@@ -592,7 +642,14 @@
                         </span>
                     </div>
                 </div>
-
+                
+                <div class="card-action article-tags">
+                    
+                    <a href="/tags/C/">
+                        <span class="chip bg-color">C</span>
+                    </a>
+                    
+                </div>
                 
             </div>
         </div>

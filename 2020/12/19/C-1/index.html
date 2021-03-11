@@ -4,7 +4,7 @@
 
 <head>
     <meta charset="utf-8">
-    <meta name="keywords" content="About, Caffreyfans">
+    <meta name="keywords" content="如何将变量中的值以二进制形式打印出来, Caffreyfans">
     <meta name="description" content="">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
@@ -16,7 +16,7 @@
     <!-- Global site tag (gtag.js) - Google Analytics -->
 
 
-    <title>About | Caffreyfans</title>
+    <title>如何将变量中的值以二进制形式打印出来 | Caffreyfans</title>
     <link rel="icon" type="image/png" href="/favicon.png">
 
     <link rel="stylesheet" type="text/css" href="/libs/awesome/css/all.css">
@@ -244,12 +244,12 @@
 
 
 
-<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/5.jpg')">
+<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/2.jpg')">
     <div class="container" style="right: 0px;left: 0px;">
         <div class="row">
             <div class="col s12 m12 l12">
                 <div class="brand">
-                    <h1 class="description center-align post-title">about</h1>
+                    <h1 class="description center-align post-title">如何将变量中的值以二进制形式打印出来</h1>
                 </div>
             </div>
         </div>
@@ -363,9 +363,13 @@
             <div class="row tag-cate">
                 <div class="col s7">
                     
-                          <div class="article-tag">
-                            <span class="chip bg-color">No tag</span>
-                          </div>
+                    <div class="article-tag">
+                        
+                            <a href="/tags/C/">
+                                <span class="chip bg-color">C</span>
+                            </a>
+                        
+                    </div>
                     
                 </div>
                 <div class="col s5 right-align">
@@ -377,7 +381,7 @@
                 
                 <div class="post-date info-break-policy">
                     <i class="far fa-calendar-minus fa-fw"></i>Publish Date:&nbsp;&nbsp;
-                    2021-03-11
+                    2020-12-20
                 </div>
                 
 
@@ -401,20 +405,35 @@
 
         <div class="card-content article-card-content">
             <div id="articleContent">
-                <p>这里是缅甸北部, 我生长的地方, 欢迎来到我的博客, 我娇贵的小公主。我是<b style="color: #42d2ca"> <strong>Caffreyfans</strong> </b>。追求新奇，追求热爱，愿为所爱而奋斗。喜欢一个高效、富有创新的团队，立志打造一款让自己骄傲的产品。热爱户外旅游和朋友交际，追求生活和工作平衡，有节奏感的人生。<br>——————</p>
-<h4 id="开源项目-Open-Source-Projects"><a href="#开源项目-Open-Source-Projects" class="headerlink" title="开源项目 Open Source Projects"></a>开源项目 Open Source Projects</h4><ul>
-<li><a target="_blank" rel="noopener" href="https://github.com/Caffreyfans/IRbaby">IRbaby</a> 一 基于 ESP8266 的万能红外遥控方案</li>
-<li><a target="_blank" rel="noopener" href="https://github.com/Caffreyfans/baidu_face">baidu_face</a> 一 HomeAssistant 百度人脸识别插件</li>
-</ul>
-<h4 id="开发装备-Development-Gears"><a href="#开发装备-Development-Gears" class="headerlink" title="开发装备 Development Gears"></a>开发装备 Development Gears</h4><ul>
-<li>硬件：自组台式 PC</li>
-<li>系统：Windows 10 专业版/Ubuntu 18.04 TLS</li>
-<li>编辑器：<a target="_blank" rel="noopener" href="https://code.visualstudio.com/">vscode</a></li>
-<li>Shell：<a target="_blank" rel="noopener" href="https://github.com/ohmyzsh/ohmyzsh">zsh</a></li>
-<li>浏览器：<a target="_blank" rel="noopener" href="https://www.google.com/chrome/browser/desktop/index.html">Chrome</a></li>
-<li>虚拟机：<a target="_blank" rel="noopener" href="https://www.virtualbox.org/">VirtualBox</a></li>
-<li>VPS: <a target="_blank" rel="noopener" href="https://bandwagonhost.com/">BandwagongHOST</a></li>
-</ul>
+                <h2 id="如何将变量中的值以二进制形式打印出来"><a href="#如何将变量中的值以二进制形式打印出来" class="headerlink" title="如何将变量中的值以二进制形式打印出来"></a>如何将变量中的值以二进制形式打印出来</h2><p>先看源码：</p>
+<pre class="line-numbers language-c" data-language="c"><code class="language-c"><span class="token macro property"><span class="token directive-hash">#</span><span class="token directive keyword">include</span> <span class="token string">&lt;stdio.h></span></span>
+<span class="token macro property"><span class="token directive-hash">#</span><span class="token directive keyword">include</span> <span class="token string">&lt;string.h></span></span>
+
+<span class="token keyword">const</span> <span class="token keyword">char</span> <span class="token operator">*</span><span class="token function">uint64_to_binary</span><span class="token punctuation">(</span><span class="token keyword">int</span> n<span class="token punctuation">)</span>
+<span class="token punctuation">&#123;</span>
+    <span class="token keyword">static</span> <span class="token keyword">char</span> str<span class="token punctuation">[</span><span class="token number">33</span><span class="token punctuation">]</span><span class="token punctuation">;</span>
+    str<span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">]</span> <span class="token operator">=</span> <span class="token string">'\0'</span><span class="token punctuation">;</span>
+
+    <span class="token keyword">for</span> <span class="token punctuation">(</span><span class="token keyword">unsigned</span> i <span class="token operator">=</span> <span class="token number">0xffffffff</span> <span class="token operator">/</span> <span class="token number">2</span> <span class="token operator">+</span> <span class="token number">1</span><span class="token punctuation">;</span> i <span class="token operator">></span> <span class="token number">0</span><span class="token punctuation">;</span> i <span class="token operator">>>=</span> <span class="token number">1</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+        <span class="token function">strcat</span><span class="token punctuation">(</span>str<span class="token punctuation">,</span> <span class="token punctuation">(</span><span class="token punctuation">(</span>n <span class="token operator">&amp;</span> i<span class="token punctuation">)</span> <span class="token operator">==</span> i<span class="token punctuation">)</span> <span class="token operator">?</span> <span class="token string">"1"</span> <span class="token operator">:</span> <span class="token string">"0"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">&#125;</span>
+    <span class="token keyword">return</span> str<span class="token punctuation">;</span>
+<span class="token punctuation">&#125;</span>
+
+<span class="token keyword">int</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+<span class="token punctuation">&#123;</span>
+    <span class="token function">printf</span><span class="token punctuation">(</span><span class="token string">"%s\n"</span><span class="token punctuation">,</span> <span class="token function">uint64_to_binary</span><span class="token punctuation">(</span><span class="token number">1</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token keyword">return</span> <span class="token number">0</span><span class="token punctuation">;</span>
+<span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<span id="more"></span>
+<p>要打印出每个位的核心思想就是一个位一个位的去比较，如何该位为 1 就记录为 “1”，如果该位为 0 就记录为 “0”，比较一次记录一次。最后输出字符串中的结果。</p>
+<p><code>0xffffffff / 2 + 1</code> 就是将内存中最高位置为 1 其他位置为 0。如果电脑是小端处理器（数据低字节保存在内存的低地址中），那么内存中存储的应该就是 <code>10000000 00000000 00000000 00000000</code>，每一次循环就把该数右移一位，内存上体现的就是 1 在一格一格的向右移动。假如我们要输出的数它在内存中实际存储是这个样子 <code>00000000 00000000 00000000 11111111</code>。</p>
+<p>第 1 次循环:<br><code>10000000 00000000 00000000 00000000</code> &amp; <code>00000000 00000000 00000000 11111111</code> = <code>00000000 00000000 00000000 00000000</code> 所以 str = “0”。</p>
+<p>第 2 次循环：<br><code>01000000 00000000 00000000 00000000</code> &amp; <code>00000000 00000000 00000000 11111111</code> = <code>00000000 00000000 00000000 00000000</code><br>所以 str = “00”</p>
+<p>……</p>
+<p>第 25 次循环：<br><code>00000000 00000000 00000000 10000000</code> &amp; <code>00000000 00000000 00000000 11111111</code> = <code>00000000 00000000 00000000 00000000</code><br>所以 str = “0000000000000000000000001”<br>……</p>
+<p>这样就把内存中每个位的值打印出来了。如果要打印的是 1 个字节的变量，就得将 <code>0xffffffff</code> 修改成 <code>0xff</code>。</p>
+<h3 id="引申"><a href="#引申" class="headerlink" title="引申"></a>引申</h3><p>打印变量在内存的每个位是直观了解其在内存分布的方式，其实了解一个变量在内存中是怎么存储的，有利于我们解决异构 CPU 跨字节交互数据的问题。比如一台英特尔 CPU 的电脑（小端处理器）往一个 ESP32（大端处理器）上发送一个 4 字节的整型变量。电脑将 <code>unsigned int a = 255</code>, 内存中的数据(<code>0x000000ff</code>）直接发到 ESP32 上，ESP32 收到数据后直接内存拷贝到ESP32 中的 <code>unsigned int b</code> 变量上，则 b 的数值就为 <code>4278190080</code>，这样就很有可能造成程序运行错误。特别是这种跨平台跨字节交互数据的情况应该特别小心，做个大小端转换就没事了。说的容易，但是理解数据在内存中实际的存储情况才是关键。</p>
 
                 
             </div>
@@ -441,7 +460,7 @@
                     </i>
                 </span>
                 <span class="reprint-info">
-                    <a href="https://www.caffreyfans.top/about/index.html">https://www.caffreyfans.top/about/index.html</a>
+                    <a href="https://www.caffreyfans.top/2020/12/19/C-1/">https://www.caffreyfans.top/2020/12/19/C-1/</a>
                 </span>
             </div>
             <div class="reprint__notice">
@@ -478,7 +497,11 @@
                 <div class="post-meta__tag-list" style="display: inline-block;">
                     
                         <div class="article-tag">
-                            <span class="chip bg-color">No tag</span>
+                            
+                                <a href="/tags/C/">
+                                    <span class="chip bg-color">C</span>
+                                </a>
+                            
                         </div>
                     
                 </div>
@@ -522,30 +545,31 @@
 <article id="prenext-posts" class="prev-next articles">
     <div class="row article-row">
         
-        <div class="article col s12 m6" data-aos="fade-up" data-aos="fade-up">
+        <div class="article col s12 m6" data-aos="fade-up">
             <div class="article-badge left-badge text-color">
-                <i class="far fa-dot-circle"></i>&nbsp;Current
-            </div>
+                <i class="fas fa-chevron-left"></i>&nbsp;Previous</div>
             <div class="card">
-                <a href="/about/index.html">
+                <a href="/2020/12/20/memmove/">
                     <div class="card-image">
                         
                         
-                        <img src="/medias/featureimages/5.jpg" class="responsive-img" alt="about">
+                        <img src="/medias/featureimages/12.jpg" class="responsive-img" alt="memmove 实现">
                         
-                        <span class="card-title">about</span>
+                        <span class="card-title">memmove 实现</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
                     <div class="summary block-with-text">
                         
-                            
+                            一次关于 memmove 实现的记录有一次面试嵌入式工程师，题目中有一题为“请不使用任何函数实现 memmove 源码”，这题我没做出来。
+没做出来的原因1：我没使用过 memmove 函数不知道其作用，只知道字面意思。
+没做出来原因2：就
                         
                     </div>
                     <div class="publish-info">
-                            <span class="publish-date">
-                                <i class="far fa-clock fa-fw icon-date"></i>2021-03-11
-                            </span>
+                        <span class="publish-date">
+                            <i class="far fa-clock fa-fw icon-date"></i>2020-12-21
+                        </span>
                         <span class="publish-author">
                             
                             <i class="fas fa-user fa-fw"></i>
@@ -554,7 +578,18 @@
                         </span>
                     </div>
                 </div>
-
+                
+                <div class="card-action article-tags">
+                    
+                    <a href="/tags/C/">
+                        <span class="chip bg-color">C</span>
+                    </a>
+                    
+                    <a href="/tags/%E9%9D%A2%E8%AF%95%E9%A2%98%E8%AE%B0%E5%BD%95/">
+                        <span class="chip bg-color">面试题记录</span>
+                    </a>
+                    
+                </div>
                 
             </div>
         </div>
@@ -562,27 +597,27 @@
         
         <div class="article col s12 m6" data-aos="fade-up">
             <div class="article-badge right-badge text-color">
-                Current&nbsp;<i class="far fa-dot-circle"></i>
+                Next&nbsp;<i class="fas fa-chevron-right"></i>
             </div>
             <div class="card">
-                <a href="/about/index.html">
+                <a href="/2020/12/19/pointer_and_index/">
                     <div class="card-image">
                         
                         
-                        <img src="/medias/featureimages/5.jpg" class="responsive-img" alt="about">
+                        <img src="/medias/featureimages/23.jpg" class="responsive-img" alt="指针与下标">
                         
-                        <span class="card-title">about</span>
+                        <span class="card-title">指针与下标</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
                     <div class="summary block-with-text">
                         
-                            
+                            如何可以互换地使用指针表达式与表达式，应该使用哪种更为合适？对于大多数而言下标更容易理解，尤其在多维数组中。所以在可读性方面，下标更有优势。而我本人的编程习惯也倾向于使用下标,而且还一直以为下标与指针表达式等价。直到看了《C与指针》才知道，
                         
                     </div>
                     <div class="publish-info">
                             <span class="publish-date">
-                                <i class="far fa-clock fa-fw icon-date"></i>2021-03-11
+                                <i class="far fa-clock fa-fw icon-date"></i>2020-12-20
                             </span>
                         <span class="publish-author">
                             
@@ -592,7 +627,14 @@
                         </span>
                     </div>
                 </div>
-
+                
+                <div class="card-action article-tags">
+                    
+                    <a href="/tags/C/">
+                        <span class="chip bg-color">C</span>
+                    </a>
+                    
+                </div>
                 
             </div>
         </div>

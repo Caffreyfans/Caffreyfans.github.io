@@ -4,7 +4,7 @@
 
 <head>
     <meta charset="utf-8">
-    <meta name="keywords" content="About, Caffreyfans">
+    <meta name="keywords" content="译：UEFI 启动真正做了什么, Caffreyfans">
     <meta name="description" content="">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
@@ -16,7 +16,7 @@
     <!-- Global site tag (gtag.js) - Google Analytics -->
 
 
-    <title>About | Caffreyfans</title>
+    <title>译：UEFI 启动真正做了什么 | Caffreyfans</title>
     <link rel="icon" type="image/png" href="/favicon.png">
 
     <link rel="stylesheet" type="text/css" href="/libs/awesome/css/all.css">
@@ -244,12 +244,12 @@
 
 
 
-<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/5.jpg')">
+<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/13.jpg')">
     <div class="container" style="right: 0px;left: 0px;">
         <div class="row">
             <div class="col s12 m12 l12">
                 <div class="brand">
-                    <h1 class="description center-align post-title">about</h1>
+                    <h1 class="description center-align post-title">译：UEFI 启动真正做了什么</h1>
                 </div>
             </div>
         </div>
@@ -363,9 +363,17 @@
             <div class="row tag-cate">
                 <div class="col s7">
                     
-                          <div class="article-tag">
-                            <span class="chip bg-color">No tag</span>
-                          </div>
+                    <div class="article-tag">
+                        
+                            <a href="/tags/UEFI/">
+                                <span class="chip bg-color">UEFI</span>
+                            </a>
+                        
+                            <a href="/tags/BOOT/">
+                                <span class="chip bg-color">BOOT</span>
+                            </a>
+                        
+                    </div>
                     
                 </div>
                 <div class="col s5 right-align">
@@ -377,7 +385,7 @@
                 
                 <div class="post-date info-break-policy">
                     <i class="far fa-calendar-minus fa-fw"></i>Publish Date:&nbsp;&nbsp;
-                    2021-03-11
+                    2020-09-04
                 </div>
                 
 
@@ -401,20 +409,44 @@
 
         <div class="card-content article-card-content">
             <div id="articleContent">
-                <p>这里是缅甸北部, 我生长的地方, 欢迎来到我的博客, 我娇贵的小公主。我是<b style="color: #42d2ca"> <strong>Caffreyfans</strong> </b>。追求新奇，追求热爱，愿为所爱而奋斗。喜欢一个高效、富有创新的团队，立志打造一款让自己骄傲的产品。热爱户外旅游和朋友交际，追求生活和工作平衡，有节奏感的人生。<br>——————</p>
-<h4 id="开源项目-Open-Source-Projects"><a href="#开源项目-Open-Source-Projects" class="headerlink" title="开源项目 Open Source Projects"></a>开源项目 Open Source Projects</h4><ul>
-<li><a target="_blank" rel="noopener" href="https://github.com/Caffreyfans/IRbaby">IRbaby</a> 一 基于 ESP8266 的万能红外遥控方案</li>
-<li><a target="_blank" rel="noopener" href="https://github.com/Caffreyfans/baidu_face">baidu_face</a> 一 HomeAssistant 百度人脸识别插件</li>
+                <p>该文译自 Adam Willianson 的 “UEFI boot:how does that actually work, then?”</p>
+<p>又是 AdamW 文章时间了！如果你是想找简短而生动的文章，请到别处。</p>
+<p><a target="_blank" rel="noopener" href="http://kparal.wordpress.com/">Kamil Paral</a> 友好地提示我，我是一名狂热的纸制化着。时刻注意自己有什么问题。</p>
+<p><em>对行业大众的重要注解：</em> 这篇博客只针对普通大众：目的是消除一些普通神话和帮助普通大众更好的理解 UEFI。这不是低级的完全的详细描述也不能保证 100% 技术上准确的解释，我不是一名专业的固件工程师或者类似的人。如果你实际上是在构建操作系统或者其他的东西，请不要依赖我的简单说明或者向我请求帮助；我只是互联网上的白痴。如果你想做善事并且有钱的话，加入 UEFI 论坛询问您的供应商或检查您的参考实施或其他。如果你没有钱，那就问你有经验的同事，好的。<em>重要注解结束</em></p>
+<p>也许你已经在网上读了很多关于 UEFI 的文章了。这里有一点很重要的信息你应该知道：它们 95% 的都是垃圾。如果你想知道关于 UEFI，或者拓展关于 UEFI 规范以外的知识，<a target="_blank" rel="noopener" href="http://mjg59.dreamwidth.org/">mig59’s blog</a> 和一些看起来可靠的相关人员 - <a target="_blank" rel="noopener" href="http://www.rodsbooks.com/linux-uefi/">Rod Smith</a>, <a target="_blank" rel="noopener" href="http://blog.uncooperative.org/">Peter Jones</a>，Chris Murphy 和一些相对较少的文档，这些 OS 的开发人员实际上知道 UEFI 到底做了什么。你所认为你认识像误解的混合毒药，误解、半真相、炒作和彻底的谎言。所以你应该完全忘了它们。</p>
+<p>好的，我们已经走上正道了。我最想讨论的就是引导加载了，因为那是对于大多数人最重要的固件，一些网站一直发一些误解的东西并且引起人们的误解。</p>
+<span id="more"></span>
+<h2 id="术语"><a href="#术语" class="headerlink" title="术语"></a>术语</h2><p>首先，让我们摆脱一些术语。BIOS 和 UEFI 都是计算机的固件。BISO 类型的固件（大多数）仅在 IBM PC 兼容计算机上找到。UEFI 相对来说更大通用，可以在非 IMB 兼容计算机上找到。UEFI</p>
+<p>你不能有 ‘UEFI BIOS’，也没有 ‘UEFI BIOS‘。请千万不要说 ‘UEFI BIOS’. BIOS 并非所有 PC 固件的通用术语。它只是 PC 固件的一种类型。你的计算机有一个固件。如果它是 IBM PC 兼容计算机，几乎可以肯定是一个 BIOS 或者 UEFI 固件。如果你正在跑 <a target="_blank" rel="noopener" href="http://www.coreboot.org/">Coreboot</a>，先生/女士祝贺您，您是个例外，你应该为你自己感到自豪。</p>
+<p>安全启动和 UEFI 并非是一个事。千万不要交换使用这些术语。安全系统是 UEFI 规范里一个单独有效的可选项，在 UEFI 规范的版本 2.2 中添加。稍后我再确切的讨论它是什么，但是现在，只需要记住它和 UEFI 不是一样东西。你需要明白安全启动是什么，UEFI 是什么，任何时间你应该知道你自己在说什么。我们先来说 UEFI，后面我们再说安全启动作为 UEFI 的拓展，因为基本上就是这样。</p>
+<p>奖金历史记录：UEFI 不是微软发明，不被它控制，并且从未被微软控制。它的前生和基础，EFI 是英特尔开发并推行的。UEFI 被<a target="_blank" rel="noopener" href="http://uefi.org/">UEFI 联盟</a>管理。微软是 UEFI 联盟成员之一。还有红帽、苹果还有很多主要的 PC 厂家，英特尔（很明显）、AMD、和<a target="_blank" rel="noopener" href="http://uefi.org/members">其他主要的次要的硬件软件公司和组织的清单</a>。这是一个广泛的共识规范，和一大堆必要的麻烦，这些我们后面再单独讲。这不是任何一家公司的 “邪恶之车”。</p>
+<h2 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h2><p>如果你真正的想理解 UEFI，去读 UEFI 规范是一个很好的办法。你可以这样做，这也很简单。不你用花一分钱，我不是在告诉你阅读是让你最快乐的事情了，因为它不是。但是它会浪费你的时间，你可以在这里找到 <a target="_blank" rel="noopener" href="http://www.uefi.org/specs/download">UEFI 的官网</a>。你必须确认一些选项，但是你不会把你的灵魂签署给撒旦，不用担心。当我写这些事，当前版本是 <a target="_blank" rel="noopener" href="http://www.uefi.org/sites/default/files/resources/2_4_Errata_A.pdf">2.4 Errata A</a>，那就是这篇文章写的版本。这里没有 BIOS 规范，BIOS 是实事上的标准-它的工作方式与1980年代在实际IBM PC上的工作方式相同。这也是 UEFI 存在的原因之一。</p>
+<p>现在，让事情简单点，我们来考虑下两个世界。一个是 IBM PC 兼容计算机世界-以下简称为 PCs - 在 UEFI 和 GPT 存在之前。你们很多人可能对这个世界很熟悉并且可能非常了解。我们来说下在具有 BIOS 固件的 PC 是如何启动的。</p>
+<p>BIOS 启动<br>它有效，实际上是一种非常非常简单的方式。在你老派的 BIOS PC 上，你有一个或者多个是 MBR 的硬盘。这个 MBR 是另一个实事标准；基本上，磁盘的最开始以特定格式描述了磁盘上的分区，包含一个 ‘启动引导’,一段非常小 BIOS 固件知道如何执行的代码，它的任务是启动操作系统。（现代的启动引导通常更大能够包含 MBR 空间和必要使用的多阶段设计，MBR 中的位知道如何从其他位置加载下一阶段，但这对于我们来说并不是现在的重点）。</p>
+<p>所有 BIOS 固件都知道，在启动系统的上下文中，是哪个磁盘有操作系统。你，BIOS 基础计算机的所有者，可以告诉 BIOS 固件你要启动的哪个磁盘上的系统。固件不明白这范围以外的事情了。它执行启动引导找到具体硬盘上的 MBR ，就完了。固件再也不会被调用了。</p>
+<p>在 BIOS 的世界里，显然所有形式的多重引导都在固件层之上处理。固件层不知道什么是启动引导，或者什么是操作系统。它更不知道分区是什么。所有它能做的只是从磁盘的 MBR 分区执行启动引到程序。您也无法从固件外部配置引导过程。</p>
+<h2 id="UEFI-启动：背景"><a href="#UEFI-启动：背景" class="headerlink" title="UEFI 启动：背景"></a>UEFI 启动：背景</h2><p>好的，我们已经有 BIOS 世界的基础了。现在让我们看一下在UEFI系统上启动的工作方式。使您不了解这篇文章的细节，也请理解：它完全不同。彻底完全地不同与 BIOS 的启动方式。你不能将你对 BIOS 引导过程来理解 UEFI 启动。你需要知道这是一个完全不同的世界。</p>
+<p>这还有一件重要的十需要知道：许多 UEFI 固件实现了某种 BIOS 兼容模式，通常被叫称为 CSM。许多 UEFI 固件能像 BIOS 固件一样启动-它们会找磁盘上的 MBR，并且执行 MBR 里的启动引导，然后将所有内容留给该引导程序。人们有时会错误地将使用此功能称为“禁用 UEFI”，这是语法上的错误。你不能“禁用”你系统上的固件。这是很笨的术语。不要用它，但理解人们真正想说的东西。他们想说 UEFI 固件能以”BIOS 模式“启动系统而不是原生 UEFI 模式。</p>
+<p>我将描述下原生 UEFI 启动。如果你有基于 UEFI 系统，其固件具有 BIOS 兼容性功能，并且你决定使用它。那么就启动而言，你可以假装你的系统是基于 BIOS 的，做所有事的方式跟 BIOS 启动方式一样。但是，如果要执行此操作，请确保您始终应用它。我真心强烈不推荐你将 UEFI-原生 与 BIOS-兼容的永久安装操作系统的引导，特别是在相同的磁盘上。这是非常非常糟糕的主意，这会造成你身心痛苦。如果你决定这样做，不要来向我哭。</p>
+<p>为了理智，我假设磁盘尺有所短  GPT 分区表，和 EFI FAT32 <a target="_blank" rel="noopener" href="https://en.wikipedia.org/wiki/EFI_System_partition">EFI 系统分区</a>。根据要深入研究这些内容的深度，您可能会发现，并不是严格说来，您可以始终假设在处理UEFI本机启动时将要使用 GPT 磁盘和 EFI FAT32 ESP，但是 UEFI 规范与 GPT 磁盘和 EFI FAT32 ESP 紧密相关，在99％的情况下，这是您要处理的问题。除非你正在使用 Macs，坦白说，Macs 很混乱。</p>
+<p><strong>编辑注解:</strong> 以下内容（取决于含义和复杂性）在 2014-01-26 经过大量修改，此帖子的初始版本发布后几个小时根据 Peter Jones 的反馈。认为这是 V2.0 版的文章。早期版本以不太准确和混乱的方式编写。</p>
+<h2 id="UEFI-原生启动：它背后真正做了什么"><a href="#UEFI-原生启动：它背后真正做了什么" class="headerlink" title="UEFI 原生启动：它背后真正做了什么"></a>UEFI 原生启动：它背后真正做了什么</h2><p>好吧，顺便说一句，让我们开始讨论。这就是原生 UEFI 引导实际上是如何工作的。拥有一些高级背景知道可能会有所帮助。</p>
+<p>UEFI 在固件级提供了很多基础架构来处理系统启动。它远不及 BIOS 那么简单。不像 BIOS，UEFI 真正地理解，要从不同程度上，磁盘分区、启动引导程序和操作系统等概念。</p>
+<p>你可以看一下 BIOS 引导过程，再看一下 UEFI 过程，看 UEFI 流程如何扩展各种位以解决特定问题。</p>
+<p>这 BIOS/MBR 查找引导程序的方式非常简陋，当你思考它时。它就像非特别的酱：这是在磁盘头一段极小的空间里包含神奇的代码，它只对系统固件有意义，只能用特殊工具来写它。这种方法存在几个问题。</p>
+<ul>
+<li>这不方便处理 - 你需要特殊的固件来写 MBR 分区， 也就只有一个办法搞清楚它是什么，dd 出内容然后分析它。</li>
+<li>如上所述，MBR 它本身没那么大不足以容纳许多现代引导程序。它所做的是安装它们自身的一小部分到 MBR 适当的位置，剩余的空间到磁盘常规 MBR 结束到第一分区开始之的空白空间。这有一个很大的问题（好吧，这整个设计就是个大问题，但是从未注意到），这就是关于第一分区的开始位置没有可靠的约定，因此很难确保会有足够的空间。通常可以认为，没有足够的空间用于某些引导加载程序配置。</li>
+<li>设计没有提供为选择引导目标（磁盘除外）的任何标准代理层或机制…但是对于人们想选择磁盘意外的引导目标。比如，他们想有个可启动的东西-通常是操作系统-每个磁盘。唯一的方式是这样，在 BIOS/MBR 时间里是引导程序来处理它；但是仍没有一个被广泛认可的约定来完成以正常的方式来完成这些。有许多许多的方法，没有一个可以与其他任何一个互操作，写一个在 OS/OS 安装代理层能干净地处理多重引导问题的工具那太难了。</li>
+<li>该设计没有提供从磁盘以外的任何东西引导的标准方法。我不想在这篇文章真正的讨论这个问题，但请注意，这是 UEFI 引导的另一个优势：它提供了从例如远程服务器引导的标准方式。</li>
+<li>没有提供机制可以用于配置高于固件的级别来配置固件的启动行为。</li>
 </ul>
-<h4 id="开发装备-Development-Gears"><a href="#开发装备-Development-Gears" class="headerlink" title="开发装备 Development Gears"></a>开发装备 Development Gears</h4><ul>
-<li>硬件：自组台式 PC</li>
-<li>系统：Windows 10 专业版/Ubuntu 18.04 TLS</li>
-<li>编辑器：<a target="_blank" rel="noopener" href="https://code.visualstudio.com/">vscode</a></li>
-<li>Shell：<a target="_blank" rel="noopener" href="https://github.com/ohmyzsh/ohmyzsh">zsh</a></li>
-<li>浏览器：<a target="_blank" rel="noopener" href="https://www.google.com/chrome/browser/desktop/index.html">Chrome</a></li>
-<li>虚拟机：<a target="_blank" rel="noopener" href="https://www.virtualbox.org/">VirtualBox</a></li>
-<li>VPS: <a target="_blank" rel="noopener" href="https://bandwagonhost.com/">BandwagongHOST</a></li>
-</ul>
+<p>所以你能想象 UEFI 精灵围坐在一起考虑这个问题，并提出了解决方案。取代固件只知道磁盘和每个磁盘上的“魔术”区域-引导加载程序代码可能驻留的位置，UEFI 对于处理启动引导的固件有更多的基础设施。让我们看看它定义的所有与这里相关的东西。</p>
+<h1 id="EFI-可执行文件"><a href="#EFI-可执行文件" class="headerlink" title="EFI 可执行文件"></a>EFI 可执行文件</h1><p>UEFI 规格定义了一种可执行格式并要求所有 UEFI 固件能够执行这种格式的代码。当您为本机 UEFI 编写引导加载程序时，你将以这种格式编写。这种方式十分简单明了，不需要过多的解释：这是个好东西，现在我们有了一个固件规范真正地定义了固件可执行通用代码格式。</p>
+<h1 id="GPT-GUID-分区表-格式"><a href="#GPT-GUID-分区表-格式" class="headerlink" title="GPT(GUID 分区表)格式"></a>GPT(GUID 分区表)格式</h1><p><a target="_blank" rel="noopener" href="https://en.wikipedia.org/wiki/GUID_Partition_Table">GUID 分区表</a> 格式非常贴符合 UEFI 规范，此外，没有什么特别复杂的或需要过多解释的，这只是规范提供的基础。GPT 只是做分区表的标准-信息在磁盘的头部，它定义了磁盘包含什么分区。它是在许多方面比 MBR/‘MS-DOS’ 做更好的分区标准，UEFI 规范要求符合 UEFI 的固件必须能够解释 GPT（它同样要求能够执行 MBR，为了向后兼容）。所有这些都是有用的基础：这里正在发生的事情是规范正在建立某些功能，固件层以上的所有内容都可以依赖于固件。</p>
+<h1 id="EFI-系统分区"><a href="#EFI-系统分区" class="headerlink" title="EFI 系统分区"></a>EFI 系统分区</h1><p>实际上，在修订本文时，我确实想将头放在 EFI 系统分区概念上，因为它非常精彩的部分。实际上，”EFI 系统分区“这概念正是回答 MBR 空间“特殊调味料”的问题。正如我们在上面看到的，在磁盘开始时一些未定义的空白空间的概念是“引导加载程序代码所在的位置”，这是一个非常糟糕的设计。EFI 系统分区就是来解决这个问题的。</p>
+<p>解决办法是：我们要求固件能够一些具体的文件系统。UEFI 规范要求合格的固件应该能读取 FAT12， FAT 格式的 FAT16 和 FAT32 变体。实际上，它所做的是编篆对那么格式特定的解释，因为他们在 UEFI 被接受时就已经存在了，就是说符合 UEFI 的固件必须能够读这些格式。规范如下：</p>
+<p>“被可扩展固件接口支持的文件系统是基于 FAT 文件系统。EFI 定义了明确记录和可测试的 FAT 版本。符合 EFI 规范</p>
 
                 
             </div>
@@ -441,7 +473,7 @@
                     </i>
                 </span>
                 <span class="reprint-info">
-                    <a href="https://www.caffreyfans.top/about/index.html">https://www.caffreyfans.top/about/index.html</a>
+                    <a href="https://www.caffreyfans.top/2020/09/03/%E8%AF%91%EF%BC%9AUEFI%20%E5%90%AF%E5%8A%A8%E7%9C%9F%E6%AD%A3%E5%81%9A%E4%BA%86%E4%BB%80%E4%B9%88/">https://www.caffreyfans.top/2020/09/03/%E8%AF%91%EF%BC%9AUEFI%20%E5%90%AF%E5%8A%A8%E7%9C%9F%E6%AD%A3%E5%81%9A%E4%BA%86%E4%BB%80%E4%B9%88/</a>
                 </span>
             </div>
             <div class="reprint__notice">
@@ -478,7 +510,15 @@
                 <div class="post-meta__tag-list" style="display: inline-block;">
                     
                         <div class="article-tag">
-                            <span class="chip bg-color">No tag</span>
+                            
+                                <a href="/tags/UEFI/">
+                                    <span class="chip bg-color">UEFI</span>
+                                </a>
+                            
+                                <a href="/tags/BOOT/">
+                                    <span class="chip bg-color">BOOT</span>
+                                </a>
+                            
                         </div>
                     
                 </div>
@@ -522,30 +562,29 @@
 <article id="prenext-posts" class="prev-next articles">
     <div class="row article-row">
         
-        <div class="article col s12 m6" data-aos="fade-up" data-aos="fade-up">
+        <div class="article col s12 m6" data-aos="fade-up">
             <div class="article-badge left-badge text-color">
-                <i class="far fa-dot-circle"></i>&nbsp;Current
-            </div>
+                <i class="fas fa-chevron-left"></i>&nbsp;Previous</div>
             <div class="card">
-                <a href="/about/index.html">
+                <a href="/2020/12/19/pointer_and_index/">
                     <div class="card-image">
                         
                         
-                        <img src="/medias/featureimages/5.jpg" class="responsive-img" alt="about">
+                        <img src="/medias/featureimages/23.jpg" class="responsive-img" alt="指针与下标">
                         
-                        <span class="card-title">about</span>
+                        <span class="card-title">指针与下标</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
                     <div class="summary block-with-text">
                         
-                            
+                            如何可以互换地使用指针表达式与表达式，应该使用哪种更为合适？对于大多数而言下标更容易理解，尤其在多维数组中。所以在可读性方面，下标更有优势。而我本人的编程习惯也倾向于使用下标,而且还一直以为下标与指针表达式等价。直到看了《C与指针》才知道，
                         
                     </div>
                     <div class="publish-info">
-                            <span class="publish-date">
-                                <i class="far fa-clock fa-fw icon-date"></i>2021-03-11
-                            </span>
+                        <span class="publish-date">
+                            <i class="far fa-clock fa-fw icon-date"></i>2020-12-20
+                        </span>
                         <span class="publish-author">
                             
                             <i class="fas fa-user fa-fw"></i>
@@ -554,7 +593,14 @@
                         </span>
                     </div>
                 </div>
-
+                
+                <div class="card-action article-tags">
+                    
+                    <a href="/tags/C/">
+                        <span class="chip bg-color">C</span>
+                    </a>
+                    
+                </div>
                 
             </div>
         </div>
@@ -562,27 +608,28 @@
         
         <div class="article col s12 m6" data-aos="fade-up">
             <div class="article-badge right-badge text-color">
-                Current&nbsp;<i class="far fa-dot-circle"></i>
+                Next&nbsp;<i class="fas fa-chevron-right"></i>
             </div>
             <div class="card">
-                <a href="/about/index.html">
+                <a href="/2019/03/16/%E5%88%A9%E7%94%A8Docker%E6%90%AD%E5%BB%BASamba%E6%9C%8D%E5%8A%A1/">
                     <div class="card-image">
                         
                         
-                        <img src="/medias/featureimages/5.jpg" class="responsive-img" alt="about">
+                        <img src="/medias/featureimages/10.jpg" class="responsive-img" alt="利用Docker搭建Samba服务">
                         
-                        <span class="card-title">about</span>
+                        <span class="card-title">利用Docker搭建Samba服务</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
                     <div class="summary block-with-text">
                         
-                            
+                            前述能看到搜索到这篇文章想必你已经了解了什么是 Docker，什么是 Samba 了。如果你不了解这两样东西，那么我建议你在网上搜索一下，仔细了解下这两样比较实用的工具。
+我就以我通俗的语言简述下这两样东西，Docker 是一种标准化的软件
                         
                     </div>
                     <div class="publish-info">
                             <span class="publish-date">
-                                <i class="far fa-clock fa-fw icon-date"></i>2021-03-11
+                                <i class="far fa-clock fa-fw icon-date"></i>2019-03-17
                             </span>
                         <span class="publish-author">
                             
@@ -592,7 +639,14 @@
                         </span>
                     </div>
                 </div>
-
+                
+                <div class="card-action article-tags">
+                    
+                    <a href="/tags/Linux/">
+                        <span class="chip bg-color">Linux</span>
+                    </a>
+                    
+                </div>
                 
             </div>
         </div>

@@ -4,7 +4,7 @@
 
 <head>
     <meta charset="utf-8">
-    <meta name="keywords" content="About, Caffreyfans">
+    <meta name="keywords" content="SPI Flash Modes 介绍, Caffreyfans">
     <meta name="description" content="">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
@@ -16,7 +16,7 @@
     <!-- Global site tag (gtag.js) - Google Analytics -->
 
 
-    <title>About | Caffreyfans</title>
+    <title>SPI Flash Modes 介绍 | Caffreyfans</title>
     <link rel="icon" type="image/png" href="/favicon.png">
 
     <link rel="stylesheet" type="text/css" href="/libs/awesome/css/all.css">
@@ -244,12 +244,12 @@
 
 
 
-<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/5.jpg')">
+<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/14.jpg')">
     <div class="container" style="right: 0px;left: 0px;">
         <div class="row">
             <div class="col s12 m12 l12">
                 <div class="brand">
-                    <h1 class="description center-align post-title">about</h1>
+                    <h1 class="description center-align post-title">SPI Flash Modes 介绍</h1>
                 </div>
             </div>
         </div>
@@ -363,9 +363,13 @@
             <div class="row tag-cate">
                 <div class="col s7">
                     
-                          <div class="article-tag">
-                            <span class="chip bg-color">No tag</span>
-                          </div>
+                    <div class="article-tag">
+                        
+                            <a href="/tags/ESP8266/">
+                                <span class="chip bg-color">ESP8266</span>
+                            </a>
+                        
+                    </div>
                     
                 </div>
                 <div class="col s5 right-align">
@@ -377,7 +381,7 @@
                 
                 <div class="post-date info-break-policy">
                     <i class="far fa-calendar-minus fa-fw"></i>Publish Date:&nbsp;&nbsp;
-                    2021-03-11
+                    2021-01-01
                 </div>
                 
 
@@ -401,20 +405,78 @@
 
         <div class="card-content article-card-content">
             <div id="articleContent">
-                <p>这里是缅甸北部, 我生长的地方, 欢迎来到我的博客, 我娇贵的小公主。我是<b style="color: #42d2ca"> <strong>Caffreyfans</strong> </b>。追求新奇，追求热爱，愿为所爱而奋斗。喜欢一个高效、富有创新的团队，立志打造一款让自己骄傲的产品。热爱户外旅游和朋友交际，追求生活和工作平衡，有节奏感的人生。<br>——————</p>
-<h4 id="开源项目-Open-Source-Projects"><a href="#开源项目-Open-Source-Projects" class="headerlink" title="开源项目 Open Source Projects"></a>开源项目 Open Source Projects</h4><ul>
-<li><a target="_blank" rel="noopener" href="https://github.com/Caffreyfans/IRbaby">IRbaby</a> 一 基于 ESP8266 的万能红外遥控方案</li>
-<li><a target="_blank" rel="noopener" href="https://github.com/Caffreyfans/baidu_face">baidu_face</a> 一 HomeAssistant 百度人脸识别插件</li>
+                <p>该文章翻译来源为 <a target="_blank" rel="noopener" href="https://github.com/espressif/esptool/wiki/SPI-Flash-Modes">https://github.com/espressif/esptool/wiki/SPI-Flash-Modes</a></p>
+<p>它主要介绍了我们烧录 ESP8266 和 ESP32 时对 SPI 接入方式该如何选择，每次我看到什么 DIO，DOUT，DIO 和 QOUT 都一脸懵B不知道该选什么，网上好像也没有什么专门讲这个的文章，至到我找网上翻到官方的文档，所以这里把它记录并翻译过来供大家参考，如果翻译错了请到 <a target="_blank" rel="noopener" href="https://github.com/Caffreyfans/Caffreyfans.github.io.git">https://github.com/Caffreyfans/Caffreyfans.github.io.git</a> 提交 issues 指出问题，我会即时修改。</p>
+<span id="more"></span>
+<p>ESP8266 和 ESP32 支持 4 种不同的 SPI flash 接入模式：DIO，DOUT，DIO 和 QOUT。他们可以在使用 <code>esptool.py write_flash</code> 使用 <code>--flash_mode</code> 选项。</p>
+<p>这些选择控制多少 I/O 引脚被来与 SPI 闪存芯片连接，传输数据，和用哪种 SPI 命令。</p>
+<p>ESP8266 和 ESP32 在从当从 SPI 闪存芯片读或执行代码和数据时用这些命令。读取数据，然后内部缓存到芯片。</p>
+<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p>按性能排序：</p>
+<table>
+<thead>
+<tr>
+<th>选项</th>
+<th>模式名</th>
+<th>引脚使用</th>
+<th>速度(ESP8266 &amp; ESP32)</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>qio</td>
+<td>四路 I/O</td>
+<td>4 个引脚用于地址和数据</td>
+<td>最快</td>
+</tr>
+<tr>
+<td>qout</td>
+<td>四路输出</td>
+<td>4 个引脚用于数据</td>
+<td>比 <code>qio</code> 模式约慢 15%</td>
+</tr>
+<tr>
+<td>dio</td>
+<td>两路 I/O</td>
+<td>2 个引脚用于地址和数据</td>
+<td>比 <code>qio</code> 慢约 45%</td>
+</tr>
+<tr>
+<td>dout</td>
+<td>两路输出</td>
+<td>2 个引脚用于数据</td>
+<td>比 <code>qio</code> 约慢 50%</td>
+</tr>
+</tbody></table>
+<p>一般来说，应该为你的设备选择最快的 flash 模式。但是不是所有设备都支持所有工作模式。详情见下列 FAQ 部分。</p>
+<h2 id="工作模式描述"><a href="#工作模式描述" class="headerlink" title="工作模式描述"></a>工作模式描述</h2><h3 id="常规-SPI"><a href="#常规-SPI" class="headerlink" title="常规 SPI"></a>常规 SPI</h3><p>一个传统的“单独”SPI（串行外设接口）总线使用 4 个引脚进行通信：</p>
+<ul>
+<li>时钟线（CLK）</li>
+<li>主出从进（MOSI）</li>
+<li>主进从出（MISO)</li>
+<li>片选（CS）<br><a target="_blank" rel="noopener" href="https://en.wikipedia.org/wiki/Serial_Peripheral_Interface">维基百科里有关于 SPI 的完整介绍</a>。</li>
 </ul>
-<h4 id="开发装备-Development-Gears"><a href="#开发装备-Development-Gears" class="headerlink" title="开发装备 Development Gears"></a>开发装备 Development Gears</h4><ul>
-<li>硬件：自组台式 PC</li>
-<li>系统：Windows 10 专业版/Ubuntu 18.04 TLS</li>
-<li>编辑器：<a target="_blank" rel="noopener" href="https://code.visualstudio.com/">vscode</a></li>
-<li>Shell：<a target="_blank" rel="noopener" href="https://github.com/ohmyzsh/ohmyzsh">zsh</a></li>
-<li>浏览器：<a target="_blank" rel="noopener" href="https://www.google.com/chrome/browser/desktop/index.html">Chrome</a></li>
-<li>虚拟机：<a target="_blank" rel="noopener" href="https://www.virtualbox.org/">VirtualBox</a></li>
-<li>VPS: <a target="_blank" rel="noopener" href="https://bandwagonhost.com/">BandwagongHOST</a></li>
+<p>所有这些信号都是单向的。在单独的 SPI 模式，数据通过MISO引脚从设备发送到主机，并通过MOSI引脚从主机发送到设备。</p>
+<p>正常 SPI 的最大数据速率是时钟速率（以位为单位）-所以一个 40MHz 的时钟 = 40Mbits/每秒 = 5Mbytes/每秒。</p>
+<h3 id="双路-SPI"><a href="#双路-SPI" class="headerlink" title="双路 SPI"></a>双路 SPI</h3><p>为了提升性能，SPI 闪存厂商引进了“双路 SPI”。在双路 SPI 模式下，MOSI 和 MISO 引脚都被同时用来读取或写数据，每个时种周期为 2 位。相对于单独 SPI，一些指令就有两倍速率。</p>
+<p>在 <code>dout</code> 模式下，主机使用“双输出快速读取”（3BH）命令去读取数据。每个读取指令和读取地址都通过常规 SPI 发送到闪存芯片，但主机同时通过 MOSI 和 MISO 引脚以每个时钟周期 2 位的速率读取数据。与仅使用 MISO 读取数据的单个 SPI 相比，这传数据传输速率提高了一倍。</p>
+<p>在 <code>dio</code> 模式下，主机使用“双 I/O 快速读取”（BBH）命令去读取数据。每个读取指令都通过常规 SPI 发送到闪存芯片，但地址通过 MOSI 和 MISO 引脚以每个时钟周期 2 位的速率发送到闪存芯片。在这之后，主机以“双输出快读取”相同的方式读取每个时钟具有 2 位的速率。</p>
+<p>对于 ESP8266 和 ESP32，每次指令读取 32 个字节，并且 dio 模式大约快 dout 快 5%。</p>
+<p>请查阅您的特定 SPI 闪存芯片的数据表，以确定它是否支持这两个命令的一个或两个。</p>
+<h3 id="四路-SPI"><a href="#四路-SPI" class="headerlink" title="四路 SPI"></a>四路 SPI</h3><p>为了进一步提高 SPI 闪存数据传输的性能，SPI 闪存厂商引进了“四路 SPI”模式。这种模式增加两个附加引脚（否则用于闪存芯片 WP 信号和 HOLD 信号）用于数据传输。这是使两 SPI 的数据传输速率提高一倍。</p>
+<p>并不是所有 flash 芯片都支持四路 SPI 模式，而且并不是所有 ESP8266 和 ESP32 芯片都有这些引脚连接到 SPI 闪存芯片。一些闪存芯片要求特殊的指令实现四路模式（见下方）。</p>
+<p>在 <code>qout</code> 模式，主机使用“四输出快速读取”（6BH）指令读取数据。这种命令与“双路输出快速读取”相同，只是数据读取用 4 个引脚代替了 2 个引脚，也就是每个时钟 4 位的速率。这使得传输数据实际快“双路输出快速读取”一倍。</p>
+<p>在 <code>qio</code> 模式，主机使用“四路 I/O 快速读取”（EBH）指令读取数据。这命令与“双路 I/O 快速读取”相同，每个地址和数据传输用 4 个引脚代替了 2 个引脚，也就是每个时钟周期 4 位的速率。这使得地址和数据传输速度都比“双路 I/O 快速读取”快一倍。</p>
+<h2 id="常问问题"><a href="#常问问题" class="headerlink" title="常问问题"></a>常问问题</h2><h3 id="为什么我的乐鑫芯片或模组不能使用-qio-或-qout-模式？"><a href="#为什么我的乐鑫芯片或模组不能使用-qio-或-qout-模式？" class="headerlink" title="为什么我的乐鑫芯片或模组不能使用 qio 或 qout 模式？"></a>为什么我的乐鑫芯片或模组不能使用 qio 或 qout 模式？</h3><p>这通常是以下原因：</p>
+<ul>
+<li>SPI 闪存芯片上的 WP 和 HOLD 引脚没有与乐鑫上的 GPIO 引脚正确连接。这些引脚必须正确连接才能让 quad 模式工作，不是所有板子和模组都连接了它们的。</li>
+<li>SPI 闪存芯片不支持 quad 模式。查看 闪存芯片的数据表看它是否支持。你可以直接看闪存芯片上面印的型号或者使用 esptool.py flash 命令。</li>
+<li>此芯片型号未正确启用 Quad 模式。SPI 闪存不是标准的，每个厂商实施它们芯片的方式都不一样。大多数闪存芯片需要发送某些命令才能启用 Quad SPI 模式，这些命令会有所不同。对于 ESP8266 和 ESP32，这通常意味着芯片第一次以双路 SPI 模式启动然后软件（ESP32 的启动引导或者 ESP8266 的SDK）检测芯片类型并尝试使能四路 SPI 模式。如果具体的芯片类型不被软件支持那么它将无法进入四路模式。</li>
 </ul>
+<h3 id="为什么-qout-和-dout-模式正常但是-qio-和-dio-模式不正常？"><a href="#为什么-qout-和-dout-模式正常但是-qio-和-dio-模式不正常？" class="headerlink" title="为什么 qout 和 dout 模式正常但是 qio 和 dio 模式不正常？"></a>为什么 qout 和 dout 模式正常但是 qio 和 dio 模式不正常？</h3><p>一些 SPI 闪存芯片类型只支持“双路输出快速读取”和“四路输出快速读取”指令，而不是等效的“双路 I/O”和“四路 I/O”。</p>
+<h3 id="与四路-SPI-相比，我的代码在双路-SPI-模式下的运行速度快一半吗？"><a href="#与四路-SPI-相比，我的代码在双路-SPI-模式下的运行速度快一半吗？" class="headerlink" title="与四路 SPI 相比，我的代码在双路 SPI 模式下的运行速度快一半吗？"></a>与四路 SPI 相比，我的代码在双路 SPI 模式下的运行速度快一半吗？</h3><p>不是。ESP8266 和 ESP32 都是从 flash 里直接执行代码，但是，由于从闪存读取速度很慢，因此数据会透明地缓存在 RAM 中。仅在发生高速缓存未命令时发送闪存读取指令。但是，使用双路 SPI 读取重新填充缓存的速度大约是四路 SPI 的一半。</p>
+<p>如果你不能使用四路 SPI 模式，请确保你配置的最快 SPI 闪存时钟速率能够让你的板子或者模组可靠地工作。两路 I/O 模式下的 80Mhz 时钟比四路 I/O 模式下的 40HMz SPI 时钟快。</p>
+<h3 id="闪存是如何与-ESP8266-或-ESP32-通信的？"><a href="#闪存是如何与-ESP8266-或-ESP32-通信的？" class="headerlink" title="闪存是如何与 ESP8266 或 ESP32 通信的？"></a>闪存是如何与 ESP8266 或 ESP32 通信的？</h3><p>启动引导 .bin 文件，被烧录在 SPI 闪存里，头部包含闪存速度，闪存工作模式，和其他元数据。初始主机模式由 ROM 代码确定，当它在重置后会读取到该头部。esptool.py 为 <code>-flash_mode</code> 传入参数当文件被烧录到 flash 里时会更新头部。</p>
+<p>这仅确定用于从复位进行初始引导的模式。然后，在启动过程中，软件可能会不同涤配置闪存模式。</p>
+<p>比如，在 ESP32 上，如果将 ESP-IDF 配置为 qio/qout 模式，则实际上以 dio/dout 模式刷新 IDF 软件引导程序。当 ROM 代码从闪存引导该引导加载程序时，引导加载程序软件会检查闪存芯片型号，并在其余的引导过程中启用正确的四路 SPI 模式。这是因为有很多不同的方法可以在不同的芯片型号上启用四路 SPI。</p>
 
                 
             </div>
@@ -441,7 +503,7 @@
                     </i>
                 </span>
                 <span class="reprint-info">
-                    <a href="https://www.caffreyfans.top/about/index.html">https://www.caffreyfans.top/about/index.html</a>
+                    <a href="https://www.caffreyfans.top/2020/12/31/SPI%20Flash%20Modes/">https://www.caffreyfans.top/2020/12/31/SPI%20Flash%20Modes/</a>
                 </span>
             </div>
             <div class="reprint__notice">
@@ -478,7 +540,11 @@
                 <div class="post-meta__tag-list" style="display: inline-block;">
                     
                         <div class="article-tag">
-                            <span class="chip bg-color">No tag</span>
+                            
+                                <a href="/tags/ESP8266/">
+                                    <span class="chip bg-color">ESP8266</span>
+                                </a>
+                            
                         </div>
                     
                 </div>
@@ -527,24 +593,25 @@
                 <i class="far fa-dot-circle"></i>&nbsp;Current
             </div>
             <div class="card">
-                <a href="/about/index.html">
+                <a href="/2020/12/31/SPI%20Flash%20Modes/">
                     <div class="card-image">
                         
                         
-                        <img src="/medias/featureimages/5.jpg" class="responsive-img" alt="about">
+                        <img src="/medias/featureimages/14.jpg" class="responsive-img" alt="SPI Flash Modes 介绍">
                         
-                        <span class="card-title">about</span>
+                        <span class="card-title">SPI Flash Modes 介绍</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
                     <div class="summary block-with-text">
                         
-                            
+                            该文章翻译来源为 https://github.com/espressif/esptool/wiki/SPI-Flash-Modes
+它主要介绍了我们烧录 ESP8266 和 ESP32 时对 SPI 接入方式该如何选择，每次我看到什么 D
                         
                     </div>
                     <div class="publish-info">
                             <span class="publish-date">
-                                <i class="far fa-clock fa-fw icon-date"></i>2021-03-11
+                                <i class="far fa-clock fa-fw icon-date"></i>2021-01-01
                             </span>
                         <span class="publish-author">
                             
@@ -556,33 +623,43 @@
                 </div>
 
                 
+                <div class="card-action article-tags">
+                    
+                    <a href="/tags/ESP8266/">
+                        <span class="chip bg-color">ESP8266</span>
+                    </a>
+                    
+                </div>
+                
             </div>
         </div>
         
         
         <div class="article col s12 m6" data-aos="fade-up">
             <div class="article-badge right-badge text-color">
-                Current&nbsp;<i class="far fa-dot-circle"></i>
+                Next&nbsp;<i class="fas fa-chevron-right"></i>
             </div>
             <div class="card">
-                <a href="/about/index.html">
+                <a href="/2020/12/20/memmove/">
                     <div class="card-image">
                         
                         
-                        <img src="/medias/featureimages/5.jpg" class="responsive-img" alt="about">
+                        <img src="/medias/featureimages/12.jpg" class="responsive-img" alt="memmove 实现">
                         
-                        <span class="card-title">about</span>
+                        <span class="card-title">memmove 实现</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
                     <div class="summary block-with-text">
                         
-                            
+                            一次关于 memmove 实现的记录有一次面试嵌入式工程师，题目中有一题为“请不使用任何函数实现 memmove 源码”，这题我没做出来。
+没做出来的原因1：我没使用过 memmove 函数不知道其作用，只知道字面意思。
+没做出来原因2：就
                         
                     </div>
                     <div class="publish-info">
                             <span class="publish-date">
-                                <i class="far fa-clock fa-fw icon-date"></i>2021-03-11
+                                <i class="far fa-clock fa-fw icon-date"></i>2020-12-21
                             </span>
                         <span class="publish-author">
                             
@@ -592,7 +669,18 @@
                         </span>
                     </div>
                 </div>
-
+                
+                <div class="card-action article-tags">
+                    
+                    <a href="/tags/C/">
+                        <span class="chip bg-color">C</span>
+                    </a>
+                    
+                    <a href="/tags/%E9%9D%A2%E8%AF%95%E9%A2%98%E8%AE%B0%E5%BD%95/">
+                        <span class="chip bg-color">面试题记录</span>
+                    </a>
+                    
+                </div>
                 
             </div>
         </div>
