@@ -537,7 +537,7 @@ subtitle:
   showCursor: true # 是否显示光标
   startDelay: 300 # 开始延迟
   typeSpeed: 100 # 打字速度
-  backSpeed: 50 # 删除速度
+  backSpeed: 40 # 删除速度
   sub:
     - 我行过许多地方的桥，看过许多次数的云，喝过许多种类的酒，却只爱过一个正当最好年龄的人。  —— 沈从文
     - I have crossed bridges in many places, seen clouds many times, and drank many kinds of wine, but I only loved a person of the right age. -- Shen Congwen
