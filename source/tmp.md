@@ -1,9 +1,26 @@
 ---
 title: about
-date: 2021-03-11 15:53:11
+date: 2018-09-30 17:25:30
+type: "about"
+layout: "about"
 ---
 
-这里是缅甸北部, 我生长的地方, 欢迎来到我的博客, 我娇贵的小公主. 我是<b style="color: #42d2ca"> **Caffreyfans** </b>, 一个从事 Linux 底层开发的工程师（干系统定制，安装占多,感觉自己更像运维）。代码写的越来越少了，目前干着不是一份特别喜欢的工作，期待自己慢慢升级打怪，成为一个 IOT 开发人员。
+<div class="my-links">
+  <a class="gradient-text" href="https://github.com/Caffreyfans" target="_blank" rel="noopener"><span class=" iconfont icon-github"></span></a>
+</div>
+
+<style>
+  .my-links {display: flex; align-content: flex-start; margin-top: 30px;}
+  .my-links a {display: flex; color: #000; padding: 2px 10px;border-bottom:none !important;}
+  .my-links a span {font-size: 28px;}
+</style>
+
+#### 关于我 Who am I
+
+<img src="/img/nLtSiD.png" style="height: 50px; width: 50px; border-radius: 50%; margin-bottom: 15px" />
+
+欢迎来到我的博客, 我是<b style="color: #42d2ca"> **Caffreyfans** </b>, 
+一个从事 Linux 底层开发的工程师（干系统定制，安装占多,感觉自己更像运维）。代码写的越来越少了，目前干着不是一份特别喜欢的工作，期待自己慢慢升级打怪，成为一个 IOT 开发人员。
 
 追求新奇，追求热爱，愿为所爱而奋斗。喜欢一个高效、富有创新的团队，立志打造一款让自己骄傲的产品。
 
