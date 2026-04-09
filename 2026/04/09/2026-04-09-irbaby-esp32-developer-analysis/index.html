@@ -1,0 +1,1416 @@
+<!DOCTYPE HTML>
+<html lang="zh-CN">
+
+
+<head>
+    <meta charset="utf-8">
+    <meta name="keywords" content="从开发者角度深入剖析IRbaby ESP32红外遥控固件, Caffreyfans">
+    <meta name="description" content="我行过许多地方的桥，看过许多次数的云，喝过许多种类的酒，却只爱过一个正当最好年龄的人">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <meta name="renderer" content="webkit|ie-stand|ie-comp">
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="format-detection" content="telephone=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+
+
+    <title>从开发者角度深入剖析IRbaby ESP32红外遥控固件 | Caffreyfans</title>
+    <link rel="icon" type="image/png" href="/favicon.png">
+
+    <link rel="stylesheet" type="text/css" href="/libs/awesome/css/all.css">
+    <link rel="stylesheet" type="text/css" href="/libs/materialize/materialize.min.css">
+    <link rel="stylesheet" type="text/css" href="/libs/aos/aos.css">
+    <link rel="stylesheet" type="text/css" href="/libs/animate/animate.min.css">
+    <link rel="stylesheet" type="text/css" href="/libs/lightGallery/css/lightgallery.min.css">
+    <link rel="stylesheet" type="text/css" href="/css/matery.css">
+    <link rel="stylesheet" type="text/css" href="/css/my.css">
+
+    <script src="/libs/jquery/jquery.min.js"></script>
+
+<meta name="generator" content="Hexo 5.4.0"></head>
+
+
+
+
+<body>
+    <header class="navbar-fixed">
+    <nav id="headNav" class="bg-color nav-transparent">
+        <div id="navContainer" class="nav-wrapper container">
+            <div class="brand-logo">
+                <a href="/" class="waves-effect waves-light">
+                    
+                    <img src="/medias/logo.png" class="logo-img" alt="LOGO">
+                    
+                    <span class="logo-span">Caffreyfans</span>
+                </a>
+            </div>
+            
+
+<a href="#" data-target="mobile-nav" class="sidenav-trigger button-collapse"><i class="fas fa-bars"></i></a>
+<ul class="right nav-menu">
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/" class="waves-effect waves-light">
+      
+      <i class="fas fa-home" style="zoom: 0.6;"></i>
+      
+      <span>首页</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/tags" class="waves-effect waves-light">
+      
+      <i class="fas fa-tags" style="zoom: 0.6;"></i>
+      
+      <span>标签</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/archives" class="waves-effect waves-light">
+      
+      <i class="fas fa-archive" style="zoom: 0.6;"></i>
+      
+      <span>归档</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/about" class="waves-effect waves-light">
+      
+      <i class="fas fa-user-circle" style="zoom: 0.6;"></i>
+      
+      <span>关于</span>
+    </a>
+    
+  </li>
+  
+  <li>
+    <a href="#searchModal" class="modal-trigger waves-effect waves-light">
+      <i id="searchIcon" class="fas fa-search" title="搜索" style="zoom: 0.85;"></i>
+    </a>
+  </li>
+</ul>
+
+
+<div id="mobile-nav" class="side-nav sidenav">
+
+    <div class="mobile-head bg-color">
+        
+        <img src="/medias/logo.png" class="logo-img circle responsive-img">
+        
+        <div class="logo-name">Caffreyfans</div>
+        <div class="logo-desc">
+            
+            我行过许多地方的桥，看过许多次数的云，喝过许多种类的酒，却只爱过一个正当最好年龄的人
+            
+        </div>
+    </div>
+
+    
+
+    <ul class="menu-list mobile-menu-list">
+        
+        <li class="m-nav-item">
+	  
+		<a href="/" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-home"></i>
+			
+			首页
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/tags" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-tags"></i>
+			
+			标签
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/archives" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-archive"></i>
+			
+			归档
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/about" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-user-circle"></i>
+			
+			关于
+		</a>
+          
+        </li>
+        
+        
+        <li><div class="divider"></div></li>
+        <li>
+            <a href="https://github.com/Caffreyfans" class="waves-effect waves-light" target="_blank">
+                <i class="fab fa-github-square fa-fw"></i>Fork Me
+            </a>
+        </li>
+        
+    </ul>
+</div>
+
+
+        </div>
+
+        
+            <style>
+    .nav-transparent .github-corner {
+        display: none !important;
+    }
+
+    .github-corner {
+        position: absolute;
+        z-index: 10;
+        top: 0;
+        right: 0;
+        border: 0;
+        transform: scale(1.1);
+    }
+
+    .github-corner svg {
+        color: #0f9d58;
+        fill: #fff;
+        height: 64px;
+        width: 64px;
+    }
+
+    .github-corner:hover .octo-arm {
+        animation: a 0.56s ease-in-out;
+    }
+
+    .github-corner .octo-arm {
+        animation: none;
+    }
+
+    @keyframes a {
+        0%,
+        to {
+            transform: rotate(0);
+        }
+        20%,
+        60% {
+            transform: rotate(-25deg);
+        }
+        40%,
+        80% {
+            transform: rotate(10deg);
+        }
+    }
+</style>
+
+<a href="https://github.com/Caffreyfans" class="github-corner tooltipped hide-on-med-and-down" target="_blank"
+   data-tooltip="Fork Me" data-position="left" data-delay="50">
+    <svg viewBox="0 0 250 250" aria-hidden="true">
+        <path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"></path>
+        <path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2"
+              fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"></path>
+        <path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z"
+              fill="currentColor" class="octo-body"></path>
+    </svg>
+</a>
+        
+    </nav>
+
+</header>
+
+    
+
+
+
+<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/18.jpg')">
+    <div class="container" style="right: 0px;left: 0px;">
+        <div class="row">
+            <div class="col s12 m12 l12">
+                <div class="brand">
+                    <h1 class="description center-align post-title">从开发者角度深入剖析IRbaby ESP32红外遥控固件</h1>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+<main class="post-container content">
+
+    
+    <link rel="stylesheet" href="/libs/tocbot/tocbot.css">
+<style>
+    #articleContent h1::before,
+    #articleContent h2::before,
+    #articleContent h3::before,
+    #articleContent h4::before,
+    #articleContent h5::before,
+    #articleContent h6::before {
+        display: block;
+        content: " ";
+        height: 100px;
+        margin-top: -100px;
+        visibility: hidden;
+    }
+
+    #articleContent :focus {
+        outline: none;
+    }
+
+    .toc-fixed {
+        position: fixed;
+        top: 64px;
+    }
+
+    .toc-widget {
+        width: 345px;
+        padding-left: 20px;
+    }
+
+    .toc-widget .toc-title {
+        padding: 35px 0 15px 17px;
+        font-size: 1.5rem;
+        font-weight: bold;
+        line-height: 1.5rem;
+    }
+
+    .toc-widget ol {
+        padding: 0;
+        list-style: none;
+    }
+
+    #toc-content {
+        padding-bottom: 30px;
+        overflow: auto;
+    }
+
+    #toc-content ol {
+        padding-left: 10px;
+    }
+
+    #toc-content ol li {
+        padding-left: 10px;
+    }
+
+    #toc-content .toc-link:hover {
+        color: #42b983;
+        font-weight: 700;
+        text-decoration: underline;
+    }
+
+    #toc-content .toc-link::before {
+        background-color: transparent;
+        max-height: 25px;
+
+        position: absolute;
+        right: 23.5vw;
+        display: block;
+    }
+
+    #toc-content .is-active-link {
+        color: #42b983;
+    }
+
+    #floating-toc-btn {
+        position: fixed;
+        right: 15px;
+        bottom: 76px;
+        padding-top: 15px;
+        margin-bottom: 0;
+        z-index: 998;
+    }
+
+    #floating-toc-btn .btn-floating {
+        width: 48px;
+        height: 48px;
+    }
+
+    #floating-toc-btn .btn-floating i {
+        line-height: 48px;
+        font-size: 1.4rem;
+    }
+</style>
+<div class="row">
+    <div id="main-content" class="col s12 m12 l9">
+        <!-- 文章内容详情 -->
+<div id="artDetail">
+    <div class="card">
+        <div class="card-content article-info">
+            <div class="row tag-cate">
+                <div class="col s7">
+                    
+                    <div class="article-tag">
+                        
+                            <a href="/tags/ESP32/">
+                                <span class="chip bg-color">ESP32</span>
+                            </a>
+                        
+                            <a href="/tags/%E7%BA%A2%E5%A4%96%E9%81%A5%E6%8E%A7/">
+                                <span class="chip bg-color">红外遥控</span>
+                            </a>
+                        
+                            <a href="/tags/%E5%B5%8C%E5%85%A5%E5%BC%8F%E5%BC%80%E5%8F%91/">
+                                <span class="chip bg-color">嵌入式开发</span>
+                            </a>
+                        
+                            <a href="/tags/IRbaby/">
+                                <span class="chip bg-color">IRbaby</span>
+                            </a>
+                        
+                    </div>
+                    
+                </div>
+                <div class="col s5 right-align">
+                    
+                    <div class="post-cate">
+                        <i class="fas fa-bookmark fa-fw icon-category"></i>
+                        
+                            <a href="/categories/%E6%8A%80%E6%9C%AF%E5%88%86%E4%BA%AB/" class="post-category">
+                                技术分享
+                            </a>
+                        
+                    </div>
+                    
+                </div>
+            </div>
+
+            <div class="post-info">
+                
+                <div class="post-date info-break-policy">
+                    <i class="far fa-calendar-minus fa-fw"></i>发布日期:&nbsp;&nbsp;
+                    2026-04-09
+                </div>
+                
+
+                
+                <div class="post-date info-break-policy">
+                    <i class="far fa-calendar-check fa-fw"></i>更新日期:&nbsp;&nbsp;
+                    2026-04-09
+                </div>
+                
+
+                
+
+                
+
+                
+                    <div id="busuanzi_container_page_pv" class="info-break-policy">
+                        <i class="far fa-eye fa-fw"></i>阅读次数:&nbsp;&nbsp;
+                        <span id="busuanzi_value_page_pv"></span>
+                    </div>
+				
+            </div>
+        </div>
+        <hr class="clearfix">
+
+        
+        <!-- 是否加载使用自带的 prismjs. -->
+        <link rel="stylesheet" href="/libs/prism/prism.css">
+        
+
+        
+
+        <div class="card-content article-card-content">
+            <div id="articleContent">
+                <h1 id="从开发者角度深入剖析IRbaby-ESP32红外遥控固件"><a href="#从开发者角度深入剖析IRbaby-ESP32红外遥控固件" class="headerlink" title="从开发者角度深入剖析IRbaby ESP32红外遥控固件"></a>从开发者角度深入剖析IRbaby ESP32红外遥控固件</h1><h2 id="引言：项目背景和开发者视角的重要性"><a href="#引言：项目背景和开发者视角的重要性" class="headerlink" title="引言：项目背景和开发者视角的重要性"></a>引言：项目背景和开发者视角的重要性</h2><p>作为一名嵌入式开发者，当我第一次接触到IRbaby ESP32项目时，就被其精巧的设计和实用的功能所吸引。这个项目是一个基于ESP32的万能红外遥控固件，能够通过Web界面控制各种红外设备，并支持HomeKit和MQTT集成。从开发者的角度来看，这不仅仅是一个功能产品，更是一个优秀的嵌入式系统设计范例。</p>
+<p>IRbaby ESP32的核心价值在于其模块化的架构和对ESP32硬件能力的充分利用。它解决了红外遥控领域的常见痛点：协议多样性、设备兼容性以及用户友好的配置界面。通过深入分析其代码实现，我们可以学习到嵌入式开发中的许多最佳实践，包括实时任务调度、内存管理、网络协议处理以及跨平台兼容性设计。</p>
+<h2 id="代码架构：详细分析模块划分、依赖关系和设计模式"><a href="#代码架构：详细分析模块划分、依赖关系和设计模式" class="headerlink" title="代码架构：详细分析模块划分、依赖关系和设计模式"></a>代码架构：详细分析模块划分、依赖关系和设计模式</h2><h3 id="整体架构概览"><a href="#整体架构概览" class="headerlink" title="整体架构概览"></a>整体架构概览</h3><p>IRbaby ESP32采用经典的分层架构设计，从代码结构可以清晰看出其模块化思想：</p>
+<pre class="line-numbers language-none"><code class="language-none">IRbaby_ESP32&#x2F;
+├── main&#x2F;                 # 主应用程序层
+│   ├── main.c           # 系统初始化和主循环
+│   ├── web.c&#x2F;web_handler.c  # 应用层 - HTTP服务
+│   ├── ir.c             # 核心业务层 - 红外处理
+│   ├── conf.c           # 数据层 - 配置管理
+│   ├── homekit.c        # 扩展层 - HomeKit集成
+│   ├── mqtt.c           # 扩展层 - MQTT客户端
+│   └── peripherals.c    # 硬件抽象层
+├── components&#x2F;IRbaby&#x2F;   # 第三方组件层
+└── front&#x2F;              # 前端资源<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<p>这种分层设计遵循了关注点分离的原则，每一层都有明确的职责：</p>
+<ul>
+<li><strong>硬件抽象层</strong>：直接与ESP32外设交互</li>
+<li><strong>核心业务层</strong>：实现红外信号处理逻辑</li>
+<li><strong>应用层</strong>：提供HTTP API接口</li>
+<li><strong>扩展层</strong>：集成第三方服务</li>
+<li><strong>前端层</strong>：用户界面和交互</li>
+</ul>
+<h3 id="依赖关系分析"><a href="#依赖关系分析" class="headerlink" title="依赖关系分析"></a>依赖关系分析</h3><p>从CMakeLists.txt可以看出项目的依赖关系：</p>
+<pre class="line-numbers language-cmake" data-language="cmake"><code class="language-cmake"><span class="token function">idf_component_register</span><span class="token punctuation">(</span>SRCS <span class="token punctuation">$&#123;</span>srcs<span class="token punctuation">&#125;</span> ota.c mqtt.c homekit.c
+                    INCLUDE_DIRS <span class="token string">"."</span>
+                    REQUIRES esp_psram IRbaby esp_netif esp_http_server esp_wifi nvs_flash spiffs spi_flash newlib esp_system driver esp_http_client app_update mqtt
+                    EMBED_TXTFILES front/config.json front/wificonfig.html front/root.html<span class="token punctuation">)</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
+
+<p>关键依赖包括：</p>
+<ul>
+<li><strong>esp_http_server</strong>：HTTP服务器实现</li>
+<li><strong>esp_wifi</strong>：WiFi功能</li>
+<li><strong>nvs_flash</strong>：非易失性存储</li>
+<li><strong>spiffs</strong>：文件系统</li>
+<li><strong>IRbaby组件</strong>：红外协议处理库</li>
+</ul>
+<h3 id="设计模式应用"><a href="#设计模式应用" class="headerlink" title="设计模式应用"></a>设计模式应用</h3><p>项目中采用了多种设计模式来提高代码质量：</p>
+<ol>
+<li><strong>单例模式</strong>：配置管理器使用全局静态变量</li>
+<li><strong>工厂模式</strong>：HTTP请求处理器根据URL路径创建不同响应</li>
+<li><strong>观察者模式</strong>：MQTT客户端订阅主题并处理消息</li>
+<li><strong>策略模式</strong>：不同红外协议的处理逻辑</li>
+</ol>
+<p>以HTTP请求处理为例：</p>
+<pre class="line-numbers language-c" data-language="c"><code class="language-c"><span class="token keyword">static</span> <span class="token class-name">esp_err_t</span> <span class="token function">index_handler</span><span class="token punctuation">(</span><span class="token class-name">httpd_req_t</span> <span class="token operator">*</span>req<span class="token punctuation">)</span>
+<span class="token punctuation">&#123;</span>
+  <span class="token keyword">char</span> <span class="token operator">*</span>response <span class="token operator">=</span> <span class="token constant">NULL</span><span class="token punctuation">;</span>
+<span class="token macro property"><span class="token directive-hash">#</span><span class="token directive keyword">define</span> <span class="token macro-name">BUFFER_SIZE</span> <span class="token expression"><span class="token number">512</span></span></span>
+  <span class="token keyword">char</span> query_str<span class="token punctuation">[</span>BUFFER_SIZE<span class="token punctuation">]</span><span class="token punctuation">;</span>
+  <span class="token keyword">char</span> buffer<span class="token punctuation">[</span>BUFFER_SIZE<span class="token punctuation">]</span><span class="token punctuation">;</span>
+  <span class="token function">httpd_req_get_url_query_str</span><span class="token punctuation">(</span>req<span class="token punctuation">,</span> query_str<span class="token punctuation">,</span> BUFFER_SIZE<span class="token punctuation">)</span><span class="token punctuation">;</span>
+  <span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token function">httpd_query_key_value</span><span class="token punctuation">(</span>query_str<span class="token punctuation">,</span> <span class="token string">"page"</span><span class="token punctuation">,</span> buffer<span class="token punctuation">,</span> BUFFER_SIZE<span class="token punctuation">)</span> <span class="token operator">==</span> ESP_OK<span class="token punctuation">)</span>
+  <span class="token punctuation">&#123;</span>
+    response <span class="token operator">=</span> <span class="token function">get_index_handle</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+  <span class="token punctuation">&#125;</span>
+  <span class="token keyword">else</span> <span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token function">httpd_query_key_value</span><span class="token punctuation">(</span>query_str<span class="token punctuation">,</span> <span class="token string">"sync"</span><span class="token punctuation">,</span> buffer<span class="token punctuation">,</span> BUFFER_SIZE<span class="token punctuation">)</span> <span class="token operator">==</span> ESP_OK<span class="token punctuation">)</span>
+  <span class="token punctuation">&#123;</span>
+    <span class="token keyword">int</span> tab <span class="token operator">=</span> <span class="token function">atoi</span><span class="token punctuation">(</span>buffer<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token keyword">switch</span> <span class="token punctuation">(</span>tab<span class="token punctuation">)</span>  <span class="token comment">// 策略模式：根据tab值选择不同处理逻辑</span>
+    <span class="token punctuation">&#123;</span>
+    <span class="token keyword">case</span> <span class="token number">0</span><span class="token operator">:</span>
+      response <span class="token operator">=</span> <span class="token function">get_ir_handle</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+      <span class="token keyword">break</span><span class="token punctuation">;</span>
+    <span class="token keyword">case</span> <span class="token number">1</span><span class="token operator">:</span>
+      response <span class="token operator">=</span> <span class="token function">get_gpio_handle</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+      <span class="token keyword">break</span><span class="token punctuation">;</span>
+    <span class="token comment">// ...</span>
+    <span class="token punctuation">&#125;</span>
+  <span class="token punctuation">&#125;</span>
+  <span class="token comment">// ...</span>
+<span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<p>这种设计使得代码易于扩展和维护。</p>
+<h2 id="核心组件实现：深入剖析关键函数、数据结构和算法"><a href="#核心组件实现：深入剖析关键函数、数据结构和算法" class="headerlink" title="核心组件实现：深入剖析关键函数、数据结构和算法"></a>核心组件实现：深入剖析关键函数、数据结构和算法</h2><h3 id="红外信号处理核心（ir-c）"><a href="#红外信号处理核心（ir-c）" class="headerlink" title="红外信号处理核心（ir.c）"></a>红外信号处理核心（ir.c）</h3><p>红外处理是系统的核心功能，其实现体现了嵌入式开发的许多技巧：</p>
+<pre class="line-numbers language-c" data-language="c"><code class="language-c"><span class="token comment">// 红外发送函数的关键实现</span>
+<span class="token class-name">esp_err_t</span> <span class="token function">ir_send_raw</span><span class="token punctuation">(</span><span class="token class-name">uint16_t</span> <span class="token operator">*</span>data<span class="token punctuation">,</span> <span class="token class-name">uint16_t</span> len<span class="token punctuation">,</span> <span class="token class-name">uint8_t</span> repeat<span class="token punctuation">)</span>
+<span class="token punctuation">&#123;</span>
+    <span class="token class-name">rmt_item32_t</span> <span class="token operator">*</span>items <span class="token operator">=</span> <span class="token constant">NULL</span><span class="token punctuation">;</span>
+    <span class="token class-name">size_t</span> item_num <span class="token operator">=</span> len <span class="token operator">*</span> <span class="token number">2</span><span class="token punctuation">;</span>  <span class="token comment">// 每个数据点需要mark和space</span>
+    
+    <span class="token comment">// 内存分配：考虑ESP32内存限制</span>
+    items <span class="token operator">=</span> <span class="token function">calloc</span><span class="token punctuation">(</span>item_num<span class="token punctuation">,</span> <span class="token keyword">sizeof</span><span class="token punctuation">(</span><span class="token class-name">rmt_item32_t</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token keyword">if</span> <span class="token punctuation">(</span>items <span class="token operator">==</span> <span class="token constant">NULL</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+        <span class="token function">ESP_LOGE</span><span class="token punctuation">(</span>TAG<span class="token punctuation">,</span> <span class="token string">"No memory for RMT items"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token keyword">return</span> ESP_ERR_NO_MEM<span class="token punctuation">;</span>
+    <span class="token punctuation">&#125;</span>
+    
+    <span class="token comment">// 数据转换：将红外数据转换为RMT格式</span>
+    <span class="token keyword">for</span> <span class="token punctuation">(</span><span class="token keyword">int</span> i <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span> i <span class="token operator">&lt;</span> len<span class="token punctuation">;</span> i<span class="token operator">++</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+        <span class="token class-name">uint16_t</span> mark <span class="token operator">=</span> data<span class="token punctuation">[</span>i<span class="token punctuation">]</span> <span class="token operator">&amp;</span> <span class="token number">0x7FFF</span><span class="token punctuation">;</span>  <span class="token comment">// 低15位为mark时间</span>
+        <span class="token class-name">uint16_t</span> space <span class="token operator">=</span> data<span class="token punctuation">[</span>i<span class="token punctuation">]</span> <span class="token operator">>></span> <span class="token number">15</span><span class="token punctuation">;</span>    <span class="token comment">// 高1位为space标志</span>
+        
+        items<span class="token punctuation">[</span>i <span class="token operator">*</span> <span class="token number">2</span><span class="token punctuation">]</span><span class="token punctuation">.</span>duration0 <span class="token operator">=</span> mark<span class="token punctuation">;</span>
+        items<span class="token punctuation">[</span>i <span class="token operator">*</span> <span class="token number">2</span><span class="token punctuation">]</span><span class="token punctuation">.</span>level0 <span class="token operator">=</span> <span class="token number">1</span><span class="token punctuation">;</span>  <span class="token comment">// 高电平</span>
+        items<span class="token punctuation">[</span>i <span class="token operator">*</span> <span class="token number">2</span><span class="token punctuation">]</span><span class="token punctuation">.</span>duration1 <span class="token operator">=</span> space <span class="token operator">?</span> <span class="token number">0</span> <span class="token operator">:</span> <span class="token number">560</span><span class="token punctuation">;</span>  <span class="token comment">// space时间</span>
+        items<span class="token punctuation">[</span>i <span class="token operator">*</span> <span class="token number">2</span><span class="token punctuation">]</span><span class="token punctuation">.</span>level1 <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span>  <span class="token comment">// 低电平</span>
+    <span class="token punctuation">&#125;</span>
+    
+    <span class="token comment">// 使用RMT外设发送</span>
+    <span class="token function">rmt_write_items</span><span class="token punctuation">(</span>RMT_TX_CHANNEL<span class="token punctuation">,</span> items<span class="token punctuation">,</span> item_num<span class="token punctuation">,</span> true<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token function">rmt_tx_start</span><span class="token punctuation">(</span>RMT_TX_CHANNEL<span class="token punctuation">,</span> true<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    
+    <span class="token function">free</span><span class="token punctuation">(</span>items<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token keyword">return</span> ESP_OK<span class="token punctuation">;</span>
+<span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<p>这个函数展示了几个关键设计决策：</p>
+<ol>
+<li><strong>内存管理</strong>：使用<code>calloc</code>和<code>free</code>管理动态内存，避免内存泄漏</li>
+<li><strong>位操作优化</strong>：通过位域压缩数据，节省内存</li>
+<li><strong>硬件抽象</strong>：使用ESP-IDF的RMT驱动，屏蔽底层细节</li>
+</ol>
+<h3 id="配置管理系统（conf-c）"><a href="#配置管理系统（conf-c）" class="headerlink" title="配置管理系统（conf.c）"></a>配置管理系统（conf.c）</h3><p>配置管理采用键值对存储，支持不同类型配置：</p>
+<pre class="line-numbers language-c" data-language="c"><code class="language-c"><span class="token keyword">typedef</span> <span class="token keyword">struct</span>
+<span class="token punctuation">&#123;</span>
+  <span class="token class-name">uint16_t</span> key<span class="token punctuation">;</span>
+  <span class="token class-name">uint16_t</span> value<span class="token punctuation">;</span>
+  <span class="token keyword">char</span> <span class="token operator">*</span>label<span class="token punctuation">;</span>
+<span class="token punctuation">&#125;</span> <span class="token class-name">property_t</span><span class="token punctuation">;</span>
+
+<span class="token keyword">typedef</span> <span class="token keyword">struct</span>
+<span class="token punctuation">&#123;</span>
+  <span class="token class-name">uint16_t</span> key<span class="token punctuation">;</span>
+  <span class="token keyword">char</span> <span class="token operator">*</span>value<span class="token punctuation">;</span>
+  <span class="token keyword">char</span> <span class="token operator">*</span>label<span class="token punctuation">;</span>
+<span class="token punctuation">&#125;</span> <span class="token class-name">string_property_t</span><span class="token punctuation">;</span>
+
+<span class="token comment">// 配置枚举定义</span>
+<span class="token keyword">typedef</span> <span class="token keyword">enum</span>
+<span class="token punctuation">&#123;</span>
+  CONF_AC_BRAND<span class="token punctuation">,</span>
+  CONF_AC_PROTOCOL<span class="token punctuation">,</span>
+  CONF_AC_POWER<span class="token punctuation">,</span>
+  CONF_AC_MODE<span class="token punctuation">,</span>
+  <span class="token comment">// ...</span>
+<span class="token punctuation">&#125;</span> ac_ops<span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<p>配置的存储和读取：</p>
+<pre class="line-numbers language-c" data-language="c"><code class="language-c"><span class="token class-name">esp_err_t</span> <span class="token function">irbaby_set_conf</span><span class="token punctuation">(</span>conf_type type<span class="token punctuation">,</span> <span class="token class-name">uint16_t</span> key<span class="token punctuation">,</span> <span class="token class-name">uint16_t</span> value<span class="token punctuation">)</span>
+<span class="token punctuation">&#123;</span>
+    <span class="token class-name">nvs_handle_t</span> handle<span class="token punctuation">;</span>
+    <span class="token class-name">esp_err_t</span> err<span class="token punctuation">;</span>
+    
+    <span class="token comment">// 打开NVS存储区</span>
+    err <span class="token operator">=</span> <span class="token function">nvs_open</span><span class="token punctuation">(</span><span class="token string">"irbaby"</span><span class="token punctuation">,</span> NVS_READWRITE<span class="token punctuation">,</span> <span class="token operator">&amp;</span>handle<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token keyword">if</span> <span class="token punctuation">(</span>err <span class="token operator">!=</span> ESP_OK<span class="token punctuation">)</span> <span class="token keyword">return</span> err<span class="token punctuation">;</span>
+    
+    <span class="token comment">// 写入配置值</span>
+    <span class="token keyword">char</span> key_str<span class="token punctuation">[</span><span class="token number">16</span><span class="token punctuation">]</span><span class="token punctuation">;</span>
+    <span class="token function">snprintf</span><span class="token punctuation">(</span>key_str<span class="token punctuation">,</span> <span class="token keyword">sizeof</span><span class="token punctuation">(</span>key_str<span class="token punctuation">)</span><span class="token punctuation">,</span> <span class="token string">"%d_%d"</span><span class="token punctuation">,</span> type<span class="token punctuation">,</span> key<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    err <span class="token operator">=</span> <span class="token function">nvs_set_u16</span><span class="token punctuation">(</span>handle<span class="token punctuation">,</span> key_str<span class="token punctuation">,</span> value<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    
+    <span class="token comment">// 提交更改</span>
+    <span class="token function">nvs_commit</span><span class="token punctuation">(</span>handle<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token function">nvs_close</span><span class="token punctuation">(</span>handle<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    
+    <span class="token keyword">return</span> err<span class="token punctuation">;</span>
+<span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<p>这种设计提供了：</p>
+<ul>
+<li><strong>类型安全</strong>：枚举确保配置键的正确性</li>
+<li><strong>持久化</strong>：使用NVS保证掉电不丢失</li>
+<li><strong>扩展性</strong>：易于添加新配置项</li>
+</ul>
+<h3 id="Web服务器实现（web-c-web-handler-c）"><a href="#Web服务器实现（web-c-web-handler-c）" class="headerlink" title="Web服务器实现（web.c/web_handler.c）"></a>Web服务器实现（web.c/web_handler.c）</h3><p>HTTP服务器使用ESP-IDF的httpd组件：</p>
+<pre class="line-numbers language-c" data-language="c"><code class="language-c"><span class="token comment">// 服务器初始化</span>
+<span class="token keyword">const</span> <span class="token class-name">httpd_uri_t</span> root <span class="token operator">=</span> <span class="token punctuation">&#123;</span><span class="token punctuation">.</span>uri <span class="token operator">=</span> <span class="token string">"/"</span><span class="token punctuation">,</span>
+                         <span class="token punctuation">.</span>method <span class="token operator">=</span> HTTP_GET<span class="token punctuation">,</span>
+                         <span class="token punctuation">.</span>handler <span class="token operator">=</span> root_handler<span class="token punctuation">,</span>
+                         <span class="token punctuation">.</span>user_ctx <span class="token operator">=</span> <span class="token constant">NULL</span><span class="token punctuation">&#125;</span><span class="token punctuation">;</span>
+
+<span class="token keyword">const</span> <span class="token class-name">httpd_uri_t</span> index_get <span class="token operator">=</span> <span class="token punctuation">&#123;</span><span class="token punctuation">.</span>uri <span class="token operator">=</span> <span class="token string">"/index"</span><span class="token punctuation">,</span>
+                              <span class="token punctuation">.</span>method <span class="token operator">=</span> HTTP_GET<span class="token punctuation">,</span>
+                              <span class="token punctuation">.</span>handler <span class="token operator">=</span> index_handler<span class="token punctuation">,</span>
+                              <span class="token punctuation">.</span>user_ctx <span class="token operator">=</span> <span class="token constant">NULL</span><span class="token punctuation">&#125;</span><span class="token punctuation">;</span>
+
+<span class="token function">ESP_LOGI</span><span class="token punctuation">(</span>TAG<span class="token punctuation">,</span> <span class="token string">"Starting server on port: '%d'"</span><span class="token punctuation">,</span> config<span class="token punctuation">.</span>server_port<span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token function">httpd_start</span><span class="token punctuation">(</span><span class="token operator">&amp;</span>server<span class="token punctuation">,</span> <span class="token operator">&amp;</span>config<span class="token punctuation">)</span> <span class="token operator">==</span> ESP_OK<span class="token punctuation">)</span>
+<span class="token punctuation">&#123;</span>
+  <span class="token comment">// 注册URI处理器</span>
+  <span class="token function">httpd_register_uri_handler</span><span class="token punctuation">(</span>server<span class="token punctuation">,</span> <span class="token operator">&amp;</span>root<span class="token punctuation">)</span><span class="token punctuation">;</span>
+  <span class="token function">httpd_register_uri_handler</span><span class="token punctuation">(</span>server<span class="token punctuation">,</span> <span class="token operator">&amp;</span>index_get<span class="token punctuation">)</span><span class="token punctuation">;</span>
+  <span class="token comment">// ...</span>
+<span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<p>请求处理函数采用统一的接口：</p>
+<pre class="line-numbers language-c" data-language="c"><code class="language-c"><span class="token keyword">static</span> <span class="token keyword">char</span> <span class="token operator">*</span><span class="token function">get_info_handle</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+<span class="token punctuation">&#123;</span>
+  cJSON <span class="token operator">*</span>root <span class="token operator">=</span> <span class="token function">cJSON_CreateObject</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+  <span class="token comment">// 收集系统信息</span>
+  <span class="token function">cJSON_AddStringToObject</span><span class="token punctuation">(</span>root<span class="token punctuation">,</span> <span class="token string">"build_time"</span><span class="token punctuation">,</span> <span class="token constant">__DATE__</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+  <span class="token function">cJSON_AddStringToObject</span><span class="token punctuation">(</span>root<span class="token punctuation">,</span> <span class="token string">"core_version"</span><span class="token punctuation">,</span> CORE_VERSION<span class="token punctuation">)</span><span class="token punctuation">;</span>
+  
+  <span class="token comment">// 获取WiFi信息</span>
+  <span class="token class-name">wifi_ap_record_t</span> ap<span class="token punctuation">;</span>
+  <span class="token function">esp_wifi_sta_get_ap_info</span><span class="token punctuation">(</span><span class="token operator">&amp;</span>ap<span class="token punctuation">)</span><span class="token punctuation">;</span>
+  <span class="token function">cJSON_AddStringToObject</span><span class="token punctuation">(</span>root<span class="token punctuation">,</span> <span class="token string">"wifi_rssi"</span><span class="token punctuation">,</span> ret_buffer<span class="token punctuation">)</span><span class="token punctuation">;</span>
+  
+  <span class="token comment">// 内存使用情况</span>
+  <span class="token function">cJSON_AddStringToObject</span><span class="token punctuation">(</span>root<span class="token punctuation">,</span> <span class="token string">"total_heap"</span><span class="token punctuation">,</span> ret_buffer<span class="token punctuation">)</span><span class="token punctuation">;</span>
+  
+  <span class="token keyword">return</span> <span class="token function">cJSON_Print</span><span class="token punctuation">(</span>root<span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<p>这种设计体现了RESTful API的原则，每个功能模块都有独立的处理函数。</p>
+<h2 id="技术挑战与解决方案"><a href="#技术挑战与解决方案" class="headerlink" title="技术挑战与解决方案"></a>技术挑战与解决方案</h2><h3 id="红外协议多样性处理"><a href="#红外协议多样性处理" class="headerlink" title="红外协议多样性处理"></a>红外协议多样性处理</h3><p>红外遥控面临的最大挑战是协议的多样性。IRbaby通过集成IRext库来解决：</p>
+<pre class="line-numbers language-c" data-language="c"><code class="language-c"><span class="token comment">// 协议自动识别和编码</span>
+cJSON <span class="token operator">*</span><span class="token function">irext_list_indexes</span><span class="token punctuation">(</span><span class="token keyword">int</span> type<span class="token punctuation">,</span> <span class="token keyword">int</span> brand_id<span class="token punctuation">,</span> <span class="token keyword">int</span> id<span class="token punctuation">,</span> <span class="token keyword">char</span> <span class="token operator">*</span>token<span class="token punctuation">)</span>
+<span class="token punctuation">&#123;</span>
+    <span class="token comment">// 调用云端API获取协议信息</span>
+    <span class="token comment">// 解析返回的JSON数据</span>
+    <span class="token comment">// 返回支持的协议列表</span>
+<span class="token punctuation">&#125;</span>
+
+<span class="token keyword">void</span> <span class="token function">irbaby_set_conf</span><span class="token punctuation">(</span>CONF_AC<span class="token punctuation">,</span> CONF_AC_PROTOCOL<span class="token punctuation">,</span> protocol_value<span class="token punctuation">)</span><span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<p>解决方案：</p>
+<ol>
+<li><strong>云端数据库</strong>：利用云端API获取最新的协议支持</li>
+<li><strong>动态配置</strong>：运行时选择合适的协议</li>
+<li><strong>兼容性保证</strong>：支持多种编码格式</li>
+</ol>
+<h3 id="内存和性能优化"><a href="#内存和性能优化" class="headerlink" title="内存和性能优化"></a>内存和性能优化</h3><p>ESP32内存有限，项目采用了多种优化策略：</p>
+<pre class="line-numbers language-c" data-language="c"><code class="language-c"><span class="token comment">// 静态内存分配避免堆碎片</span>
+<span class="token macro property"><span class="token directive-hash">#</span><span class="token directive keyword">define</span> <span class="token macro-name">RET_BUFFER_SIZE</span> <span class="token expression"><span class="token number">128</span></span></span>
+<span class="token keyword">char</span> ret_buffer<span class="token punctuation">[</span>RET_BUFFER_SIZE<span class="token punctuation">]</span><span class="token punctuation">;</span>
+
+<span class="token comment">// 使用SPIFFS存储大文件</span>
+<span class="token class-name">esp_vfs_spiffs_conf_t</span> conf <span class="token operator">=</span> <span class="token punctuation">&#123;</span>
+    <span class="token punctuation">.</span>base_path <span class="token operator">=</span> <span class="token string">"/spiffs"</span><span class="token punctuation">,</span>
+    <span class="token punctuation">.</span>partition_label <span class="token operator">=</span> <span class="token constant">NULL</span><span class="token punctuation">,</span>
+    <span class="token punctuation">.</span>max_files <span class="token operator">=</span> <span class="token number">5</span><span class="token punctuation">,</span>
+    <span class="token punctuation">.</span>format_if_mount_failed <span class="token operator">=</span> true
+<span class="token punctuation">&#125;</span><span class="token punctuation">;</span>
+
+<span class="token comment">// 异步处理避免阻塞</span>
+<span class="token function">xTaskCreate</span><span class="token punctuation">(</span>dns_server<span class="token punctuation">,</span> <span class="token string">"dns_server"</span><span class="token punctuation">,</span> <span class="token number">4096</span><span class="token punctuation">,</span> <span class="token constant">NULL</span><span class="token punctuation">,</span> <span class="token number">5</span><span class="token punctuation">,</span> <span class="token constant">NULL</span><span class="token punctuation">)</span><span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<h3 id="网络稳定性保障"><a href="#网络稳定性保障" class="headerlink" title="网络稳定性保障"></a>网络稳定性保障</h3><p>WiFi连接不稳定是物联网设备的常见问题：</p>
+<pre class="line-numbers language-c" data-language="c"><code class="language-c"><span class="token comment">// WiFi事件处理</span>
+<span class="token keyword">static</span> <span class="token keyword">void</span> <span class="token function">wifi_event_handler</span><span class="token punctuation">(</span><span class="token keyword">void</span><span class="token operator">*</span> arg<span class="token punctuation">,</span> <span class="token class-name">esp_event_base_t</span> event_base<span class="token punctuation">,</span>
+                              <span class="token class-name">int32_t</span> event_id<span class="token punctuation">,</span> <span class="token keyword">void</span><span class="token operator">*</span> event_data<span class="token punctuation">)</span>
+<span class="token punctuation">&#123;</span>
+    <span class="token keyword">if</span> <span class="token punctuation">(</span>event_base <span class="token operator">==</span> WIFI_EVENT <span class="token operator">&amp;&amp;</span> event_id <span class="token operator">==</span> WIFI_EVENT_STA_DISCONNECTED<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+        <span class="token comment">// 重连逻辑</span>
+        <span class="token function">esp_wifi_connect</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">&#125;</span>
+<span class="token punctuation">&#125;</span>
+
+<span class="token comment">// Captive Portal实现</span>
+<span class="token keyword">void</span> <span class="token function">dns_server</span><span class="token punctuation">(</span><span class="token keyword">void</span> <span class="token operator">*</span>pvParameters<span class="token punctuation">)</span>
+<span class="token punctuation">&#123;</span>
+    <span class="token comment">// 监听53端口，所有域名解析到本地IP</span>
+    <span class="token comment">// 实现无缝配网体验</span>
+<span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<h2 id="代码质量与最佳实践"><a href="#代码质量与最佳实践" class="headerlink" title="代码质量与最佳实践"></a>代码质量与最佳实践</h2><h3 id="错误处理机制"><a href="#错误处理机制" class="headerlink" title="错误处理机制"></a>错误处理机制</h3><p>项目采用多层次错误处理：</p>
+<pre class="line-numbers language-c" data-language="c"><code class="language-c"><span class="token macro property"><span class="token directive-hash">#</span><span class="token directive keyword">define</span> <span class="token macro-name function">CHECK_IS_NULL</span><span class="token expression"><span class="token punctuation">(</span>value<span class="token punctuation">,</span> ret<span class="token punctuation">)</span> </span><span class="token punctuation">\</span>
+  <span class="token expression"><span class="token keyword">if</span> <span class="token punctuation">(</span>value <span class="token operator">==</span> <span class="token constant">NULL</span><span class="token punctuation">)</span>              </span><span class="token punctuation">\</span>
+    <span class="token expression"><span class="token keyword">return</span> ret<span class="token punctuation">;</span></span></span>
+
+<span class="token comment">// 使用示例</span>
+cJSON <span class="token operator">*</span>root <span class="token operator">=</span> <span class="token function">cJSON_CreateObject</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token function">CHECK_IS_NULL</span><span class="token punctuation">(</span>root<span class="token punctuation">,</span> <span class="token constant">NULL</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+<span class="token comment">// ESP-IDF错误检查</span>
+<span class="token function">ESP_ERROR_CHECK</span><span class="token punctuation">(</span><span class="token function">nvs_flash_init</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token function">ESP_ERROR_CHECK</span><span class="token punctuation">(</span><span class="token function">esp_wifi_start</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<h3 id="代码风格和规范"><a href="#代码风格和规范" class="headerlink" title="代码风格和规范"></a>代码风格和规范</h3><ul>
+<li><strong>命名规范</strong>：函数使用snake_case，宏使用UPPER_CASE</li>
+<li><strong>注释风格</strong>：函数头部有详细说明，包括参数和返回值</li>
+<li><strong>模块化</strong>：每个.c文件对应一个.h头文件</li>
+<li><strong>常量定义</strong>：使用#define定义魔法数字</li>
+</ul>
+<h3 id="性能优化实践"><a href="#性能优化实践" class="headerlink" title="性能优化实践"></a>性能优化实践</h3><pre class="line-numbers language-c" data-language="c"><code class="language-c"><span class="token comment">// 使用静态字符串避免动态分配</span>
+<span class="token keyword">extern</span> <span class="token keyword">const</span> <span class="token keyword">char</span> root_html<span class="token punctuation">[</span><span class="token punctuation">]</span> <span class="token keyword">asm</span><span class="token punctuation">(</span><span class="token string">"_binary_root_html_start"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+<span class="token comment">// 内联函数优化</span>
+<span class="token keyword">static</span> <span class="token keyword">inline</span> <span class="token class-name">esp_err_t</span> <span class="token function">validate_config</span><span class="token punctuation">(</span>conf_type type<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+    <span class="token keyword">return</span> <span class="token punctuation">(</span>type <span class="token operator">>=</span> CONF_AC <span class="token operator">&amp;&amp;</span> type <span class="token operator">&lt;=</span> CONFIG_MORE<span class="token punctuation">)</span> <span class="token operator">?</span> ESP_OK <span class="token operator">:</span> ESP_ERR_INVALID_ARG<span class="token punctuation">;</span>
+<span class="token punctuation">&#125;</span>
+
+<span class="token comment">// 编译时计算</span>
+<span class="token macro property"><span class="token directive-hash">#</span><span class="token directive keyword">define</span> <span class="token macro-name function">ARRAY_SIZE</span><span class="token expression"><span class="token punctuation">(</span>arr<span class="token punctuation">)</span> <span class="token punctuation">(</span><span class="token keyword">sizeof</span><span class="token punctuation">(</span>arr<span class="token punctuation">)</span> <span class="token operator">/</span> <span class="token keyword">sizeof</span><span class="token punctuation">(</span><span class="token punctuation">(</span>arr<span class="token punctuation">)</span><span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">)</span></span></span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<h2 id="扩展性与维护性"><a href="#扩展性与维护性" class="headerlink" title="扩展性与维护性"></a>扩展性与维护性</h2><h3 id="模块化设计"><a href="#模块化设计" class="headerlink" title="模块化设计"></a>模块化设计</h3><p>项目的组件化设计便于扩展：</p>
+<pre class="line-numbers language-cmake" data-language="cmake"><code class="language-cmake"><span class="token comment"># CMakeLists.txt中的组件注册</span>
+<span class="token function">idf_component_register</span><span class="token punctuation">(</span>SRCS <span class="token punctuation">$&#123;</span>srcs<span class="token punctuation">&#125;</span>
+                      INCLUDE_DIRS <span class="token punctuation">$&#123;</span>includes<span class="token punctuation">&#125;</span>
+                      REQUIRES lwip freertos esp_driver_rmt esp_timer<span class="token punctuation">)</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
+
+<p>新功能可以通过添加新组件实现，而不影响现有代码。</p>
+<h3 id="配置驱动的架构"><a href="#配置驱动的架构" class="headerlink" title="配置驱动的架构"></a>配置驱动的架构</h3><p>前端界面通过JSON配置驱动：</p>
+<pre class="line-numbers language-json" data-language="json"><code class="language-json"><span class="token punctuation">&#123;</span>
+  <span class="token property">"render"</span><span class="token operator">:</span> <span class="token string">"tabs"</span><span class="token punctuation">,</span>
+  <span class="token property">"tabs"</span><span class="token operator">:</span> <span class="token punctuation">[</span>
+    <span class="token punctuation">&#123;</span>
+      <span class="token property">"label"</span><span class="token operator">:</span> <span class="token string">"红外控制"</span><span class="token punctuation">,</span>
+      <span class="token property">"contents"</span><span class="token operator">:</span> <span class="token punctuation">[</span>
+        <span class="token punctuation">&#123;</span>
+          <span class="token property">"render"</span><span class="token operator">:</span> <span class="token string">"cells"</span><span class="token punctuation">,</span>
+          <span class="token property">"cells"</span><span class="token operator">:</span> <span class="token punctuation">[</span>
+            <span class="token punctuation">&#123;</span>
+              <span class="token property">"render"</span><span class="token operator">:</span> <span class="token string">"switch"</span><span class="token punctuation">,</span>
+              <span class="token property">"label"</span><span class="token operator">:</span> <span class="token string">"空调电源"</span><span class="token punctuation">,</span>
+              <span class="token property">"path"</span><span class="token operator">:</span> <span class="token string">"/ac"</span><span class="token punctuation">,</span>
+              <span class="token property">"key"</span><span class="token operator">:</span> <span class="token string">"power"</span>
+            <span class="token punctuation">&#125;</span>
+          <span class="token punctuation">]</span>
+        <span class="token punctuation">&#125;</span>
+      <span class="token punctuation">]</span>
+    <span class="token punctuation">&#125;</span>
+  <span class="token punctuation">]</span>
+<span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<p>这种设计允许：</p>
+<ul>
+<li><strong>运行时配置</strong>：无需重新编译即可调整界面</li>
+<li><strong>用户定制</strong>：支持个性化设置</li>
+<li><strong>版本兼容</strong>：向后兼容旧配置</li>
+</ul>
+<h3 id="测试和调试支持"><a href="#测试和调试支持" class="headerlink" title="测试和调试支持"></a>测试和调试支持</h3><p>项目包含丰富的调试信息：</p>
+<pre class="line-numbers language-c" data-language="c"><code class="language-c"><span class="token comment">// 日志分级</span>
+<span class="token function">ESP_LOGI</span><span class="token punctuation">(</span>TAG<span class="token punctuation">,</span> <span class="token string">"Initializing SPIFFS"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token function">ESP_LOGE</span><span class="token punctuation">(</span>TAG<span class="token punctuation">,</span> <span class="token string">"Failed to mount filesystem"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+<span class="token comment">// 断言检查</span>
+<span class="token function">assert</span><span class="token punctuation">(</span>config <span class="token operator">!=</span> <span class="token constant">NULL</span><span class="token punctuation">)</span><span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<h2 id="学习要点：开发者可以从中学习的知识点"><a href="#学习要点：开发者可以从中学习的知识点" class="headerlink" title="学习要点：开发者可以从中学习的知识点"></a>学习要点：开发者可以从中学习的知识点</h2><h3 id="1-ESP32硬件抽象"><a href="#1-ESP32硬件抽象" class="headerlink" title="1. ESP32硬件抽象"></a>1. ESP32硬件抽象</h3><p>学习如何使用RMT外设处理红外信号，理解定时器和中断的使用。</p>
+<h3 id="2-嵌入式网络编程"><a href="#2-嵌入式网络编程" class="headerlink" title="2. 嵌入式网络编程"></a>2. 嵌入式网络编程</h3><p>掌握HTTP服务器实现、WiFi管理、MQTT客户端开发等网络编程技能。</p>
+<h3 id="3-内存管理最佳实践"><a href="#3-内存管理最佳实践" class="headerlink" title="3. 内存管理最佳实践"></a>3. 内存管理最佳实践</h3><p>在资源受限的环境中进行有效的内存管理，避免内存泄漏和碎片化。</p>
+<h3 id="4-模块化软件设计"><a href="#4-模块化软件设计" class="headerlink" title="4. 模块化软件设计"></a>4. 模块化软件设计</h3><p>如何将复杂系统分解为可维护的模块，实现高内聚低耦合。</p>
+<h3 id="5-协议处理技巧"><a href="#5-协议处理技巧" class="headerlink" title="5. 协议处理技巧"></a>5. 协议处理技巧</h3><p>学习如何处理多种通信协议，包括红外编码、JSON解析、HTTP请求等。</p>
+<h3 id="6-实时系统开发"><a href="#6-实时系统开发" class="headerlink" title="6. 实时系统开发"></a>6. 实时系统开发</h3><p>理解FreeRTOS任务调度、优先级设置、中断处理等实时系统概念。</p>
+<h3 id="7-跨平台兼容性"><a href="#7-跨平台兼容性" class="headerlink" title="7. 跨平台兼容性"></a>7. 跨平台兼容性</h3><p>代码同时支持ESP32和ESP32C2，展示了条件编译和硬件抽象的技巧。</p>
+<p>通过深入分析IRbaby ESP32的代码实现，我们不仅可以学习到具体的开发技巧，更能体会到嵌入式系统设计的核心原则：平衡功能、性能、可靠性和可维护性。这个项目是一个优秀的学习案例，值得每位嵌入式开发者仔细研读。</p>
+
+                
+            </div>
+            <hr/>
+
+            
+
+    <div class="reprint" id="reprint-statement">
+        
+            <div class="reprint__author">
+                <span class="reprint-meta" style="font-weight: bold;">
+                    <i class="fas fa-user">
+                        文章作者:
+                    </i>
+                </span>
+                <span class="reprint-info">
+                    <a href="/about" rel="external nofollow noreferrer">Caffreyfans</a>
+                </span>
+            </div>
+            <div class="reprint__type">
+                <span class="reprint-meta" style="font-weight: bold;">
+                    <i class="fas fa-link">
+                        文章链接:
+                    </i>
+                </span>
+                <span class="reprint-info">
+                    <a href="https://www.caffreyfans.top/2026/04/09/2026-04-09-irbaby-esp32-developer-analysis/">https://www.caffreyfans.top/2026/04/09/2026-04-09-irbaby-esp32-developer-analysis/</a>
+                </span>
+            </div>
+            <div class="reprint__notice">
+                <span class="reprint-meta" style="font-weight: bold;">
+                    <i class="fas fa-copyright">
+                        版权声明:
+                    </i>
+                </span>
+                <span class="reprint-info">
+                    本博客所有文章除特別声明外，均采用
+                    <a href="https://creativecommons.org/licenses/by/4.0/deed.zh" rel="external nofollow noreferrer" target="_blank">CC BY 4.0</a>
+                    许可协议。转载请注明来源
+                    <a href="/about" target="_blank">Caffreyfans</a>
+                    !
+                </span>
+            </div>
+        
+    </div>
+
+    <script async defer>
+      document.addEventListener("copy", function (e) {
+        let toastHTML = '<span>复制成功，请遵循本文的转载规则</span><button class="btn-flat toast-action" onclick="navToReprintStatement()" style="font-size: smaller">查看</a>';
+        M.toast({html: toastHTML})
+      });
+
+      function navToReprintStatement() {
+        $("html, body").animate({scrollTop: $("#reprint-statement").offset().top - 80}, 800);
+      }
+    </script>
+
+
+
+            <div class="tag_share" style="display: block;">
+                <div class="post-meta__tag-list" style="display: inline-block;">
+                    
+                        <div class="article-tag">
+                            
+                                <a href="/tags/ESP32/">
+                                    <span class="chip bg-color">ESP32</span>
+                                </a>
+                            
+                                <a href="/tags/%E7%BA%A2%E5%A4%96%E9%81%A5%E6%8E%A7/">
+                                    <span class="chip bg-color">红外遥控</span>
+                                </a>
+                            
+                                <a href="/tags/%E5%B5%8C%E5%85%A5%E5%BC%8F%E5%BC%80%E5%8F%91/">
+                                    <span class="chip bg-color">嵌入式开发</span>
+                                </a>
+                            
+                                <a href="/tags/IRbaby/">
+                                    <span class="chip bg-color">IRbaby</span>
+                                </a>
+                            
+                        </div>
+                    
+                </div>
+                <div class="post_share" style="zoom: 80%; width: fit-content; display: inline-block; float: right; margin: -0.15rem 0;">
+                    <link rel="stylesheet" type="text/css" href="/libs/share/css/share.min.css">
+<div id="article-share">
+
+    
+
+    
+
+</div>
+
+                </div>
+            </div>
+            
+        </div>
+    </div>
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+<article id="prenext-posts" class="prev-next articles">
+    <div class="row article-row">
+        
+        <div class="article col s12 m6" data-aos="fade-up" data-aos="fade-up">
+            <div class="article-badge left-badge text-color">
+                <i class="far fa-dot-circle"></i>&nbsp;本篇
+            </div>
+            <div class="card">
+                <a href="/2026/04/09/2026-04-09-irbaby-esp32-developer-analysis/">
+                    <div class="card-image">
+                        
+                        
+                        <img src="/medias/featureimages/18.jpg" class="responsive-img" alt="从开发者角度深入剖析IRbaby ESP32红外遥控固件">
+                        
+                        <span class="card-title">从开发者角度深入剖析IRbaby ESP32红外遥控固件</span>
+                    </div>
+                </a>
+                <div class="card-content article-content">
+                    <div class="summary block-with-text">
+                        
+                            
+                        
+                    </div>
+                    <div class="publish-info">
+                            <span class="publish-date">
+                                <i class="far fa-clock fa-fw icon-date"></i>2026-04-09
+                            </span>
+                        <span class="publish-author">
+                            
+                            <i class="fas fa-bookmark fa-fw icon-category"></i>
+                            
+                            <a href="/categories/%E6%8A%80%E6%9C%AF%E5%88%86%E4%BA%AB/" class="post-category">
+                                    技术分享
+                                </a>
+                            
+                            
+                        </span>
+                    </div>
+                </div>
+
+                
+                <div class="card-action article-tags">
+                    
+                    <a href="/tags/ESP32/">
+                        <span class="chip bg-color">ESP32</span>
+                    </a>
+                    
+                    <a href="/tags/%E7%BA%A2%E5%A4%96%E9%81%A5%E6%8E%A7/">
+                        <span class="chip bg-color">红外遥控</span>
+                    </a>
+                    
+                    <a href="/tags/%E5%B5%8C%E5%85%A5%E5%BC%8F%E5%BC%80%E5%8F%91/">
+                        <span class="chip bg-color">嵌入式开发</span>
+                    </a>
+                    
+                    <a href="/tags/IRbaby/">
+                        <span class="chip bg-color">IRbaby</span>
+                    </a>
+                    
+                </div>
+                
+            </div>
+        </div>
+        
+        
+        <div class="article col s12 m6" data-aos="fade-up">
+            <div class="article-badge right-badge text-color">
+                下一篇&nbsp;<i class="fas fa-chevron-right"></i>
+            </div>
+            <div class="card">
+                <a href="/2021/03/13/%E5%BD%93%E5%B9%B8%E7%A6%8F%E6%9D%A5%E6%95%B2%E9%97%A8/">
+                    <div class="card-image">
+                        
+                        
+                        <img src="/medias/featureimages/14.jpg" class="responsive-img" alt="当幸福来敲门观后感">
+                        
+                        <span class="card-title">当幸福来敲门观后感</span>
+                    </div>
+                </a>
+                <div class="card-content article-content">
+                    <div class="summary block-with-text">
+                        
+                            
+                        
+                    </div>
+                    <div class="publish-info">
+                            <span class="publish-date">
+                                <i class="far fa-clock fa-fw icon-date"></i>2021-03-13
+                            </span>
+                        <span class="publish-author">
+                            
+                            <i class="fas fa-bookmark fa-fw icon-category"></i>
+                            
+                            <a href="/categories/%E7%94%B5%E5%BD%B1/" class="post-category">
+                                    电影
+                                </a>
+                            
+                            
+                        </span>
+                    </div>
+                </div>
+                
+                <div class="card-action article-tags">
+                    
+                    <a href="/tags/%E4%BA%BA%E7%94%9F/">
+                        <span class="chip bg-color">人生</span>
+                    </a>
+                    
+                    <a href="/tags/%E5%86%99%E7%BB%99%E8%87%AA%E5%B7%B1/">
+                        <span class="chip bg-color">写给自己</span>
+                    </a>
+                    
+                </div>
+                
+            </div>
+        </div>
+        
+    </div>
+</article>
+
+</div>
+
+
+
+<!-- 代码块功能依赖 -->
+<script type="text/javascript" src="/libs/codeBlock/codeBlockFuction.js"></script>
+
+<!-- 代码语言 -->
+
+<script type="text/javascript" src="/libs/codeBlock/codeLang.js"></script>
+
+
+<!-- 代码块复制 -->
+
+<script type="text/javascript" src="/libs/codeBlock/codeCopy.js"></script>
+
+
+<!-- 代码块收缩 -->
+
+<script type="text/javascript" src="/libs/codeBlock/codeShrink.js"></script>
+
+
+    </div>
+    <div id="toc-aside" class="expanded col l3 hide-on-med-and-down">
+        <div class="toc-widget card" style="background-color: white;">
+            <div class="toc-title"><i class="far fa-list-alt"></i>&nbsp;&nbsp;目录</div>
+            <div id="toc-content"></div>
+        </div>
+    </div>
+</div>
+
+<!-- TOC 悬浮按钮. -->
+
+<div id="floating-toc-btn" class="hide-on-med-and-down">
+    <a class="btn-floating btn-large bg-color">
+        <i class="fas fa-list-ul"></i>
+    </a>
+</div>
+
+
+<script src="/libs/tocbot/tocbot.min.js"></script>
+<script>
+    $(function () {
+        tocbot.init({
+            tocSelector: '#toc-content',
+            contentSelector: '#articleContent',
+            headingsOffset: -($(window).height() * 0.4 - 45),
+            collapseDepth: Number('0'),
+            headingSelector: 'h2, h3, h4'
+        });
+
+        // modify the toc link href to support Chinese.
+        let i = 0;
+        let tocHeading = 'toc-heading-';
+        $('#toc-content a').each(function () {
+            $(this).attr('href', '#' + tocHeading + (++i));
+        });
+
+        // modify the heading title id to support Chinese.
+        i = 0;
+        $('#articleContent').children('h2, h3, h4').each(function () {
+            $(this).attr('id', tocHeading + (++i));
+        });
+
+        // Set scroll toc fixed.
+        let tocHeight = parseInt($(window).height() * 0.4 - 64);
+        let $tocWidget = $('.toc-widget');
+        $(window).scroll(function () {
+            let scroll = $(window).scrollTop();
+            /* add post toc fixed. */
+            if (scroll > tocHeight) {
+                $tocWidget.addClass('toc-fixed');
+            } else {
+                $tocWidget.removeClass('toc-fixed');
+            }
+        });
+
+        
+        /* 修复文章卡片 div 的宽度. */
+        let fixPostCardWidth = function (srcId, targetId) {
+            let srcDiv = $('#' + srcId);
+            if (srcDiv.length === 0) {
+                return;
+            }
+
+            let w = srcDiv.width();
+            if (w >= 450) {
+                w = w + 21;
+            } else if (w >= 350 && w < 450) {
+                w = w + 18;
+            } else if (w >= 300 && w < 350) {
+                w = w + 16;
+            } else {
+                w = w + 14;
+            }
+            $('#' + targetId).width(w);
+        };
+
+        // 切换TOC目录展开收缩的相关操作.
+        const expandedClass = 'expanded';
+        let $tocAside = $('#toc-aside');
+        let $mainContent = $('#main-content');
+        $('#floating-toc-btn .btn-floating').click(function () {
+            if ($tocAside.hasClass(expandedClass)) {
+                $tocAside.removeClass(expandedClass).hide();
+                $mainContent.removeClass('l9');
+            } else {
+                $tocAside.addClass(expandedClass).show();
+                $mainContent.addClass('l9');
+            }
+            fixPostCardWidth('artDetail', 'prenext-posts');
+        });
+        
+    });
+</script>
+
+    
+
+</main>
+
+
+
+
+    <footer class="page-footer bg-color">
+    
+    <div class="container row center-align" style="margin-bottom: 15px !important;">
+        <div class="col s12 m8 l8 copy-right">
+            Copyright&nbsp;&copy;
+            
+                <span id="year">2018-2026</span>
+            
+            <span id="year">2018</span>
+            <a href="/about" target="_blank">Caffreyfans</a>
+            |&nbsp;Powered by&nbsp;<a href="https://hexo.io/" target="_blank">Hexo</a>
+            |&nbsp;Theme&nbsp;<a href="https://github.com/blinkfox/hexo-theme-matery" target="_blank">Matery</a>
+            <br>
+            
+            
+            
+            
+            
+            
+            <span id="busuanzi_container_site_pv">
+                |&nbsp;<i class="far fa-eye"></i>&nbsp;总访问量:&nbsp;<span id="busuanzi_value_site_pv"
+                    class="white-color"></span>&nbsp;次
+            </span>
+            
+            
+            <span id="busuanzi_container_site_uv">
+                |&nbsp;<i class="fas fa-users"></i>&nbsp;总访问人数:&nbsp;<span id="busuanzi_value_site_uv"
+                    class="white-color"></span>&nbsp;人
+            </span>
+            
+            <br>
+            
+            <span id="sitetime">载入运行时间...</span>
+            <script>
+                function siteTime() {
+                    var seconds = 1000;
+                    var minutes = seconds * 60;
+                    var hours = minutes * 60;
+                    var days = hours * 24;
+                    var years = days * 365;
+                    var today = new Date();
+                    var startYear = "2018";
+                    var startMonth = "6";
+                    var startDate = "28";
+                    var startHour = "0";
+                    var startMinute = "0";
+                    var startSecond = "0";
+                    var todayYear = today.getFullYear();
+                    var todayMonth = today.getMonth() + 1;
+                    var todayDate = today.getDate();
+                    var todayHour = today.getHours();
+                    var todayMinute = today.getMinutes();
+                    var todaySecond = today.getSeconds();
+                    var t1 = Date.UTC(startYear, startMonth, startDate, startHour, startMinute, startSecond);
+                    var t2 = Date.UTC(todayYear, todayMonth, todayDate, todayHour, todayMinute, todaySecond);
+                    var diff = t2 - t1;
+                    var diffYears = Math.floor(diff / years);
+                    var diffDays = Math.floor((diff / days) - diffYears * 365);
+                    var diffHours = Math.floor((diff - (diffYears * 365 + diffDays) * days) / hours);
+                    var diffMinutes = Math.floor((diff - (diffYears * 365 + diffDays) * days - diffHours * hours) /
+                        minutes);
+                    var diffSeconds = Math.floor((diff - (diffYears * 365 + diffDays) * days - diffHours * hours -
+                        diffMinutes * minutes) / seconds);
+                    if (startYear == todayYear) {
+                        document.getElementById("year").innerHTML = todayYear;
+                        document.getElementById("sitetime").innerHTML = "本站已安全运行 " + diffDays + " 天 " + diffHours +
+                            " 小时 " + diffMinutes + " 分钟 " + diffSeconds + " 秒";
+                    } else {
+                        document.getElementById("year").innerHTML = startYear + " - " + todayYear;
+                        document.getElementById("sitetime").innerHTML = "本站已安全运行 " + diffYears + " 年 " + diffDays +
+                            " 天 " + diffHours + " 小时 " + diffMinutes + " 分钟 " + diffSeconds + " 秒";
+                    }
+                }
+                setInterval(siteTime, 1000);
+            </script>
+            
+            <br>
+            
+        </div>
+        <div class="col s12 m4 l4 social-link social-statis">
+    <a href="https://github.com/Caffreyfans" class="tooltipped" target="_blank" data-tooltip="访问我的GitHub" data-position="top" data-delay="50">
+        <i class="fab fa-github"></i>
+    </a>
+
+
+
+    <a href="mailto:Caffreyfans@163.com" class="tooltipped" target="_blank" data-tooltip="邮件联系我" data-position="top" data-delay="50">
+        <i class="fas fa-envelope-open"></i>
+    </a>
+
+
+
+
+
+
+
+    <a href="tencent://AddContact/?fromId=50&fromSubId=1&subcmd=all&uin=893399065" class="tooltipped" target="_blank" data-tooltip="QQ联系我: 893399065" data-position="top" data-delay="50">
+        <i class="fab fa-qq"></i>
+    </a>
+
+
+
+
+
+
+
+</div>
+    </div>
+</footer>
+
+<div class="progress-bar"></div>
+
+
+    <!-- 搜索遮罩框 -->
+<div id="searchModal" class="modal">
+    <div class="modal-content">
+        <div class="search-header">
+            <span class="title"><i class="fas fa-search"></i>&nbsp;&nbsp;搜索</span>
+            <input type="search" id="searchInput" name="s" placeholder="请输入搜索的关键字"
+                   class="search-input">
+        </div>
+        <div id="searchResult"></div>
+    </div>
+</div>
+
+<script type="text/javascript">
+$(function () {
+    var searchFunc = function (path, search_id, content_id) {
+        'use strict';
+        $.ajax({
+            url: path,
+            dataType: "xml",
+            success: function (xmlResponse) {
+                // get the contents from search data
+                var datas = $("entry", xmlResponse).map(function () {
+                    return {
+                        title: $("title", this).text(),
+                        content: $("content", this).text(),
+                        url: $("url", this).text()
+                    };
+                }).get();
+                var $input = document.getElementById(search_id);
+                var $resultContent = document.getElementById(content_id);
+                $input.addEventListener('input', function () {
+                    var str = '<ul class=\"search-result-list\">';
+                    var keywords = this.value.trim().toLowerCase().split(/[\s\-]+/);
+                    $resultContent.innerHTML = "";
+                    if (this.value.trim().length <= 0) {
+                        return;
+                    }
+                    // perform local searching
+                    datas.forEach(function (data) {
+                        var isMatch = true;
+                        var data_title = data.title.trim().toLowerCase();
+                        var data_content = data.content.trim().replace(/<[^>]+>/g, "").toLowerCase();
+                        var data_url = data.url;
+                        data_url = data_url.indexOf('/') === 0 ? data.url : '/' + data_url;
+                        var index_title = -1;
+                        var index_content = -1;
+                        var first_occur = -1;
+                        // only match artiles with not empty titles and contents
+                        if (data_title !== '' && data_content !== '') {
+                            keywords.forEach(function (keyword, i) {
+                                index_title = data_title.indexOf(keyword);
+                                index_content = data_content.indexOf(keyword);
+                                if (index_title < 0 && index_content < 0) {
+                                    isMatch = false;
+                                } else {
+                                    if (index_content < 0) {
+                                        index_content = 0;
+                                    }
+                                    if (i === 0) {
+                                        first_occur = index_content;
+                                    }
+                                }
+                            });
+                        }
+                        // show search results
+                        if (isMatch) {
+                            str += "<li><a href='" + data_url + "' class='search-result-title'>" + data_title + "</a>";
+                            var content = data.content.trim().replace(/<[^>]+>/g, "");
+                            if (first_occur >= 0) {
+                                // cut out 100 characters
+                                var start = first_occur - 20;
+                                var end = first_occur + 80;
+                                if (start < 0) {
+                                    start = 0;
+                                }
+                                if (start === 0) {
+                                    end = 100;
+                                }
+                                if (end > content.length) {
+                                    end = content.length;
+                                }
+                                var match_content = content.substr(start, end);
+                                // highlight all keywords
+                                keywords.forEach(function (keyword) {
+                                    var regS = new RegExp(keyword, "gi");
+                                    match_content = match_content.replace(regS, "<em class=\"search-keyword\">" + keyword + "</em>");
+                                });
+
+                                str += "<p class=\"search-result\">" + match_content + "...</p>"
+                            }
+                            str += "</li>";
+                        }
+                    });
+                    str += "</ul>";
+                    $resultContent.innerHTML = str;
+                });
+            }
+        });
+    };
+
+    searchFunc('/search.xml', 'searchInput', 'searchResult');
+});
+</script>
+
+    <!-- 回到顶部按钮 -->
+<div id="backTop" class="top-scroll">
+    <a class="btn-floating btn-large waves-effect waves-light" href="#!">
+        <i class="fas fa-arrow-up"></i>
+    </a>
+</div>
+
+
+    <script src="/libs/materialize/materialize.min.js"></script>
+    <script src="/libs/masonry/masonry.pkgd.min.js"></script>
+    <script src="/libs/aos/aos.js"></script>
+    <script src="/libs/scrollprogress/scrollProgress.min.js"></script>
+    <script src="/libs/lightGallery/js/lightgallery-all.min.js"></script>
+    <script src="/js/matery.js"></script>
+
+    <!-- Baidu Analytics -->
+
+    <!-- Baidu Push -->
+
+<script>
+    (function () {
+        var bp = document.createElement('script');
+        var curProtocol = window.location.protocol.split(':')[0];
+        if (curProtocol === 'https') {
+            bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';
+        } else {
+            bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+        }
+        var s = document.getElementsByTagName("script")[0];
+        s.parentNode.insertBefore(bp, s);
+    })();
+</script>
+
+    
+    <script src="/libs/others/clicklove.js" async="async"></script>
+    
+    
+    <script async src="/libs/others/busuanzi.pure.mini.js"></script>
+    
+
+    
+
+    
+
+    <!--腾讯兔小巢-->
+    
+    
+
+    
+
+    
+    <script type="text/javascript" src="/libs/background/ribbon-dynamic.js" async="async"></script>
+    
+
+    
+    <script src="/libs/instantpage/instantpage.js" type="module"></script>
+    
+
+</body>
+
+</html>
