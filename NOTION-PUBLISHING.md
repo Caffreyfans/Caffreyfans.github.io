@@ -35,9 +35,9 @@ _config.yml 还保留了部署到 master 的旧 Hexo deploy 配置，本方案�
    不需要将 Notion 页面本身开启“发布到 Web”。聊天中的 Notion 连接不会自动给 Actions 提供凭证。
 3. 打开 GitHub 仓库 Settings → Secrets and variables → Actions：
    - Repository secret `NOTION_TOKEN`：保存内部集成令牌。不要发送到聊天或写进代码。
-   - Repository variable `NOTION_ROOT_PAGE_ID`：根页面 UUID，使用带连字符的标准格式。
-   - Repository variable `NOTION_PUBLICATION_APPROVED`：填写相同 UUID，表示明确批准公开该页面树。
-   脚本要求后两个值完全一致；应通过 Notion 页面读取结果确认 ID，不要把整个链接填进去。
+   根页面已创建并经用户批准，工作流中已固定 NOTION_ROOT_PAGE_ID 和 NOTION_PUBLICATION_APPROVED，均为 3ff4fb93-f5cf-8137-8de5-f4faa853244e，无需再设置变量。
+   页面：https://app.notion.com/p/3ff4fb93f5cf81378de5f4faa853244e
+   请在该页面的连接设置中添加用于 Actions 的只读内部集成。
 4. 从 hexo 创建配置分支，将本目录中的三个新增文件及 scripts 目录加入仓库。
    将本目录 `.github/workflows/pages.yml` 作为现有同名文件的修改版本审阅，
    不要删除其他工作流、source、themes、package.json 或锁文件。
@@ -79,7 +79,7 @@ toggle 展开显示；提及和普通超链接显示为文字，不追踪目标�
 使用 Notion-Version: 2026-03-11 及 GET /v1/pages/{id}、GET /v1/blocks/{id}/children。
 Pages actions 选用已核对的官方部署指南中的 configure-pages@v5、
 upload-pages-artifact@v4、deploy-pages@v4；这些与仓库当前文件中的版本号不同。
-未直接修改远程仓库或启动部署。
+配置已推送到远程 notion-mkdocs-publishing 分支，尚未合并或启动部署。
 
 ## 本地验证
 
