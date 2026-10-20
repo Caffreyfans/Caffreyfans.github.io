@@ -36,8 +36,8 @@ jobs:
       - name: Export approved Notion pages
         env:
           NOTION_TOKEN: ${{ secrets.NOTION_TOKEN }}
-          NOTION_ROOT_PAGE_ID: ${{ vars.NOTION_ROOT_PAGE_ID }}
-          NOTION_PUBLICATION_APPROVED: ${{ vars.NOTION_PUBLICATION_APPROVED }}
+          NOTION_ROOT_PAGE_ID: '3ff4fb93-f5cf-8137-8de5-f4faa853244e'
+          NOTION_PUBLICATION_APPROVED: '3ff4fb93-f5cf-8137-8de5-f4faa853244e'
         run: python scripts/sync_notion.py
       - name: Build documentation
         run: python -m mkdocs build --strict -f .notion-build/mkdocs.yml
