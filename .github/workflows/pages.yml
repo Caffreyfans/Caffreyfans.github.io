@@ -2,67 +2,60 @@ name: Pages
 
 on:
   push:
-    branches: [hexo]
-  workflow_dispatch:
-  schedule:
-    - cron: '23 * * * *'
+    branches:
+      - hexo  # default branch
 
 permissions:
   contents: read
+  pages: write
+  id-token: write
 
 concurrency:
   group: pages
-  cancel-in-progress: false
+  cancel-in-progress: true
 
 jobs:
   build:
     runs-on: ubuntu-latest
+    name: Build Hexo
     steps:
-      - uses: actions/checkout@v6
-        with:
-          submodules: true
-          persist-credentials: false
-      - uses: actions/setup-node@v4
-        with:
-          node-version: '22'
-      - run: npm ci
-      - uses: actions/configure-pages@v5
-      - name: Build existing Hexo blog
-        run: npm run build
-      - uses: actions/setup-python@v5
-        with:
-          python-version: '3.12'
-      - run: python -m pip install -r requirements-notion.txt
-      - name: Export approved Notion pages
-        env:
-          NOTION_TOKEN: ${{ secrets.NOTION_TOKEN }}
-          NOTION_ROOT_PAGE_ID: '3ff4fb93-f5cf-8137-8de5-f4faa853244e'
-          NOTION_PUBLICATION_APPROVED: '3ff4fb93-f5cf-8137-8de5-f4faa853244e'
-        run: python scripts/sync_notion.py
-      - name: Build documentation
-        run: python -m mkdocs build --strict -f .notion-build/mkdocs.yml
-      - name: Combine blog and documentation without overwriting
-        shell: bash
-        run: |
-          if [ -e public/notion ]; then
-            echo "public/notion already exists; refusing to overwrite"
-            exit 1
-          fi
-          cp -R .notion-build/site public/notion
-          touch public/.nojekyll
-      - uses: actions/upload-pages-artifact@v4
-        with:
-          path: public
+    - name: Checkout
+      uses: actions/checkout@v4
+      with:
+        submodules: true # Checkout private submodules(themes or something else).
+    
+    # Caching dependencies to speed up workflows. (GitHub will remove any cache entries that have not been accessed in over 7 days.)
+    - name: Cache node modules
+      uses: actions/cache@v4
+      id: cache
+      with:
+        path: node_modules
+        key: ${{ runner.os }}-node-${{ hashFiles('**/package-lock.json') }}
+        restore-keys: |
+          ${{ runner.os }}-node-
+    - name: Install Dependencies
+      if: steps.cache.outputs.cache-hit != 'true'
+      run: npm ci
+
+    - name: Setup Pages
+      uses: actions/configure-pages@v6
+
+    - name: Build
+      run: npm run build
+
+    - name: Upload artifact
+      uses: actions/upload-pages-artifact@v5.0.0
+      with:
+        path: ./public
+
   deploy:
     needs: build
     runs-on: ubuntu-latest
-    permissions:
-      pages: write
-      id-token: write
     environment:
       name: github-pages
       url: ${{ steps.deployment.outputs.page_url }}
+    name: Deploy to GitHub Pages
     steps:
-      - name: Deploy combined site
-        id: deployment
-        uses: actions/deploy-pages@v4
+    - name: Deploy
+      id: deployment
+      uses: actions/deploy-pages@v5
